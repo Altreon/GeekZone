@@ -9,3 +9,5 @@ include 'inc/border.php';
 echo '
 	<p>test</p>
 ';
+
+include 'inc/basPage.php';

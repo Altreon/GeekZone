@@ -4,9 +4,11 @@ echo '
 ';
 
 include 'inc/titre.php';
-include 'inc/border.php';
 echo '
 	<body>
+	';
+include 'inc/border.php';
+echo'
 	<div class="produitFilter">
 	<form class="produitFilter"; action="categorieProduit.php" method="get">
 	Filtrer les produits : <SELECT class="produitFilter" name="categorie" size="">
@@ -90,5 +92,5 @@ echo '
 	echo '
 	</body>
 	';
-
-include 'inc/basPage.php';
+	
+	include 'inc/basPage.php';
