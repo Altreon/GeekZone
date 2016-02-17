@@ -187,3 +187,111 @@ button.contact:hover span:after {
   opacity: 1;
   right: 0;
 }
+
+h1.bvenue {
+	text-align:center;
+	font-size:25px;
+	font-family:"Times New Roman" , Times , serif;
+	color: #3366CC; 
+}
+
+h1.bvenue2 {
+	text-align:center;
+	font-size:25px;
+	font-family:"Times New Roman" , Times , serif;
+	color: #21c1de; 
+}
+
+h1.bvenue3 {
+	text-align:center;
+	font-size:25px;
+	font-family:"Times New Roman" , Times , serif;
+	color: #FF9966; 
+}
+
+h1.bvenue4 {
+	text-align:center;
+	font-size:25px;
+	font-family:"Times New Roman" , Times , serif;
+	color: #ff008c; 
+}
+
+p.acc {
+	text-align:center;
+	font-size:20px;
+}
+
+p.img {
+	text-align:center;
+}
+
+img.red {
+	height:350px;
+}
+
+td.top {
+	vertical-align:top;
+}
+
+div.cuisine {
+	margin-left: 780px;
+	margin-right: 788px;
+}
+
+div.mode {
+	margin-top:100px;
+	margin-left:370px;
+	margin-right: 1369px;
+}
+
+div.portable {
+	margin-top:-210px;
+	margin-left: 1340px;
+	margin-right: 329px;
+}
+
+div.img {
+	margin-top:-210px;
+	margin-left:845px;
+}
+
+img.imagegeek {
+width: 15%;
+}
+
+div.usb {
+	margin-top:150px;
+	margin-left: 500px;
+	margin-right: 1161px;
+}
+
+div.gadget {
+	margin-top:-160px;
+	margin-left: 1100px;
+	margin-right: 515px;
+}
+
+div.color:hover {
+	background-color:#8080ff;
+
+}
+
+a.lien:hover {
+	font-size: 115%;
+	color: #10efdb;
+}
+
+div.shop {
+	position : absolute;
+	margin-top:-660px;
+	margin-left: 600px;
+	font-size:20px;
+	font-style:italic;
+	text-shadow: 0.5px 0.5px #000000;
+}
+
+ul {
+	margin-left : 40%;
+}
+
+
