@@ -78,15 +78,24 @@ div.borderRight {
 	right:0;
 	top:0;
 	width:50px;
-	height:100%;
+	height:200%;
 	/*margin-left:-10px;*/
 	background-image: url(../img/background.png);
 	background-repeat: repeat;
 }
 
 div.borderBottom {
-	position:relative;
-	bottom:calc(-100% + 200px);
+	right:0;
+	left:0;
+	height:20px;
+	/*margin-left:-10px;*/
+	background-image: url(../img/background.png);
+	background-repeat: repeat;
+}
+
+div.borderBottomFull {
+	position:absolute;
+	bottom:0;
 	right:0;
 	left:0;
 	height:20px;
@@ -103,10 +112,16 @@ div.produit {
 }
 
 div.contact {
+	clear:both;
+	width : 0px;
+	margin-right: 250px ;
+	margin-left:auto;
+}
+
+div.contactFull {
 	position:absolute;
-	bottom:0;
+	bottom:20px;
 	right:50px;
-	bottom:50px;
 }
 
 form.produitFilter {
