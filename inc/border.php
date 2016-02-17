@@ -7,8 +7,4 @@ echo '
 	<div class="borderRight">
 		
 	</div>
-		
-	<div class="borderBottom">
-		
-	</div>
 ';

@@ -5,7 +5,6 @@ echo '
 
 include 'inc/titre.php';
 include 'inc/border.php';
-
 echo '
 	<body>
 	<div class="produitFilter">
@@ -88,9 +87,8 @@ echo '
 		}
 	}
 	
-	//echo '
-	//</table>	
-	//</body>
-	//';
+	echo '
+	</body>
+	';
 
 include 'inc/basPage.php';
