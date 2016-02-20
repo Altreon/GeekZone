@@ -3,10 +3,10 @@ echo '
 <link rel="stylesheet" type="text/css" media="screen" href="css/GeekZone.css"/>
 ';
 
-include 'inc/titre.php';
 echo '
 	<body>
 	';
+include 'inc/titre.php';
 include 'inc/border.php';
 echo'
 	<div class="produitFilter">
@@ -62,7 +62,7 @@ echo'
 		//</tr>
 	//';
 	if(!isset($_GET['categorie']) || $_GET['categorie'] == "Tous"){
-		for($i = 0; $i<count($cuisineRef); $i++){
+		for($i = 0; $i<count($cuisineRef)-2; $i++){
 			echo'
 			<div class = "produit">
 				<hr class="produit">
@@ -88,9 +88,9 @@ echo'
 			}
 		}
 	}
-	
+	include 'inc/basPage.php';
 	echo '
+	<br>
 	</body>
 	';
 	
-	include 'inc/basPage.php';
