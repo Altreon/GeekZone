@@ -9,6 +9,7 @@ echo '
 include 'inc/titre.php';
 include 'inc/border.php';
 echo'
+<div class = "content">
 	<div class="produitFilter">
 	<form class="produitFilter"; action="categorieProduit.php" method="get">
 	Filtrer les produits : <SELECT class="produitFilter" name="categorie" size="">
@@ -21,7 +22,13 @@ echo'
 	</SELECT>
 	<input class="produitFilter" type="submit" name="send"></input>
 	</div>
-	';
+';
+	
+echo'
+	<div class="strip">
+	</div>
+	<br>
+';
 	
 	$cuisineRef = array(
 				"img/cuisine/fridgebook-magnet-reseau-social-frigo.jpg",
@@ -62,7 +69,7 @@ echo'
 		//</tr>
 	//';
 	if(!isset($_GET['categorie']) || $_GET['categorie'] == "Tous"){
-		for($i = 0; $i<count($cuisineRef)-2; $i++){
+		for($i = 0; $i<count($cuisineRef); $i++){
 			echo'
 			<div class = "produit">
 				<hr class="produit">
@@ -88,9 +95,15 @@ echo'
 			}
 		}
 	}
-	include 'inc/basPage.php';
 	echo '
-	<br>
+	<p>test</p>
+	<p>test</p>
+	<p>test</p>
+	<p>test</p>
+	</div>
+	';
+	include 'inc/basPage.php';
+	echo'
 	</body>
 	';
 	

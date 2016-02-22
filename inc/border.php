@@ -2,7 +2,7 @@
 echo '
 	<div class="borderLeft">
 		
-	</div>
+	</div>	
 		
 	<div class="borderRight">
 		

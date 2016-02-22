@@ -13,9 +13,10 @@ include 'inc/border.php';
 echo '
 	<div class = "content">
 		<p>test</p>
+		
 	</div>
 ';
 
-echo'</body>';
-
 include 'inc/basPage.php';
+
+echo'</body>';
