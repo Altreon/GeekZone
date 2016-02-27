@@ -96,10 +96,6 @@ echo'
 		}
 	}
 	echo '
-	<p>test</p>
-	<p>test</p>
-	<p>test</p>
-	<p>test</p>
 	</div>
 	';
 	include 'inc/basPage.php';
