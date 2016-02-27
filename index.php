@@ -13,23 +13,6 @@ include 'inc/border.php';
 echo '
 	<div class = "content">
 		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
-		<p>test</p>
 		
 	</div>
 ';
