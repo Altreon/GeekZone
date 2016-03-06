@@ -5,6 +5,11 @@ echo '
 	';
 
 include 'inc/titre.php';
+include 'inc/border.php';
+
+echo'
+	<div class = "content">
+';
 
 $boutiqueImage = array(
 		"img/boutiques/boutique_valence.jpg",
@@ -117,8 +122,11 @@ echo '
 			</th>
 		</tr>
 	</table>
-		
-	</body>
 ';
 
 include 'inc/basPage.php';
+
+echo '
+	</div>
+	</body>
+';
