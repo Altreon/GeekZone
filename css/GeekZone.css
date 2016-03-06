@@ -43,11 +43,6 @@ img.boutique {
 	height: 320px;
 }
 
-form {
-	display: inline-block;
-    text-align: center;
-}
-
 th {
 	border : groove black;
 	font-size : 25px;
@@ -128,6 +123,10 @@ div.contact {
 form.produitFilter {
 	margin-left : 20px;
 	margin-top : 10px;
+}
+
+form.contact {
+	text-align:center;
 }
 
 select.produitFilter, input.produitFilter {

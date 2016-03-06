@@ -10,7 +10,6 @@ include 'inc/titre.php';
 include 'inc/border.php';
 echo'
 <div class = "content">
-	<div class="produitFilter">
 	<form class="produitFilter"; action="categorieProduit.php" method="get">
 	Filtrer les produits : <SELECT class="produitFilter" name="categorie" size="">
 		<OPTION>Tous
@@ -21,7 +20,7 @@ echo'
 		<OPTION>USB
 	</SELECT>
 	<input class="produitFilter" type="submit" name="send"></input>
-	</div>
+	</form>
 ';
 	
 echo'

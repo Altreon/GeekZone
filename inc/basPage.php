@@ -5,7 +5,7 @@ echo '
 		<br>
 		<br>
 		<div class="contact">
-		<button class="contact"><span>Contact</span></button>
+		<a href="contact.php"><button class="contact"><span>Contact</span></button></a>
 		
 		</div>
 ';

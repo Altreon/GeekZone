@@ -1,6 +1,6 @@
 <?php
 echo '
 	<div class="titre">
-		<img class="titre" src="img/geekzone.png"></img>
+		<a href="index.php"><img class="titre" src="img/geekzone.png"></img></a>
 	</div>
 ';
