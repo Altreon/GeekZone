@@ -3,7 +3,7 @@ echo '
 <link rel="stylesheet" type="text/css" media="screen" href="css/GeekZone.css"/>
 	';
 
-include 'inc/titre.php';
+include '../inc/titre.php';
 
 echo '<body>
 		<p class="acc"><i>Voici ci-dessous les différentes catégories de produits disponibles :</i></p>
