@@ -12,9 +12,20 @@ include 'inc/border.php';
 
 echo '
 	<div class = "content">
-		<p>test</p>
-		
+		<p class = "acc">Bienvenue chez GeekZone!</p>	
 	</div>
+		
+	<div class = "accboutiques">
+		<p>
+   			<map name="mapacc" id="mapacc">
+      			<area shape="rect" coords="0,0,270,122" href="scriptscedric/boutiquesmap.php"/>
+				<area shape="rect" coords="910,0,1184,122" href="categorieProduit.php"/>
+   			</map>
+		
+			<img src="imgcedric/bouton/gz.png" usemap="mapacc" alt="image"/>
+		</p>
+		
+	</div>	
 ';
 
 echo'</body>';

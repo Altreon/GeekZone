@@ -63,7 +63,7 @@ div.titre {
 }
 
 div.content {
-	/*margin-top:168px;*/
+	margin-top:80px;
 	margin-left:50px;
 	margin-right:50px;
 }
@@ -308,6 +308,10 @@ div.shop  {
 
 ul {
 	margin-left : 40%;
+}
+
+div.accboutiques {
+	margin-top:220px;
 }
 
 
