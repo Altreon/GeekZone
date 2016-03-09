@@ -348,11 +348,16 @@ p.detailproduitPrix {
 	color : red;
 	text-shadow: 0.75px 0.75px #ff0000;
 	font-size : 25px;
-	text-align : right;
+	text-align : left;
 }
 
 div.prods {
 	margin-left:10px;
 	margin-right:500px;
 
+}
+
+div.prix {
+	margin-top:-230px;
+	margin-left:1340px;
 }

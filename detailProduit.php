@@ -47,17 +47,22 @@ for ($i=0; $i < count($produitName); $i++){
 				</div>
 							
 				<div class="details">
-					<p class="detailproduitPrix">
-						Disponible!<br>	
-						'.$produitPrice[$i].'€
-					</p>
 					<p class="detailproduit">'.$produitName[$i].'</p>		
 						
 					<hr>
 					
 					<p class="details">'.$produitDesc[$i].'</p>
 				</div>			
-			</div>			
+			</div>	
+			
+			<div class="prix">
+				<p class="detailproduitPrix">
+					Disponible!<br>	
+					'.$produitPrice[$i].'€
+				</p>			
+			</div>
+							
+			
 			';
 	}
 }
