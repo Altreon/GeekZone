@@ -6,8 +6,8 @@ $coordy = array(307+167,295+167,311+167,307+167,329+167,305+167,362+167);
 
 
 
-include 'inc/titre.php';
-include 'inc/france.inc.php';
+include '../inc/titre.php';
+include '../inc/france.inc.php';
 
 for($i=0; $i<count($villes); $i=$i+1) {
  	echo '<DIV STYLE="
@@ -15,7 +15,7 @@ for($i=0; $i<count($villes); $i=$i+1) {
  	 top:'.$coordy[$i].';
  	 left:'.$coordx[$i].';
   	">
- 		<a href="boutique.php?boutique='.$villes[$i].'"><img src="img/point.png" /></a>
+ 		<a href="boutique.php?boutique='.$villes[$i].'"><img src="../imgcedric/point.png" /></a>
 
  	</div>';
 }
