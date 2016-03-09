@@ -1,4 +1,10 @@
 <?php
+
+$base='geekzone';
+$hote='localhost';
+$utilisateur='root';
+$mdp='';
+
 echo '
 <link rel="stylesheet" type="text/css" media="screen" href="css/GeekZone.css"/>
 	<body>
@@ -6,6 +12,7 @@ echo '
 
 include 'inc/titre.php';
 include 'inc/border.php';
+include 'inc/fonction.php';
 
 echo'
 	<div class = "content">
@@ -40,7 +47,8 @@ $boutiqueHoraires = array(
 		"Du lundi au samedi de 08h30 à 12h et de 14h à 19h.",
 		"Du mardi au samedi de 8h30 à 19h30 (sans interruption) et le dimanche matin de 9h à 12h30",
 );
-	
+
+/*
 echo '
 	<table>
 		<tr>
@@ -123,6 +131,9 @@ echo '
 		</tr>
 	</table>
 ';
+*/
+
+boutique($_GET['boutique'], $base, $hote, $utilisateur, $mdp);
 
 include 'inc/basPage.php';
 
