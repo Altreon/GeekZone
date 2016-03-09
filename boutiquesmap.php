@@ -3,7 +3,7 @@ echo '
 <link rel="stylesheet" type="text/css" media="screen" href="css/GeekZone.css"/>
 ';
 
-$villes = array("Albertville","Annecy","Chambery","Clermont-Ferrand","Grenoble","Lyon","Valence");
+$villes = array("ALBERTVILLE","ANNECY","CHAMBERY","CLERMONT FERRAND","GRENOBLE","LYON","VALENCE");
 $coordx = array(442+50,426+50,420+50,311+50,406+50,370+50,383+50);
 $coordy = array(307+168+80,295+168+80,311+168+80,307+168+80,329+168+80,305+168+80,362+168+80);
 
