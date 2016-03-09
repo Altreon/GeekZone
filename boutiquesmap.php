@@ -1,13 +1,24 @@
 <?php
+echo '
+<link rel="stylesheet" type="text/css" media="screen" href="css/GeekZone.css"/>
+';
 
 $villes = array("Albertville","Annecy","Chambery","Clermont-Ferrand","Grenoble","Lyon","Valence");
-$coordx = array(442,426,420,311,406,370,383);
-$coordy = array(307+167,295+167,311+167,307+167,329+167,305+167,362+167);
+$coordx = array(442+50,426+50,420+50,311+50,406+50,370+50,383+50);
+$coordy = array(307+168+80,295+168+80,311+168+80,307+168+80,329+168+80,305+168+80,362+168+80);
 
 
 
-include '../inc/titre.php';
-include '../inc/france.inc.php';
+include 'inc/titre.php';
+echo '
+	<body>
+';
+include 'inc/border.php';
+echo '
+	<div class = "content">
+';
+
+include 'inc/france.inc.php';
 
 for($i=0; $i<count($villes); $i=$i+1) {
  	echo '<DIV STYLE="
@@ -15,7 +26,7 @@ for($i=0; $i<count($villes); $i=$i+1) {
  	 top:'.$coordy[$i].';
  	 left:'.$coordx[$i].';
   	">
- 		<a href="boutique.php?boutique='.$villes[$i].'"><img src="../imgcedric/point.png" /></a>
+ 		<a href="boutique.php?boutique='.$villes[$i].'"><img src="imgcedric/point.png" /></a>
 
  	</div>';
 }
@@ -30,4 +41,6 @@ for($i=0; $i<count($villes); $i=$i+1) {
 	echo '</ul>
 				
 	</div>
+	</div>
+	</body>
 		';
