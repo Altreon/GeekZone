@@ -234,7 +234,10 @@ h1.bvenue4 {
 
 p.acc {
 	text-align:center;
-	font-size:20px;
+	font-size:40px;
+	color:#2eb91e;
+	font-style:italic;
+	text-decoration:underline overline;
 }
 
 p.img {
@@ -316,4 +319,38 @@ div.accboutiques {
 
 th.boutinfos {
 	background-color:#d6ebda;
+}
+
+div.details {
+	margin-top:-330px;
+	margin-left:380px;
+}
+
+div.details:hover {
+	background-color:#dfe6e2;
+}
+
+p.details {
+	font-size:25px;
+	text-shadow: 0.5px 0.5px #000000;
+	color:#2eb91e;
+}
+
+p.detailproduit {
+	font-size : 40px;
+	text-align : center;
+	text-shadow: 0.5px 0.5px #000000;
+	color:#2eb91e;
+}
+
+p.detailproduitPrix {
+	color : red;
+	text-shadow: 0.75px 0.75px #ff0000;
+	font-size : 25px;
+	text-align : center;
+}
+
+div.prods {
+	margin-left:15px;
+	margin-right:700px;
 }

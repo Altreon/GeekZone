@@ -21,8 +21,10 @@ echo '
       			<area shape="rect" coords="0,0,270,122" href="boutiquesmap.php"/>
 				<area shape="rect" coords="910,0,1184,122" href="categorieProduit.php"/>
    			</map>
-		
+			<hr class="produit">
 			<img src="imgcedric/bouton/gz.png" usemap="mapacc" alt="image"/>
+			<br>
+			<hr class="produit">
 		</p>
 		
 	</div>	
