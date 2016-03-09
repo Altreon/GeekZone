@@ -18,7 +18,7 @@ echo '
 	<div class = "accboutiques">
 		<p>
    			<map name="mapacc" id="mapacc">
-      			<area shape="rect" coords="0,0,270,122" href="scriptscedric/boutiquesmap.php"/>
+      			<area shape="rect" coords="0,0,270,122" href="boutiquesmap.php"/>
 				<area shape="rect" coords="910,0,1184,122" href="categorieProduit.php"/>
    			</map>
 		
