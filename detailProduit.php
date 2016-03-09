@@ -41,17 +41,22 @@ for ($i=0; $i < count($produitName); $i++){
 	if($_GET['nomProduit']==$produitName[$i]) {
 		echo'
 			<div class="prods">
-			<hr class="produit">	
-			<div class = "produit">
-				<img class="produit" src="'.$produitRef[$i].'"></img>
-			</div>
+				<hr class="produit">	
+				<div class = "produit">
+					<img class="produit" src="'.$produitRef[$i].'"></img>
+				</div>
+							
+				<div class="details">
+					<p class="detailproduitPrix">
+						Disponible!<br>	
+						'.$produitPrice[$i].'€
+					</p>
+					<p class="detailproduit">'.$produitName[$i].'</p>		
 						
-			<div class="details">
-				<p class="detailproduit">'.$produitName[$i].'</p>
-				<p class="detailproduitPrix">'.$produitPrice[$i].'€</p>			
-				<hr>
-				<p class="details">'.$produitDesc[$i].'</p>
-			</div>			
+					<hr>
+					
+					<p class="details">'.$produitDesc[$i].'</p>
+				</div>			
 			</div>			
 			';
 	}

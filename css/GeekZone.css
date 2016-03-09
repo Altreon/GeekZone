@@ -324,6 +324,7 @@ th.boutinfos {
 div.details {
 	margin-top:-330px;
 	margin-left:380px;
+	margin-right:auto;
 }
 
 div.details:hover {
@@ -347,10 +348,11 @@ p.detailproduitPrix {
 	color : red;
 	text-shadow: 0.75px 0.75px #ff0000;
 	font-size : 25px;
-	text-align : center;
+	text-align : right;
 }
 
 div.prods {
-	margin-left:15px;
-	margin-right:700px;
+	margin-left:10px;
+	margin-right:500px;
+
 }
