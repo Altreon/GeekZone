@@ -44,3 +44,5 @@ for($i=0; $i<count($villes); $i=$i+1) {
 	</div>
 	</body>
 		';
+	
+include 'inc/basPage.php';
