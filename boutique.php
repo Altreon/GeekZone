@@ -44,7 +44,7 @@ $boutiqueHoraires = array(
 echo '
 	<table>
 		<tr>
-			<th rowspan = "4">
+			<th class="boutinfos" rowspan = "4">
 				<h2>Boutique de '.$_GET['boutique'].'</h2>
 				';
 				if($_GET['boutique'] == "Valence"){
@@ -54,39 +54,39 @@ echo '
 				}
 				echo '
 			</th>
-			<th rowspan = "1">
+			<th class="boutinfos" rowspan = "1">
 				<h3>Horaires :</h3>
 					<table>
 						<tr>
-							<th rowspan = "1"></th>
-							<th rowspan = "1">Lundi</th>
-							<th rowspan = "1">Mardi</th>
-							<th rowspan = "1">Mercredi</th>
-							<th rowspan = "1">Jeudi</th>
-							<th rowspan = "1">Vendredi</th>
-							<th rowspan = "1">Samedi</th>
-							<th rowspan = "1">Dimanche</th>
+							<th class="boutinfos" rowspan = "1"></th>
+							<th class="boutinfos" rowspan = "1">Lundi</th>
+							<th class="boutinfos" rowspan = "1">Mardi</th>
+							<th class="boutinfos" rowspan = "1">Mercredi</th>
+							<th class="boutinfos" rowspan = "1">Jeudi</th>
+							<th class="boutinfos" rowspan = "1">Vendredi</th>
+							<th class="boutinfos" rowspan = "1">Samedi</th>
+							<th class="boutinfos" rowspan = "1">Dimanche</th>
 						</tr>';
 						if($_GET['boutique'] == "Valence"){ echo'
 							<tr>
-								<th rowspan = "1">Matin</th>
-								<th rowspan = "1">de 08h30 à 12h30</th>
-								<th rowspan = "1">de 08h30 à 12h30</th>
-								<th rowspan = "1">de 08h30 à 12h30</th>
-								<th rowspan = "1">de 08h30 à 12h30</th>
-								<th rowspan = "1">de 08h30 à 12h30</th>
-								<th rowspan = "1">de 08h30 à 12h30</th>
-								<th rowspan = "1">Fermée</th>
+								<th class="boutinfos" rowspan = "1">Matin</th>
+								<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
+								<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
+								<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
+								<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
+								<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
+								<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
+								<th class="boutinfos" rowspan = "1">Fermée</th>
 							</tr>
 							<tr>
-								<th rowspan = "1">Après-midi</th>
-								<th rowspan = "1">de 14h00 à 19h00</th>
-								<th rowspan = "1">de 14h00 à 19h00</th>
-								<th rowspan = "1">de 14h00 à 19h00</th>
-								<th rowspan = "1">de 14h00 à 19h00</th>
-								<th rowspan = "1">de 14h00 à 19h00</th>
-								<th rowspan = "1">de 14h00 à 19h00</th>
-								<th rowspan = "1">Fermée</th>
+								<th class="boutinfos" rowspan = "1">Après-midi</th>
+								<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
+								<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
+								<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
+								<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
+								<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
+								<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
+								<th class="boutinfos" rowspan = "1">Fermée</th>
 							</tr>
 						';
 						}
@@ -95,7 +95,7 @@ echo '
 			</th>
 		</tr>
 		<tr>
-			<th rowspan = "1">';
+			<th class="boutinfos" rowspan = "1">';
 				if($_GET['boutique'] == "Valence"){ echo'
 					<h5>Telephone : '.$boutiqueTelephone[0].'</h5>
 				';
@@ -104,7 +104,7 @@ echo '
 			</th>
 		</tr>
 		<tr>
-			<th rowspan = "1">';
+			<th class="boutinfos" rowspan = "1">';
 				if($_GET['boutique'] == "Valence"){ echo'
 					<h5>Adresse : '.$boutiqueAdresse[0].'</h5>
 				';
@@ -113,7 +113,7 @@ echo '
 			</th>
 		</tr>
 		<tr>
-			<th rowspan = "1">';
+			<th class="boutinfos" rowspan = "1">';
 				if($_GET['boutique'] == "Valence"){ echo'
 					<h5>Code Postale : '.$boutiqueCP[0].'</h5>
 				';
