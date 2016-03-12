@@ -15,6 +15,8 @@ echo '
 		<p class = "acc">Bienvenue chez GeekZone!</p>	
 	</div>
 		
+	<p class="acc">test</p>
+		
 	<div class = "accboutiques">
 		<p>
    			<map name="mapacc" id="mapacc">
