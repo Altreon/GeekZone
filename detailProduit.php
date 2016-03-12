@@ -119,4 +119,3 @@ echo '
 	</div>
 	';
 include 'inc/basPage.php';
-echo'
