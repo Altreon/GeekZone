@@ -76,8 +76,16 @@ echo '<div class = "content">';
 for ($i=0; $i < count($produitName); $i++){	
 	if($_GET['nomProduit']==$produitName[$i]) {
 		echo'
+				
+			<div class="retourProds">
+					<a href="categorieProduit.php"><button class="retourProds"><span>Retour aux produits</span></button></a>
+			</div>	
+				
 			<div class="prods">
-				<hr class="produit">	
+								
+				<hr class="produit">
+				
+				
 				<div class = "produit">
 					<img class="produit" src="'.$produitRef[$i].'"></img>
 				</div>
@@ -100,7 +108,7 @@ for ($i=0; $i < count($produitName); $i++){
 							
 			<div class="details2">
 				<p class="detail2produit">'.$produitDet[$i].'</p>
-			</div>			
+			</div>				
 					
 			
 			';
@@ -112,4 +120,3 @@ echo '
 	';
 include 'inc/basPage.php';
 echo'
-	</body>';

@@ -133,6 +133,10 @@ div.retourCarte {
 	margin-left: calc(100% - 300px);
 }
 
+div.retourProds {
+	margin-left: calc(100% - 300px);
+}
+
 form.produitFilter {
 	margin-left : 20px;
 	margin-top : 10px;
