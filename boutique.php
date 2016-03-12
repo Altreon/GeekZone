@@ -17,7 +17,7 @@ include 'inc/fonction.php';
 echo'
 	<div class = "content">
 	<div class="retourCarte">
-		<a href="contact.php"><button class="retourCarte"><span>Retour à la carte</span></button></a>
+		<a href="boutiquesmap.php"><button class="retourCarte"><span>Retour à la carte</span></button></a>
 	</div>
 ';
 
