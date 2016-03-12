@@ -188,6 +188,7 @@ p.produitPrix {
 }
 
 button.contact {
+  font-family:'FixedsysTTF';
   display: inline-block;
   border-radius: 4px;
   background-color: #10efdb;
@@ -205,6 +206,7 @@ button.contact {
 }
 
 button.retourCarte {
+  font-family:'FixedsysTTF';
   display: inline-block;
   border-radius: 4px;
   background-color: #10efdb;
@@ -218,6 +220,44 @@ button.retourCarte {
   margin: 5px;
   margin-right: 0;
   margin-left: calc(50% - 130px/2);
+  border-radius: 12px;
+}
+
+button.boutiques {
+  font-family:'FixedsysTTF';
+  position:absolute;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #10efdb;
+  border: none;
+  color: dark;
+  text-align: center;
+  font-size: 30px;
+  width: 200px;
+  height:50px;
+  transition: all 0.5s;
+  cursor: pointer;
+  top:84px;
+  left:25%;
+  border-radius: 12px;
+}
+
+button.produits {
+  font-family:'FixedsysTTF';
+  position:absolute;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #10efdb;
+  border: none;
+  color: dark;
+  text-align: center;
+  font-size: 30px;
+  width: 200px;
+  height:50px;
+  transition: all 0.5s;
+  cursor: pointer;
+  top:84px;
+  right:25%;
   border-radius: 12px;
 }
 
