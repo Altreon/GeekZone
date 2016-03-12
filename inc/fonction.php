@@ -61,7 +61,7 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 						
 					<hr>
 					
-					<p class="details">'.$donnees['detail'].'</p>
+					<p class="details">'.$donnees['description'].'</p>
 				</div>			
 			</div>	
 

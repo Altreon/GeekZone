@@ -252,7 +252,7 @@ button.boutiques {
   transition: all 0.5s;
   cursor: pointer;
   top:84px;
-  left:25%;
+  left: calc(25% - 200px);
   border-radius: 12px;
 }
 
@@ -271,7 +271,7 @@ button.produits {
   transition: all 0.5s;
   cursor: pointer;
   top:84px;
-  right:25%;
+  right: calc(25% - 200px);
   border-radius: 12px;
 }
 
@@ -483,8 +483,7 @@ p.detailproduitPrix {
 div.prods {
 	margin-left:10px;
 	margin-right:500px;
-	
-
+	min-height:460px;
 }
 
 div.prix {
