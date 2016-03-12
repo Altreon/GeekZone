@@ -16,6 +16,9 @@ include 'inc/fonction.php';
 
 echo'
 	<div class = "content">
+	<div class="retourCarte">
+		<a href="contact.php"><button class="retourCarte"><span>Retour à la carte</span></button></a>
+	</div>
 ';
 
 boutique($_GET['boutique'], $base, $hote, $utilisateur, $mdp);
