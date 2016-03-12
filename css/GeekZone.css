@@ -47,6 +47,10 @@ img.produit {
 	margin: 5% auto auto auto;
 }
 
+img.produit:hover {
+	width: 320px;
+}
+
 img.boutique {
 	height: 320px;
 }
@@ -119,8 +123,13 @@ div.produit {
 	display: inline-block;
     vertical-align: top;
 	margin-left : 1%;
+	
 }
 
+div.produit:hover {
+	background-color:#dfe6e2;
+}
+	
 div.contact {
 	position:absolute;
 	width:calc(100% - 50px);
