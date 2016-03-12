@@ -124,7 +124,7 @@ div.produit {
 	display: inline-block;
     vertical-align: top;
 	margin-left : 1%;
-	
+	min-height: 448px;
 }
 
 div.produit:hover {
@@ -437,7 +437,7 @@ th.boutinfos {
 }
 
 div.details {
-	margin-top:-330px;
+	margin-top: -480px;
 	margin-left:380px;
 	margin-right:auto;
 }
@@ -447,7 +447,7 @@ div.details:hover {
 }
 
 div.details2 {
-	margin-top:300px;
+	margin-top:auto;
 	margin-left:1%;
 	border-left:grey double 5px;
 }
@@ -483,10 +483,11 @@ p.detailproduitPrix {
 div.prods {
 	margin-left:10px;
 	margin-right:500px;
+	
 
 }
 
 div.prix {
-	margin-top:-230px;
-	margin-left:1340px;
+	margin-top: -130px;
+    margin-left: 50px;
 }

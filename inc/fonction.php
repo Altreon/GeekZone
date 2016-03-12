@@ -50,6 +50,10 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 				
 				<div class = "produit">
 					<img class="produit" src="img/produits/'.$donnees['image'].'"></img>
+					<br>
+					<p class="detailproduitPrix">
+					Disponible!<br>	
+					'.$donnees['prix'].'€
 				</div>
 							
 				<div class="details">
@@ -60,13 +64,7 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 					<p class="details">'.$donnees['detail'].'</p>
 				</div>			
 			</div>	
-			
-			<div class="prix">
-				<p class="detailproduitPrix">
-					Disponible!<br>	
-					'.$donnees['prix'].'€
-				</p>			
-			</div>
+
 							
 			<div class="details2">
 				<p class="detail2produit">'.$donnees['detail'].'</p>
