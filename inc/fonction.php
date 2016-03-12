@@ -15,13 +15,64 @@ function produitList($tri, $base, $hote, $utilisateur, $mdp) {
 		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
 		{
 			echo'
-			<div class = "produit">
+			<a href="detailProduit.php?idProduit='.$donnees['produit_id'].'"><div class = "produit">
 				<hr class="produit">
 				<img class="produit" src="img/produits/'.$donnees['image'].'"></img>
 				<hr>
 				<p class="produit">'.$donnees['nom'].'</p>
 				<p class="produitPrix">'.$donnees['prix'].'€</p>
+			</div></a>
+			';
+		}
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		$reponse = $bdd->query('SELECT * FROM produit WHERE produit.produit_id = '.$id.''); // Envoi de la requête
+		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
+		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
+		{
+			echo'	
+			<div class="prods">
+								
+				<hr class="produit">
+				
+				
+				<div class = "produit">
+					<img class="produit" src="img/produits/'.$donnees['image'].'"></img>
+				</div>
+							
+				<div class="details">
+					<p class="detailproduit">'.$donnees['nom'].'</p>		
+						
+					<hr>
+					
+					<p class="details">'.$donnees['detail'].'</p>
+				</div>			
+			</div>	
+			
+			<div class="prix">
+				<p class="detailproduitPrix">
+					Disponible!<br>	
+					'.$donnees['prix'].'€
+				</p>			
 			</div>
+							
+			<div class="details2">
+				<p class="detail2produit">'.$donnees['detail'].'</p>
+			</div>				
+					
+			
 			';
 		}
 		// On libère la connexion du serveur pour d'autres requêtes :
