@@ -374,6 +374,20 @@ div.details:hover {
 	background-color:#dfe6e2;
 }
 
+div.details2 {
+	margin-top:300px;
+	margin-left:1%;
+	border-left:grey double 5px;
+}
+
+div.details2:hover {
+	background-color:#dfe6e2;
+}
+
+p.detail2produit {
+	margin-left:20px;
+}
+
 p.details {
 	font-size:25px;
 	text-shadow: 0.5px 0.5px #000000;

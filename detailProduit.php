@@ -36,6 +36,42 @@ echo '<div class = "content">';
 			8.90,
 			9.90
 	);
+	
+	$produitDet = array(
+		"Recréez votre réseau social préféré ... sur votre frigo ! grâce à nos magnets Fridgebook !<br/>
+		<br/>
+		Mettez à jour votre statut, postez des commentaires et faites de votre wall le défouloir de la maison !<br/>
+		<br/>
+		Ce kit pour reproduire un réseau social est livré avec un stylo feutre pour écrire facilement ainsi qu'une mini-brosse pour vite effacer les commentaires et en écrire de nouveaux.<br/>
+		<br/>
+		De nombreux magnets sont inclus dans le pack :<br/>
+		<br/>
+		* 1 x Statuts<br/>
+		* 2 x Comment<br/>
+		* 2 x Wall<br/>
+		* 2 x Friends (à personnaliser avec des photos de vos amis)<br/>
+		* 5 Logos (Photos, Events, Notes, Like, Dislike).",	
+			
+		"LICENCE OFFICIELLE TETRIS
+		<br/>
+		Recréez une partie de Tetris mais cette fois-ci dans votre verre avec ces glaçons Tetris !<br/>
+		Sous licence officielle, ces glaçons emblématiques sont les véritables glaçons à forme de blocs Tetris : les Tetrimono !<br/>
+		Plongez-les dans les verres de vos amis pour les ramener au bon vieux temps des jeux d'arcade !<br/>
+		<br/>
+		Caractéristiques :<br/>
+		* Bac à glaçons en plastique mou, il reste souple même quand les glaçons sont gelés afin que votre glaçon en forme de tetrimono soit toujours facile à enlever.",
+			
+		"LICENCE OFFICIELLE PAC-MAN<br/>
+	<br/>
+	Fan de Pac-Man, ce mug est fait pour vous !<br/>
+	<br/>
+	Froid, c'est une grille de jeu Pac-Man ...<br/>
+	<br/>
+	Chaud, Pac-Man, les fantômes et les Pac-Gommes apparaissent !<br/>
+	<br/>
+	Attention : Ne pas laver au lave-vaisselle ni utiliser au micro-onde."
+	);
+		
 
 for ($i=0; $i < count($produitName); $i++){	
 	if($_GET['nomProduit']==$produitName[$i]) {
@@ -62,6 +98,10 @@ for ($i=0; $i < count($produitName); $i++){
 				</p>			
 			</div>
 							
+			<div class="details2">
+				<p class="detail2produit">'.$produitDet[$i].'</p>
+			</div>			
+					
 			
 			';
 	}
