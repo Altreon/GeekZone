@@ -8,7 +8,7 @@ $coordx = array(442+50,426+50,420+50,311+50,406+50,370+50,383+50);
 $coordy = array(307+168+80,295+168+80,311+168+80,307+168+80,329+168+80,305+168+80,362+168+80);
 
 
-
+include 'inc/fonction.php';
 include 'inc/titre.php';
 echo '
 	<body>
@@ -32,15 +32,15 @@ for($i=0; $i<count($villes); $i=$i+1) {
 }
 
 echo '
-	<div class="shop">Cliquez sur les points de la carte, ou sur une ville ci-dessous, pour accéder aux détails d\'une de nos boutiques.
-	<ul> ';
-		
-for($i=0; $i<count($villes); $i=$i+1) {		
-			echo ' <li><a class="lien" href="boutique.php?boutique='.$villes[$i].'">'.$villes[$i].'</a></li>';
-}
-	echo '</ul>
+	<div class="shop">Cliquez sur les points de la carte, ou sur une ville ci-dessous, pour accéder aux détails d\'une de nos boutiques. ';
+
+$base='geekzone';
+$hote='localhost';
+$utilisateur='root';
+$mdp='';
+boutiquelist($base, $hote, $utilisateur, $mdp);
 				
-	</div>
+echo '	</div>
 	</div>
 	</body>
 		';
