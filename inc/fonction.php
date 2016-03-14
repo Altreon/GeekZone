@@ -63,11 +63,11 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 				
 				
 				<div class = "produit">
-					<img class="produit" src="img/produits/'.$donnees['image'].'"></img>
+					<img class="detproduit" src="img/produits/'.$donnees['image'].'"></img>
 					<br>
 					<p class="detailproduitPrix">
 					Disponible!<br>	
-					'.$donnees['prix'].'€
+					'.$donnees['prix'].'€	
 				</div>
 							
 				<div class="details">
