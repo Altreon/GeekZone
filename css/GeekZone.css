@@ -115,6 +115,16 @@ div.strip {
 
 div.produit {
 	
+	background-color : white;
+	width : 350px;
+	display: inline-block;
+    vertical-align: top;
+	margin-left : 1%;
+	max-height: 448px;
+}
+
+div.produitdet {
+	
 	background-color : #F1F1F1;
 	width : 350px;
 	display: inline-block;
