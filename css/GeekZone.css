@@ -47,10 +47,6 @@ img.produit {
 	margin: 5% auto auto auto;
 }
 
-img.produit:hover {
-	width: 320px;
-}
-
 img.boutique {
 	height: 320px;
 }
@@ -124,11 +120,20 @@ div.produit {
 	display: inline-block;
     vertical-align: top;
 	margin-left : 1%;
-	min-height: 448px;
+	max-height: 448px;
 }
 
 div.produit:hover {
 	background-color:#dfe6e2;
+}
+
+div.imgproduit:hover {
+	max-height: 318px;
+}
+
+img.produit:hover {
+	width:320px;
+	margin-top:-8px;
 }
 	
 div.contact {

@@ -15,9 +15,11 @@ function produitList($filter, $tri, $base, $hote, $utilisateur, $mdp) {
 		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
 		{
 			echo'
-			<a href="detailProduit.php?idProduit='.$donnees['produit_id'].'"><div class = "produit">
+			<a href="detailProduit.php?idProduit='.$donnees['produit_id'].'"><div class = "produit">	
 				<hr class="produit">
+				<div class="imgproduit">	
 				<img class="produit" src="img/produits/'.$donnees['image'].'"></img>
+				</div>		
 				<hr>
 				<p class="produit">'.$donnees['nom'].'</p>
 				<p class="produitPrix">'.$donnees['prix'].'€</p>
