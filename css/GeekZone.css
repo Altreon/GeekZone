@@ -115,12 +115,13 @@ div.strip {
 
 div.produit {
 	
-	background-color : white;
+	background-color : #F1F1F1;
 	width : 350px;
 	display: inline-block;
     vertical-align: top;
 	margin-left : 1%;
 	max-height: 448px;
+	float:left;
 }
 
 div.produit:hover {
@@ -452,8 +453,8 @@ th.boutinfos {
 }
 
 div.details {
-	margin-top: -480px;
-	margin-left:380px;
+
+	/*margin-left:380px;*/
 	margin-right:auto;
 }
 
