@@ -1,15 +1,27 @@
 <?php
 
-function produitList($filter, $tri, $base, $hote, $utilisateur, $mdp) {
+function produitList($filter, $tri, $decroissant, $recherche, $base, $hote, $utilisateur, $mdp) {
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf16');
 		$reponse;
-		if($filter == "Tous"){
-			$reponse = $bdd->query('SELECT * FROM produit ORDER BY '.$tri.''); // Envoi de la requête
+		if($recherche == null){
+			if($filter == "Tous"){
+				if(!$decroissant){
+					$reponse = $bdd->query('SELECT * FROM produit ORDER BY '.$tri.'');
+				}else{
+					$reponse = $bdd->query('SELECT * FROM produit ORDER BY '.$tri.' DESC');
+				}
+			}else{
+				if(!$decroissant){
+					$reponse = $bdd->query('SELECT * FROM produit, categorie WHERE produit.categorie = categorie.categorie_id AND categorie.libelle = "'.$filter.'" ORDER BY '.$tri.'');
+				}else{
+					$reponse = $bdd->query('SELECT * FROM produit, categorie WHERE produit.categorie = categorie.categorie_id AND categorie.libelle = "'.$filter.'" ORDER BY '.$tri.' DESC');
+				}
+			}
 		}else{
-			$reponse = $bdd->query('SELECT * FROM produit, categorie WHERE produit.categorie = categorie.categorie_id AND categorie.libelle = "'.$filter.'" ORDER BY '.$tri.''); // Envoi de la requête
+			$reponse = $bdd->query('SELECT * FROM produit WHERE nom LIKE \'%'.$recherche.'%\' OR description LIKE \'%'.$recherche.'%\' OR detail LIKE \'%'.$recherche.'%\' ORDER BY nom');
 		}
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
 		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
