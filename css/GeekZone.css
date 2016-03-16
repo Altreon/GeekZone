@@ -174,22 +174,17 @@ div.retourProds {
 }
 
 div.produitFT {
-	float:left;
+	display: inline-block;
 }
 
 form.produitFilter {
-	/*margin-left : 20px;
-	margin-top : 10px;*/
+
 }
 
 form.produitTri {
-	/*margin-left : 20px;
-	margin-top : 10px;*/
 }
 
 form.produitRecherche {
-	/*margin-left : 20px;
-	margin-top : 10px;*/
 	float:right;
 }
 
