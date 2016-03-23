@@ -203,3 +203,103 @@ function boutiquelist($base, $hote, $utilisateur, $mdp) {
 		die('Erreur : ' . $erreur->getMessage());
 	}
 }
+
+
+function ModifProduitValues($base, $hote, $utilisateur, $mdp) {
+
+	try 
+	{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		$reponse = $bdd->query('SELECT * FROM produit'); // Envoi de la requête
+		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées	
+		
+		
+		if(isset($_GET['modifProd'])){
+			echo '<form>
+					<fieldset>
+						<p class="details">Modification du produit n°'.$_GET['modifProd'].'<br/><br/>
+								Nom: <input type="text" id="nom" name="nom" /><br/><br/>
+								Description: <input type="text" id="desc" name="desc" /><br/><br/>
+								Details: <input type="text" id="det" name="det" /><br/><br/>
+								Prix: <input type="text" id="prix" name="prix" /><br/><br/>
+								Image: <input type"text" id="img" name="img" /><br/><br/>
+								N° Catégorie: <input type="text" id="cat" name="cat" /><br/><br/>
+								<input name="b2" type="submit" value="Valider" />								
+					</fieldset>
+				</form>';					
+		}
+		
+		
+		else if(isset($_GET['suppProd'])) {
+			
+		}
+		
+		else {
+	
+			echo '<div class="admin"><table class="tab">
+			<tr><th>NOM</th><th>DESCRIPTION</th><th>DETAIL</th><th>PRIX</th><th>IMAGE</th>
+	 		<th>CATEGORIE</th></tr>';
+			
+			while ($donnees = $reponse->fetch()) {
+				echo '<tr>';
+				echo '<td class="cellule">'.$donnees['nom'].'</td>';
+				echo '<td class="cellule">'.$donnees['description'].'</td>';
+				echo '<td class="cellule">'.$donnees['detail'].'</td>';
+				echo '<td class="cellule">'.$donnees['prix'].'</td>';
+				echo '<td class="cellule"><img class="produit2" src="img/produits/'.$donnees['image'].'"></td>';
+				echo '<td class="cellule">'.$donnees['categorie'].'</td>';
+				echo '<td class="edit"><input type="image" id="editProd" name="editProd" src="img/edit.png"
+						   onclick="location.href=\'admin.php?modifProd='.$donnees['produit_id'].'\'"/></td>';	
+				echo '<td><a href="admin.php?suppProd='.$donnees['produit_id'].'">
+						  <img src="img/suppr.png" /></a></td>';			
+			}
+			
+			echo '</table></div>';
+				
+	
+			
+		}
+		
+		}
+		
+		catch (Exception $erreur)
+		{
+			die('Erreur : ' . $erreur->getMessage());
+		}
+		
+		
+		try
+		{
+			$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+			$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+			$bdd->exec('SET NAMES utf16');
+			$reponse = $bdd->query('SELECT * FROM boutique'); // Envoi de la requête
+			$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
+			
+			echo '<form>
+					<fieldset>
+						<p class="details">Modification des boutiques</p>
+			
+							<label for="bout">Boutiques: </label>
+								<select name="bout" id="bout">';
+									while ( $donnees = $reponse->fetch() ) {
+										echo '<option value=" '.$donnees['ville'].' ">'.$donnees['ville'].'</option>';
+									}
+									
+							echo '<input name="b2" type="submit" value="Valider" />';
+									
+			echo '</fieldset></form>';	
+			
+		
+		}
+		
+		catch (Exception $erreur)
+		{
+			die('Erreur : ' . $erreur->getMessage());
+		}
+	
+}
+
+	

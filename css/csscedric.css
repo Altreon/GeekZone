@@ -72,7 +72,7 @@ div.titre {
 }
 
 div.content {
-	margin-top:80px;
+	margin-top:30px;
 	margin-left:50px;
 	margin-right:50px;
 }
@@ -173,9 +173,20 @@ div.retourProds {
 	margin-left: calc(100% - 300px);
 }
 
+div.produitFT {
+	display: inline-block;
+}
+
 form.produitFilter {
-	margin-left : 20px;
-	margin-top : 10px;
+
+}
+
+form.produitTri {
+}
+
+form.produitRecherche {
+	float:right;
+	margin-right: 10px;
 }
 
 form.contact {
@@ -447,7 +458,7 @@ div.shop  {
 	margin-left: 600px;
 	font-size:20px;
 	font-style:italic;
-	/*text-shadow: 0.5px 0.5px #000000;*/
+	text-shadow: 0.5px 0.5px #000000;
 }
 
 ul {
@@ -516,4 +527,29 @@ div.prods {
 div.prix {
 	margin-top: -130px;
     margin-left: 50px;
+}
+
+table.tab {
+   	margin: auto;
+   	border-collapse: collapse;
+   	font-size:20px;
+}
+
+td.cellule {
+	text-align:center;
+	border: 2px solid black;
+	width:10%;
+}
+
+td.edit {
+	width:1px;
+}
+
+img.produit2 {
+	width: 100px;
+	margin: 5% auto auto auto;
+}
+
+div.admin {
+	margin-left: 20px;
 }
