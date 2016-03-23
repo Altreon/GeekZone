@@ -11,6 +11,15 @@ echo '
 	';
 include 'inc/border.php';
 
+if(!isset($_SESSION['login'])){
+
+if(isset($_POST['identifiant']) && !empty($_POST['identifiant']) && isset($_POST['mdp']) && !empty($_POST['mdp'])){
+	if(verifLogin($_POST['identifiant'], $_POST['mdp'], $base, $hote, $utilisateur, $mdp)){
+		echo'<meta http-equiv="refresh" content="0; URL=test.php">';
+		exit;
+	}
+}
+
 echo '
 	<div class = "content">
 		
@@ -21,7 +30,7 @@ echo '
 				Identifiant : <input id="identifiant" class="input" name="identifiant" type="text" value="" size="50" />
 				<br>
 				<br>
-				Mot de passe : <input id="identifiant" class="input" name="identifiant" type="text" value="" size="50" />
+				Mot de passe : <input id="mdp" class="input" name="mdp" type="text" value="" size="50" />
 				<br>
 				<br>
 				<input class="produitFilter" type="submit" name="send"></input>
@@ -30,6 +39,8 @@ echo '
 		
 	</div>	
 ';
+
+}
 
 echo'</body>';
 
