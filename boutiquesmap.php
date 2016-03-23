@@ -32,7 +32,7 @@ for($i=0; $i<count($villes); $i=$i+1) {
 }
 
 echo '
-	<div class="shop">Cliquez sur les points de la carte, ou sur une ville ci-dessous, pour accéder aux détails d\'une de nos boutiques. ';
+	<div class="shop">Cliquez sur les points de la carte, ou sur une ville ci-dessous, pour accéder aux détails d\'une de nos boutiques.';
 
 $base='geekzone';
 $hote='localhost';
