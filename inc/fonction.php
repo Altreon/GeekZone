@@ -175,22 +175,24 @@ function boutique($name, $base, $hote, $utilisateur, $mdp) {
 	}
 }
 
-function boutiquelist($name, $base, $hote, $utilisateur, $mdp) {
+function boutiquelist($base, $hote, $utilisateur, $mdp) {
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf16');
-		$reponse = $bdd->query('SELECT * FROM boutique WHERE ville = "'.$name.'"'); // Envoi de la requête
+		$reponse = $bdd->query('SELECT * FROM boutique'); // Envoi de la requête
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
 		
-		echo '
-				<table>
-					<tr>';
 		
-		for($i=0; $i<$nb;$i++) {
-			echo '<th>';
+		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
+		{
+			echo '
+					<table>		
+						<tr>	
+							<hr>
+							<th class="boutinfos" rowspan = "1">'.$donnees['ville'].'			
+						</tr></table>';
 		}
-		
 		
 	
 	}
