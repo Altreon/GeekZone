@@ -173,9 +173,19 @@ div.retourProds {
 	margin-left: calc(100% - 300px);
 }
 
+div.produitFT {
+	display: inline-block;
+}
+
 form.produitFilter {
-	margin-left : 20px;
-	margin-top : 10px;
+
+}
+
+form.produitTri {
+}
+
+form.produitRecherche {
+	float:right;
 }
 
 form.contact {

@@ -28,6 +28,7 @@ include 'inc/border.php';
 include 'inc/fonction.php';
 echo'
 <div class = "content">
+	<div class="produitFT">
 	<form class="produitFilter"; action="categorieProduit.php" method="get">
 	Filtrer les produits : <SELECT class="produitFilter" name="categorie" size="">
 		<OPTION ';if($filter == "Tous"){echo("selected");}echo'>Tous
@@ -41,7 +42,7 @@ echo'
 	<input class="produitFilter" type="submit" name="send"></input>
 	</form>
 		
-	<form class="produitFilter"; action="categorieProduit.php" method="get">
+	<form class="produitTri"; action="categorieProduit.php" method="get">
 	<input type="hidden" name="categorie" value="'.$filter.'">
 	Trier les produits : <SELECT class="produitFilter" name="tri" size="">
 		<OPTION ';if($tri == "nom A>Z"){echo("selected");}echo'>nom A>Z
@@ -52,7 +53,9 @@ echo'
 	<input class="produitFilter" type="submit" name="send"></input>
 	</form>
 		
-	<form class="produitFilter"; action="categorieProduit.php" method="get">
+	</div>
+				
+	<form class="produitRecherche"; action="categorieProduit.php" method="get">
 	Rechercher des produits : <input id="recherche" class="input" name="recherche" type="text" value="" size="30" /><br />
 	<input class="produitFilter" type="submit" name="send"></input>
 	</form>
