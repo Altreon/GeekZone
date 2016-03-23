@@ -162,3 +162,27 @@ function boutique($name, $base, $hote, $utilisateur, $mdp) {
 		die('Erreur : ' . $erreur->getMessage());
 	}
 }
+
+function verifLogin ($login, $motdp, $base, $hote, $utilisateur, $mdp){
+	$valide = false;
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf8');
+		$reponse = $bdd->query('SELECT * FROM people'); // Envoi de la requête
+		while ( !$valide && $donnees = $reponse->fetch()) // Découpage ligne à ligne de $reponse
+		{
+			if($donnees['loginPeople'] == $login && $donnees['mdpPeople'] == $motdp){
+				$valide = true;
+				session_start();
+				$_SESSION['logPeople'] = $donnees['loginPeople'];
+				$_SESSION['statPeople'] = $donnees['statutPeople'];
+			}
+		}
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+	return $valide;
+}
