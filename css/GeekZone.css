@@ -173,15 +173,16 @@ div.retourProds {
 	margin-left: calc(100% - 300px);
 }
 
-div.produitFT {
+div.produitFilter {
+
+}
+
+div.produitTri {
+	    margin-top: 10px;
+}
+
+form.produitFT {
 	display: inline-block;
-}
-
-form.produitFilter {
-
-}
-
-form.produitTri {
 }
 
 form.produitRecherche {
@@ -209,6 +210,10 @@ input {
 	box-shadow:1px 1px 1px #019a5c;
 	cursor:pointer;
 	font-family:FixedsysTTF;
+}
+
+input.produitFilter {
+	margin-top:10px;
 }
 
 form {
