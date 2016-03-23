@@ -56,7 +56,7 @@ echo'
 	</div>
 				
 	<form class="produitRecherche"; action="categorieProduit.php" method="get">
-	Rechercher des produits : <input id="recherche" class="input" name="recherche" type="text" value="" size="30" /><br />
+	Rechercher des produits : <input id="recherche" class="input" name="recherche" type="text" value="" size="30" />
 	<input class="produitFilter" type="submit" name="send"></input>
 	</form>
 ';

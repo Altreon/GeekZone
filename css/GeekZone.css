@@ -186,6 +186,7 @@ form.produitTri {
 
 form.produitRecherche {
 	float:right;
+	margin-right: 10px;
 }
 
 form.contact {
