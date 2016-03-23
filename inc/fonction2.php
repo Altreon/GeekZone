@@ -169,7 +169,7 @@ function verifLogin ($login, $motdp, $base, $hote, $utilisateur, $mdp){
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf8');
-		$reponse = $bdd->query('SELECT * FROM people'); // Envoi de la requête
+		$reponse = $bdd->query('SELECT * FROM boutique'); // Envoi de la requête
 		while ( !$valide && $donnees = $reponse->fetch()) // Découpage ligne à ligne de $reponse
 		{
 			if($donnees['loginPeople'] == $login && $donnees['mdpPeople'] == $motdp){
