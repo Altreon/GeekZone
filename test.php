@@ -1,10 +1,17 @@
 <?php
+
+$base='geekzone';
+$hote='localhost';
+$utilisateur='root';
+$mdp='';
+
 echo '
 <link rel="stylesheet" type="text/css" media="screen" href="css/GeekZone.css"/>
 	';
 	
 $page = "Acceuil";
-include 'inc/titre.php';	
+include 'inc/titre.php';
+include 'inc/fonction2.php';
 	
 echo '
 	<body>
