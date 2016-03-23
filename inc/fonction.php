@@ -183,16 +183,18 @@ function boutiquelist($base, $hote, $utilisateur, $mdp) {
 		$reponse = $bdd->query('SELECT * FROM boutique'); // Envoi de la requête
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
 		
+		echo '<table>';
 		
 		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
 		{
 			echo '
-					<table>		
-						<tr>	
-							<hr>
-							<th class="boutinfos" rowspan = "1">'.$donnees['ville'].'			
-						</tr></table>';
+					<tr>
+						<th class="boutinfos" rowspan = "1"><a href="boutique.php?boutique='.$donnees['ville'].'">'.$donnees['ville'].'</a></th>
+					</tr>
+
+						';
 		}
+		echo'</table>';
 		
 	
 	}
