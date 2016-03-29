@@ -197,6 +197,7 @@ form.contact {
 form.connexion {
 	text-align: center;
     margin: auto;
+    margin-top: 10%;
     max-width: 400px;
     background-color: rgb(196, 234, 185);
 }
