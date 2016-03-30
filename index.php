@@ -28,7 +28,7 @@ echo '
 			
 imageRandom($base, $hote, $utilisateur, $mdp);		
 		
-		echo '</div>
+		echo '<br></div>
 	</div>
 		
 	<div class = "accboutiques">
