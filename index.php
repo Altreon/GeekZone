@@ -3,6 +3,7 @@ echo '
 <link rel="stylesheet" type="text/css" media="screen" href="css/GeekZone.css"/>
 	';
 	
+$page="accueil";	
 $base='geekzone';
 $hote='localhost';
 $utilisateur='root';
@@ -26,7 +27,7 @@ echo '
 			<br>		
 			</h1>';
 			
-imageRandom($base, $hote, $utilisateur, $mdp);		
+imageRandomProduit($base, $hote, $utilisateur, $mdp);		
 		
 		echo '<br></div>
 	</div>
@@ -45,7 +46,14 @@ imageRandom($base, $hote, $utilisateur, $mdp);
 		
 	</div>	
 ';
+		
+echo '<div class="acc">
+		<h1 class="bvenue">Une de nos boutiques:</h1>
+		<br>
+		';
+		
+imageRandomBoutique($base, $hote, $utilisateur, $mdp);	
 
-echo'</body>';
+echo'<br></div></body>';
 
 include 'inc/basPage.php';

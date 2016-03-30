@@ -305,7 +305,7 @@ function ModifProduitValues($base, $hote, $utilisateur, $mdp) {
 	
 }
 
-function imageRandom($base, $hote, $utilisateur, $mdp) {
+function imageRandomProduit($base, $hote, $utilisateur, $mdp) {
 	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 	$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 	$bdd->exec('SET NAMES utf16');
@@ -327,9 +327,28 @@ function imageRandom($base, $hote, $utilisateur, $mdp) {
 	echo '<div class="produitaccalign">';
 	while ( $donnees = $reponse->fetch() ) {
 		if ($donnees['produit_id'] == $prod1 || $donnees['produit_id'] == $prod2 || $donnees['produit_id'] == $prod3) {
-			echo '<div class="produitacc"><img class="produitacc" src="img/produits/'.$donnees['image'].'"></img></div>';
+			echo '<a href="detailProduit.php?idProduit='.$donnees['produit_id'].'"><div class="produitacc"><img class="produitacc" src="img/produits/'.$donnees['image'].'"></img></div></a>';
 		}
 		
+	} echo '<br></div>';
+}
+
+
+function imageRandomBoutique($base, $hote, $utilisateur, $mdp) {
+	$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+	$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+	$bdd->exec('SET NAMES utf16');
+	$reponse = $bdd->query('SELECT * FROM boutique'); // Envoi de la requête
+	$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
+	
+	$bout=mt_rand(1,$nb);
+	
+	echo '<div class="produitaccalign">';
+	while ( $donnees = $reponse->fetch() ) {
+		if ($donnees['id'] == $bout) {
+			echo '<h1 class="bvenue">Boutique de '.$donnees['ville'];
+			echo '<a href="boutique.php?boutique='.$donnees['ville'].'"><img class="boutique" src="img/boutiques/'.$donnees['image'].'"></img></a>';
+		}
 	} echo '<br></div>';
 }
 
