@@ -27,6 +27,8 @@ if(isset($_POST['identifiant']) && !empty($_POST['identifiant']) && isset($_POST
 	}
 }
 
+if(false){
+
 echo '
 	<div class = "content">
 		
@@ -45,6 +47,15 @@ echo '
 		</form>
 		
 	</div>	
+';
+
+}
+echo '
+	<div class = "content">
+';
+	creaTableau("id", $base, $hote, $utilisateur, $mdp);
+echo'
+	</div>
 ';
 
 }

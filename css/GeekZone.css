@@ -209,7 +209,7 @@ form.connexion {
     background-color: rgb(196, 234, 185);
 }
 
-select, input, textarea {
+select, input.form, textarea {
 	background-color:#2efeab;
 	padding:3px;
 	border:1px solid #01d681;
@@ -219,7 +219,7 @@ select, input, textarea {
 	font-family:FixedsysTTF;
 }
  
-input {
+input.form {
 	width:100px;
 	margin-left:5px;
 	box-shadow:1px 1px 1px #019a5c;

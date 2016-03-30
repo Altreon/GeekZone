@@ -186,3 +186,57 @@ function verifLogin ($login, $motdp, $base, $hote, $utilisateur, $mdp){
 	}
 	return $valide;
 }
+
+//Permet d'afficher le tableau des comptes de la base de données.
+function creaTableau($tri, $base, $hote, $utilisateur, $mdp) {
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		$reponse = $bdd->query('SELECT * FROM compte ORDER BY '.$tri.''); // Envoi de la requête
+		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
+		echo '<table>'; // Déclaration d'un tableau et de sa ligne d'en-tête
+		echo '<tr><th>NUMERO</th><th>NOM</th><th>PRENOM</th><th>MAIL</th><th>TELEPHONE</th>
+		<th>ADRESSE</th><th>CP</th><th>VILLE</th><th>BOUTIQUE GÉRÉE</th><th>STATUT</th><th>LOGIN</th><th>MDP</th></tr>';
+		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
+		{
+			echo '<tr>'; // Une ligne appelle les données de $donnees['']
+			echo '<td class="c1">'.$donnees['id'].'</td>';
+			echo '<td class="c1">'.$donnees['nom'].'</td>';
+			echo '<td class="c1">'.$donnees['prenom'].'</td>';
+			echo '<td class="c1">'.$donnees['mail'].'</td>';
+			echo '<td class="c1">'.$donnees['telephone'].'</td>';
+			echo '<td class="c1">'.$donnees['adresse'].'</td>';
+			echo '<td class="c1">'.$donnees['cp'].'</td>';
+			echo '<td class="c1">'.$donnees['ville'].'</td>';
+			echo '<td class="c1">'.$donnees['boutiqueGeree'].'</td>';
+			echo '<td class="c1">'.$donnees['statut'].'</td>';
+			echo '<td class="c1">'.$donnees['login'].'</td>';
+			echo '<td class="c1">'.$donnees['mdp'].'</td>';
+				
+			//Si l'utilisateur est administrateur, le possibilité de modifier ou de supprimer un compte lui est offerte.
+			//if($_SESSION['statPeople'] == "A"){
+				//Modification
+				echo '<td class="c1">
+				<input type="image" id="editCompte" name="editCompte" src="img/edit.png"
+				onclick="location.href=\'test.php?editCompte='
+						.$donnees['id'].'\'"/></td>';
+
+				//Suppresion
+				echo '<td class="c1">
+					<input type="image" id="suppCompte" name="suppCompte" src="img/icon_suppr.gif"
+					onclick="attention('.$donnees['id'].', \''.$donnees['prenom'].'\',
+					\''.$donnees['nom'].'\');"/></td>';
+				echo '</tr>';
+			//}
+		}
+		echo '</table>'; // Fin du tableau
+		echo '<p>Il y a '.$nb.' comptes.</p>'; // Affichade du compte des lignes
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
