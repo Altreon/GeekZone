@@ -195,7 +195,7 @@ function creaTableau($tri, $base, $hote, $utilisateur, $mdp) {
 		$bdd->exec('SET NAMES utf16');
 		$reponse = $bdd->query('SELECT * FROM compte ORDER BY '.$tri.''); // Envoi de la requête
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
-		echo '<table>'; // Déclaration d'un tableau et de sa ligne d'en-tête
+		echo '<table class="compte">'; // Déclaration d'un tableau et de sa ligne d'en-tête
 		echo '<tr><th>NUMERO</th><th>NOM</th><th>PRENOM</th><th>MAIL</th><th>TELEPHONE</th>
 		<th>ADRESSE</th><th>CP</th><th>VILLE</th><th>BOUTIQUE GÉRÉE</th><th>STATUT</th><th>LOGIN</th><th>MDP</th></tr>';
 		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse

@@ -472,12 +472,27 @@ div.accboutiques {
 	margin-top:60px;
 }
 
+table.compte {
+	margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+	border : solid grey;
+	font-size : 30px
+}
+
 th.boutinfos {
 	background-color:#d6ebda;
 }
 
+td {
+	border : solid grey;
+	border-collapse: collapse;
+	font-size : 20px
+}
+
 div.details {
-	
 	margin-top:-60px;
 	margin-right:auto;
 }
