@@ -65,21 +65,19 @@ echo '
 		<fieldset>
 			<label>Nom :</label><input type="text" id="nom" name = "nom" /><br/><br/>
 			<label>Prénom :</label><input type="text" id="prenom" name = "prenom" /><br/><br/>
-			<label>Sexe :</label>
-				<input type="radio" id="sexe" name="sexe" value="H" checked="checked"/>homme
-				<input type="radio" id="sexe" name="sexe" value="F"/>femme
+			<label>Mail :</label><input type="text" id="mail" name = "mail" /><br/><br/>
+			<label>Téléphone :</label><input type="text" id="telephone" name = "telephone" /><br/><br/>
+			<label>Adresse :</label><input type="text" id="adresse" name = "adresse" /><br/><br/>
+			<label>CP :</label><input type="text" id="cp" name = "cp" /><br/><br/>
+			<label>Ville :</label><input type="text" id="ville" name = "ville" /><br/><br/>
+			<label>Gère la boutique n°</label><input type="text" id="boutiqueGeree" name = "boutiqueGeree" /><br/><br/>
+			<label>Statut :</label>
+					<input type="radio" id="statut" name="statut" value="U" checked="checked"/>Administrateur de boutique
+					<input type="radio" id="statut" name="statut" value="A"/>Administrateur général
 			<br>
 			<br>
-			<label>Âge :</label><input type="text" id="age" name = "age" /><br/><br/>
-			<label>Ville :</label>
-				<select name="ville" size = "1">
-					<option value="Etampe">Etampes</option>
-					<option value="Etrechy">Etrechy</option>
-					<option value="Morigny">Morigny</option>
-					<option value="Maisse">Maisse</option>
-				</select>
-			<br>
-			<br>
+			<label>Identifiant :</label><input type="text" id="login" name = "login" /><br/><br/>
+			<label>Mot de passe :</label><input type="text" id="mdp" name = "mdp" /><br/><br/>
 			<input name="effacer" type="reset" value="Effacer" />
 			<input name="envoyer" type="submit" value="Envoyer" />
 		</fieldset>
