@@ -379,28 +379,11 @@ h1.bvenue {
 	text-align:center;
 	font-size:25px;
 	font-family:"Times New Roman" , Times , serif;
-	color: #3366CC; 
+	color: #638bbc; 
 }
 
-h1.bvenue2 {
-	text-align:center;
-	font-size:25px;
-	font-family:"Times New Roman" , Times , serif;
-	color: #21c1de; 
-}
-
-h1.bvenue3 {
-	text-align:center;
-	font-size:25px;
-	font-family:"Times New Roman" , Times , serif;
-	color: #FF9966; 
-}
-
-h1.bvenue4 {
-	text-align:center;
-	font-size:25px;
-	font-family:"Times New Roman" , Times , serif;
-	color: #ff008c; 
+div.acc {
+	background-color:#dad8e9;
 }
 
 p.acc {
@@ -501,7 +484,6 @@ div.details {
 
 div.details:hover {
 	background-color:#dfe6e2;
-
 }
 
 div.details2 {
@@ -543,7 +525,6 @@ div.prods {
 	margin-right:500px;
 	min-height:460px;
 }
-
 
 div.prix {
 	margin-top: -130px;

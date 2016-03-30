@@ -3,7 +3,11 @@ echo '
 <link rel="stylesheet" type="text/css" media="screen" href="css/GeekZone.css"/>
 	';
 	
-$page = "Acceuil";
+$base='geekzone';
+$hote='localhost';
+$utilisateur='root';
+$mdp='';
+
 include 'inc/titre.php';	
 	
 echo '
@@ -13,7 +17,18 @@ include 'inc/border.php';
 
 echo '
 	<div class = "content">
-		<p class = "acc">Bienvenue chez GeekZone!</p>	
+		<p class = "acc">Bienvenue chez GeekZone!</p>
+		<div class="acc">
+			<h1 class="bvenue">Ceci est notre site, il répertorie les informations dont VOUS avez besoin!
+			<br>
+			Voici certains de nos produits qui pourraient vous intéresser:
+			<br>		
+			</h1>
+			<br>';
+			
+imageRandom($base, $hote, $utilisateur, $mdp);		
+		
+		echo '</div>
 	</div>
 		
 	<div class = "accboutiques">
