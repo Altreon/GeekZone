@@ -49,13 +49,13 @@ echo'
 			</SELECT>
 		</div>
 				
-		<input class="produitFilter" type="submit" name="send"></input>
+		<input class="produitFilter form" type="submit" name="send"></input>
 		
 	</form>
 				
 	<form class="produitRecherche"; action="categorieProduit.php" method="get">
-	Rechercher des produits : <input id="recherche" class="input" name="recherche" type="text" value="" size="30" />
-	<input class="produitFilter" type="submit" name="send"></input>
+	Rechercher des produits : <input id="recherche" class="input form" name="recherche" type="text" value="" size="30" />
+	<input class="produitFilter form" type="submit" name="send"></input>
 	</form>
 ';
 

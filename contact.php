@@ -18,17 +18,17 @@ echo '
 		<form class="contact" action="contact.php" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<label>Votre nom:</label><br/>
-				<input id="name" class="input" name="name" type="text" value="" size="30" /><br />
+				<input id="name" class="input form" name="name" type="text" value="" size="30" /><br />
 			</div>
 			<div class="row">
 				<label>Votre email:</label><br />
-				<input id="email" class="input" name="email" type="text" value="" size="30" /><br />
+				<input id="email" class="input form" name="email" type="text" value="" size="30" /><br />
 			</div>
 			<div class="row">
 				<label for="message">Votre message:</label><br />
-				<textarea id="message" class="input" name="message" rows="7" cols="30"></textarea><br />
+				<textarea id="message" class="input form" name="message" rows="7" cols="30"></textarea><br />
 			</div>
-			<input id="submit" type="submit" value="Envoyer email" />
+			<input class="form" id="submit" type="submit" value="Envoyer email" />
 		</form>
 		
 		';

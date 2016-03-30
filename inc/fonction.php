@@ -223,13 +223,13 @@ function ModifProduitValues($base, $hote, $utilisateur, $mdp) {
 			echo '<form>
 					<fieldset>
 						<p class="details">Modification du produit n°'.$_GET['modifProd'].'<br/><br/>
-								Nom: <input type="text" id="nom" name="nom" /><br/><br/>
-								Description: <input type="text" id="desc" name="desc" /><br/><br/>
-								Details: <input type="text" id="det" name="det" /><br/><br/>
-								Prix: <input type="text" id="prix" name="prix" /><br/><br/>
-								Image: <input type"text" id="img" name="img" /><br/><br/>
-								N° Catégorie: <input type="text" id="cat" name="cat" /><br/><br/>
-								<input name="b2" type="submit" value="Valider" />								
+								Nom: <input class="form" type="text" id="nom" name="nom" /><br/><br/>
+								Description: <input class="form" type="text" id="desc" name="desc" /><br/><br/>
+								Details: <input class="form" type="text" id="det" name="det" /><br/><br/>
+								Prix: <input class="form" type="text" id="prix" name="prix" /><br/><br/>
+								Image: <input class="form" type"text" id="img" name="img" /><br/><br/>
+								N° Catégorie: <input class="form" type="text" id="cat" name="cat" /><br/><br/>
+								<input class="form" name="b2" type="submit" value="Valider" />								
 					</fieldset>
 				</form>';					
 		}
@@ -253,7 +253,7 @@ function ModifProduitValues($base, $hote, $utilisateur, $mdp) {
 				echo '<td class="cellule">'.$donnees['prix'].'</td>';
 				echo '<td class="cellule"><img class="produit2" src="img/produits/'.$donnees['image'].'"></td>';
 				echo '<td class="cellule">'.$donnees['categorie'].'</td>';
-				echo '<td class="edit"><input type="image" id="editProd" name="editProd" src="img/edit.png"
+				echo '<td class="edit"><input class="form" type="image" id="editProd" name="editProd" src="img/edit.png"
 						   onclick="location.href=\'admin.php?modifProd='.$donnees['produit_id'].'\'"/></td>';	
 				echo '<td><a href="admin.php?suppProd='.$donnees['produit_id'].'">
 						  <img src="img/suppr.png" /></a></td>';			
@@ -291,7 +291,7 @@ function ModifProduitValues($base, $hote, $utilisateur, $mdp) {
 										echo '<option value=" '.$donnees['ville'].' ">'.$donnees['ville'].'</option>';
 									}
 									
-							echo '<input name="b2" type="submit" value="Valider" />';
+							echo '<input class="form" name="b2" type="submit" value="Valider" />';
 									
 			echo '</fieldset></form>';	
 			
@@ -364,13 +364,13 @@ function creaTableau($tri, $base, $hote, $utilisateur, $mdp) {
 			//if($_SESSION['statPeople'] == "A"){
 			//Modification
 			echo '<td class="c1">
-				<input type="image" id="editCompte" name="editCompte" src="img/edit.png"
+				<input class="form" type="image" id="editCompte" name="editCompte" src="img/edit.png"
 				onclick="location.href=\'test.php?editCompte='
 					.$donnees['id'].'\'"/></td>';
 
 			//Suppresion
 			echo '<td class="c1">
-					<input type="image" id="suppCompte" name="suppCompte" src="img/icon_suppr.gif"
+					<input class="form" type="image" id="suppCompte" name="suppCompte" src="img/icon_suppr.gif"
 					onclick="attention('.$donnees['id'].', \''.$donnees['prenom'].'\',
 					\''.$donnees['nom'].'\');"/></td>';
 			echo '</tr>';
