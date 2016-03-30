@@ -61,7 +61,7 @@ echo'
 //Affiche le formulaire d'ajout de people
 echo '<h2>Ajouter un compte</h2>';
 echo '
-	<form class="ajoutCompte" method="post" action="inscription.php">
+	<form class="ajoutCompte" method="post" action="test.php">
 		<fieldset>
 			<label>Nom :</label><input type="text" id="nom" name = "nom" /><br/><br/>
 			<label>Prénom :</label><input type="text" id="prenom" name = "prenom" /><br/><br/>

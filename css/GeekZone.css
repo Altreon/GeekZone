@@ -215,6 +215,12 @@ form.ajoutCompte {
     background-color: rgb(185, 211, 234);
 }
 
+label {
+	display: block;
+	width: 150px;
+	float: left;
+}
+
 select, input.form, textarea {
 	background-color:#2efeab;
 	padding:3px;
