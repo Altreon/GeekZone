@@ -320,8 +320,15 @@ function imageRandom($base, $hote, $utilisateur, $mdp) {
 		$prod2 = mt_rand(1,$nb);
 	}
 	
-	while ($prod3 == $prod1 ||)
+	while ($prod3 == $prod1 || $prod3 == $prod2) {
+		$prod3 = mt_rand(1,$nb);
+	}
 	
+	while ( $donnees = $reponse->fetch() ) {
+		if ($donnees['produit_id'] == $prod1 || $donnees['produit_id'] == $prod2 || $donnees['produit_id'] == $prod3) {
+			echo '<img class="produit" src="img/produits/'.$donnees['image'].'"></img>';
+		}	
+	}
 }
 
 	

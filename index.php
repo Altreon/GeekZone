@@ -9,6 +9,7 @@ $utilisateur='root';
 $mdp='';
 
 include 'inc/titre.php';	
+include 'inc/fonction.php';
 	
 echo '
 	<body>
