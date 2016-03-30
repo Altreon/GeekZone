@@ -209,6 +209,12 @@ form.connexion {
     background-color: rgb(196, 234, 185);
 }
 
+form.ajoutCompte {
+	margin: auto;
+    max-width: 400px;
+    background-color: rgb(185, 211, 234);
+}
+
 select, input.form, textarea {
 	background-color:#2efeab;
 	padding:3px;

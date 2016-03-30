@@ -240,3 +240,47 @@ function creaTableau($tri, $base, $hote, $utilisateur, $mdp) {
 		die('Erreur : ' . $erreur->getMessage());
 	}
 }
+
+//Permet de demander à l'utilisateur de confirmer la suppression de la personne de la base de données.
+echo '<script type=\'text/javascript\'>
+function attention(idEffacer, prenom, nom) {
+	if( confirm(\'Etes-vous certain de vouloir effacer le compte de \'+prenom+\' \'+nom+\' ? \') )
+	{
+		location.href=\'test.php?suppCompte=\'+idEffacer;
+	}
+}
+</script>';
+
+//Permet d'ajouter un compte dans la base de données.
+function insertTableau($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $boutiqueGeree, $statut, $login, $mdp) {
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf8');
+		//On prépare la requète:
+		$insertion = $bdd->prepare('INSERT INTO compte (id, nom, prenom, mail, telephone, adresse, cp, ville, boutiqueGeree, statut, login, mdp) VALUES (\'\', :nom, :prenom, :mail, :telephone, :adresse, :cp, :ville, :boutiqueGeree, :statut, :login, :mdp)');
+		//On envoie la requète avec les valeurs nécessaires:
+		$insertion->execute(array(
+				'nom' => $nom,
+				'prenom' => $prenom,
+				'mail' => $mail,
+				'telephone' => $telephone,
+				'adresse' => $adresse,
+				'cp' => $cp,
+				'ville' => $ville,
+				'boutiqueGeree' => $boutiqueGeree,
+				'statut' => $statut,
+				'login' => $login,
+				'mdp' => $mdp
+		));
+		$dernierId = $bdd->lastInsertId();
+		echo '<h4 class="goood">Le nouveau compte de '.$nom.' '.$prenom.' a bien été
+		enregistré avec l\'identifiant '.$dernierId.'</h4>'; //Informe l'utilisateur que l'insertion c'est bien déroulé.
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$insertion->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
