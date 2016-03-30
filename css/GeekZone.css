@@ -123,7 +123,7 @@ div.produit {
 	max-height: 448px;
 }
 
-div.produitdet {
+div.produitimg {
 	
 	background-color : #F1F1F1;
 	width : 350px;
@@ -133,6 +133,13 @@ div.produitdet {
 	max-height: 448px;
 	float:left;
 }
+
+div.produitdet {
+	margin-left: -325px;
+    float: left;
+    margin-top: 293px;
+    margin-right: 174px;
+}	
 
 div.produit:hover {
 	background-color:#dfe6e2;
@@ -487,13 +494,14 @@ th.boutinfos {
 }
 
 div.details {
-
-	/*margin-left:380px;*/
+	
+	margin-top:-60px;
 	margin-right:auto;
 }
 
 div.details:hover {
 	background-color:#dfe6e2;
+
 }
 
 div.details2 {

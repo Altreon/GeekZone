@@ -62,9 +62,11 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 				<hr class="produit">
 				
 				
-				<div class = "produitdet">
+				<div class = "produitimg">
 					<img class="detproduit" src="img/produits/'.$donnees['image'].'"></img>
-					<br>
+				</div>			
+					<br><br>
+				<div class="produitdet">			
 					<p class="detailproduitPrix">
 					Disponible!<br>	
 					'.$donnees['prix'].'€	
