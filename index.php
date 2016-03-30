@@ -24,8 +24,7 @@ echo '
 			<br>
 			Voici certains de nos produits qui pourraient vous intéresser:
 			<br>		
-			</h1>
-			<br>';
+			</h1>';
 			
 imageRandom($base, $hote, $utilisateur, $mdp);		
 		

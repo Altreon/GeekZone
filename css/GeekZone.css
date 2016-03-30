@@ -530,3 +530,16 @@ div.prix {
 	margin-top: -130px;
     margin-left: 50px;
 }
+
+img.produitacc {
+	width: 300px;
+	margin: 5% auto auto auto;
+}
+
+div.produitacc {
+	display: inline-block;
+}
+
+div.produitaccalign {
+	text-align: center;
+}
