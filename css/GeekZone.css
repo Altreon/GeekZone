@@ -588,6 +588,15 @@ div.contact {
 	background-color:#dad8e9;
 }
 
+img.accueilBout {
+	display: initial;
+}
+
 div.produitList {
 	text-align: center;
+}
+
+div.lienImage {
+	margin-left: auto;
+    margin-right: auto;
 }
