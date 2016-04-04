@@ -251,6 +251,32 @@ function attention(idEffacer, prenom, nom) {
 }
 </script>';
 
+//Perlet de lister les villes de la base de données
+function listVille($base, $hote, $utilisateur, $mdp){
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf8');
+		echo '<label>Gère la boutique de</label>';
+		echo '<select id="lstVille" name="lstVille">';
+		
+		$reponse = $bdd->prepare('SELECT ville FROM boutique');
+		$reponse->execute( array() );
+		while ( $donnees = $reponse->fetch() )
+		{
+			echo '<option value="'.$donnees['ville'].'" >'
+					.$donnees['ville'].'</option>';
+		}
+		$reponse->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+	echo '</select><br/><br/>';
+}
+
 //Permet d'ajouter un compte dans la base de données.
 function insertTableau($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $boutiqueGeree, $statut, $login, $mdp) {
 	try{

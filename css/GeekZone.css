@@ -211,13 +211,13 @@ form.connexion {
 
 form.ajoutCompte {
 	margin: auto;
-    max-width: 400px;
+    max-width: 460px;
     background-color: rgb(185, 211, 234);
 }
 
 label {
 	display: block;
-	width: 150px;
+	width: 175px;
 	float: left;
 }
 

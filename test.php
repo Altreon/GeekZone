@@ -27,7 +27,7 @@ if(isset($_POST['identifiant']) && !empty($_POST['identifiant']) && isset($_POST
 	}
 }
 
-if(false){
+if(false){Z
 
 echo '
 	<div class = "content">
@@ -50,6 +50,9 @@ echo '
 ';
 
 }
+
+if(isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['nom']) && !empty($_POST['nom']) &&)
+
 echo '
 	<div class = "content">
 ';
@@ -70,12 +73,9 @@ echo '
 			<label>Adresse :</label><input type="text" id="adresse" name = "adresse" /><br/><br/>
 			<label>CP :</label><input type="text" id="cp" name = "cp" /><br/><br/>
 			<label>Ville :</label><input type="text" id="ville" name = "ville" /><br/><br/>
-			<label>Gère la boutique n°</label><input type="text" id="boutiqueGeree" name = "boutiqueGeree" /><br/><br/>
-			<label>Statut :</label>
-					<input type="radio" id="statut" name="statut" value="U" checked="checked"/>Administrateur de boutique
-					<input type="radio" id="statut" name="statut" value="A"/>Administrateur général
-			<br>
-			<br>
+			';
+			listVille($base, $hote, $utilisateur, $mdp);
+			echo'
 			<label>Identifiant :</label><input type="text" id="login" name = "login" /><br/><br/>
 			<label>Mot de passe :</label><input type="text" id="mdp" name = "mdp" /><br/><br/>
 			<input name="effacer" type="reset" value="Effacer" />
