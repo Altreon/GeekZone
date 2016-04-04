@@ -582,3 +582,11 @@ label.tcenter {
 	width: auto;
     float: none;
 }
+
+div.contact {
+	background-color:#dad8e9;
+}
+
+div.produitList {
+	text-align: center;
+}

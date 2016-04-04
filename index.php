@@ -21,7 +21,7 @@ echo '
 	<div class = "content">
 		<p class = "acc">Bienvenue chez GeekZone!</p>
 		<div class="acc">
-			<h1 class="bvenue">Ceci est le site officiel de GeekZone , il répertorie les informations dont VOUS avez besoin!
+			<h1 class="bvenue">Ceci est le site officiel de GeekZone, il répertorie les informations dont VOUS avez besoin!
 			<br>
 			Voici certains de nos produits qui pourraient vous intéresser:
 			<br>		

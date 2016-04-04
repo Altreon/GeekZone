@@ -58,13 +58,12 @@ echo'
 	<input class="produitFilter form" type="submit" name="send"></input>
 	</form>
 ';
-
-
 	
 echo'
 	<div class="strip">
 	</div>
 	<br>
+	<div class="produitList">
 ';
 
 	if(isset($_GET['recherche'])){
@@ -83,6 +82,7 @@ echo'
 
 	
 echo '
+	</div>	
 	</div>
 	</body>
 ';
