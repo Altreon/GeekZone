@@ -123,7 +123,7 @@ div.produit {
 	max-height: 448px;
 }
 
-div.produitdet {
+div.produitimg {
 	
 	background-color : #F1F1F1;
 	width : 350px;
@@ -133,6 +133,13 @@ div.produitdet {
 	max-height: 448px;
 	float:left;
 }
+
+div.produitdet {
+	margin-left: -325px;
+    float: left;
+    margin-top: 293px;
+    margin-right: 174px;
+}	
 
 div.produit:hover {
 	background-color:#dfe6e2;
@@ -173,15 +180,16 @@ div.retourProds {
 	margin-left: calc(100% - 300px);
 }
 
-div.produitFT {
+div.produitFilter {
+
+}
+
+div.produitTri {
+	    margin-top: 10px;
+}
+
+form.produitFT {
 	display: inline-block;
-}
-
-form.produitFilter {
-
-}
-
-form.produitTri {
 }
 
 form.produitRecherche {
@@ -191,9 +199,30 @@ form.produitRecherche {
 
 form.contact {
 	text-align:center;
+	width:200px;
 }
 
-select, input, textarea {
+form.connexion {
+	text-align: center;
+    margin: auto;
+    margin-top: 10%;
+    max-width: 400px;
+    background-color: rgb(196, 234, 185);
+}
+
+form.ajoutCompte {
+	margin: auto;
+    max-width: 400px;
+    background-color: rgb(185, 211, 234);
+}
+
+label {
+	display: block;
+	width: 150px;
+	float: left;
+}
+
+select, input.form, textarea {
 	background-color:#2efeab;
 	padding:3px;
 	border:1px solid #01d681;
@@ -203,12 +232,16 @@ select, input, textarea {
 	font-family:FixedsysTTF;
 }
  
-input {
+input.form {
 	width:100px;
 	margin-left:5px;
 	box-shadow:1px 1px 1px #019a5c;
 	cursor:pointer;
 	font-family:FixedsysTTF;
+}
+
+input.produitFilter {
+	margin-top:10px;
 }
 
 form {
@@ -359,28 +392,11 @@ h1.bvenue {
 	text-align:center;
 	font-size:25px;
 	font-family:"Times New Roman" , Times , serif;
-	color: #3366CC; 
+	color: #638bbc; 
 }
 
-h1.bvenue2 {
-	text-align:center;
-	font-size:25px;
-	font-family:"Times New Roman" , Times , serif;
-	color: #21c1de; 
-}
-
-h1.bvenue3 {
-	text-align:center;
-	font-size:25px;
-	font-family:"Times New Roman" , Times , serif;
-	color: #FF9966; 
-}
-
-h1.bvenue4 {
-	text-align:center;
-	font-size:25px;
-	font-family:"Times New Roman" , Times , serif;
-	color: #ff008c; 
+div.acc {
+	background-color:#dad8e9;
 }
 
 p.acc {
@@ -466,16 +482,31 @@ ul {
 }
 
 div.accboutiques {
-	margin-top:220px;
+	margin-top:60px;
+}
+
+table.compte {
+	margin-left: auto;
+    margin-right: auto;
+}
+
+th {
+	border : solid grey;
+	font-size : 30px
 }
 
 th.boutinfos {
 	background-color:#d6ebda;
 }
 
-div.details {
+td {
+	border : solid grey;
+	border-collapse: collapse;
+	font-size : 20px
+}
 
-	/*margin-left:380px;*/
+div.details {
+	margin-top:-60px;
 	margin-right:auto;
 }
 
@@ -523,33 +554,32 @@ div.prods {
 	min-height:460px;
 }
 
-
 div.prix {
 	margin-top: -130px;
     margin-left: 50px;
 }
 
-table.tab {
-   	margin: auto;
-   	border-collapse: collapse;
-   	font-size:20px;
-}
-
-td.cellule {
-	text-align:center;
-	border: 2px solid black;
-	width:10%;
-}
-
-td.edit {
-	width:1px;
-}
-
-img.produit2 {
-	width: 100px;
+img.produitacc {
+	width: 300px;
 	margin: 5% auto auto auto;
 }
 
-div.admin {
-	margin-left: 20px;
+div.produitacc {
+	display: inline-block;
+}
+
+div.produitaccalign {
+	text-align: center;
+}
+
+div.form {
+	width: 187px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label.tcenter {
+	text-align:center;
+	width: auto;
+    float: none;
 }

@@ -15,21 +15,21 @@ echo '
 		
 		<br>
 		
-		<form class="contact" action="contact.php" method="POST" enctype="multipart/form-data">
+		<div class="form"><form class="contact" action="contact.php" method="POST" enctype="multipart/form-data">
 			<div class="row">
-				<label>Votre nom:</label><br/>
+				<label class="tcenter">Votre nom:</label><br/>
 				<input id="name" class="input form" name="name" type="text" value="" size="30" /><br />
-			</div>
+			</div><br>
 			<div class="row">
-				<label>Votre email:</label><br />
+				<label class="tcenter">Votre email:</label><br />
 				<input id="email" class="input form" name="email" type="text" value="" size="30" /><br />
-			</div>
+			</div><br><br>
 			<div class="row">
-				<label for="message">Votre message:</label><br />
+				<label class="tcenter" for="message">Votre message:</label><br />
 				<textarea id="message" class="input form" name="message" rows="7" cols="30"></textarea><br />
-			</div>
+			</div><br>
 			<input class="form" id="submit" type="submit" value="Envoyer email" />
-		</form>
+		</form></div>
 		
 		';
 			if(isset($_POST['name'])) {
