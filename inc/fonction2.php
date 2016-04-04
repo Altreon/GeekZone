@@ -252,20 +252,20 @@ function attention(idEffacer, prenom, nom) {
 </script>';
 
 //Perlet de lister les villes de la base de données
-function listVille($base, $hote, $utilisateur, $mdp){
+function listBoutique($base, $hote, $utilisateur, $mdp){
 	try
 	{
 		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf8');
 		echo '<label>Gère la boutique de</label>';
-		echo '<select id="lstVille" name="lstVille">';
+		echo '<select id="boutiqueGeree" name="boutiqueGeree">';
 		
-		$reponse = $bdd->prepare('SELECT ville FROM boutique');
+		$reponse = $bdd->prepare('SELECT * FROM boutique');
 		$reponse->execute( array() );
 		while ( $donnees = $reponse->fetch() )
 		{
-			echo '<option value="'.$donnees['ville'].'" >'
+			echo '<option value="'.$donnees['id'].'" >'
 					.$donnees['ville'].'</option>';
 		}
 		$reponse->closeCursor();
@@ -278,11 +278,11 @@ function listVille($base, $hote, $utilisateur, $mdp){
 }
 
 //Permet d'ajouter un compte dans la base de données.
-function insertTableau($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $boutiqueGeree, $statut, $login, $mdp) {
+function insertTableau($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $boutiqueGeree, $statut, $login, $motdp) {
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
-		$bdd->exec('SET NAMES utf8');
+		$bdd->exec('SET NAMES utf16');
 		//On prépare la requète:
 		$insertion = $bdd->prepare('INSERT INTO compte (id, nom, prenom, mail, telephone, adresse, cp, ville, boutiqueGeree, statut, login, mdp) VALUES (\'\', :nom, :prenom, :mail, :telephone, :adresse, :cp, :ville, :boutiqueGeree, :statut, :login, :mdp)');
 		//On envoie la requète avec les valeurs nécessaires:
@@ -297,7 +297,7 @@ function insertTableau($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $
 				'boutiqueGeree' => $boutiqueGeree,
 				'statut' => $statut,
 				'login' => $login,
-				'mdp' => $mdp
+				'mdp' => $motdp
 		));
 		$dernierId = $bdd->lastInsertId();
 		echo '<h4 class="goood">Le nouveau compte de '.$nom.' '.$prenom.' a bien été
@@ -308,5 +308,45 @@ function insertTableau($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $
 	catch (Exception $erreur)
 	{
 		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function suppTableau($suppCompte, $base, $hote, $utilisateur, $mdp) {
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		//On prépare la requète:
+		$modification = $bdd->prepare('DELETE FROM compte WHERE id=:idCompte');
+		//On envoie la requète avec les valeurs nécessaires:
+		$modification->execute(array(
+				'idCompte' => $suppCompte
+		));
+
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$modification->closeCursor();
+		// On modifie l'auto-incremente pour que l'id de la prochaine personne ajouter suives les autres :
+		autoInc($base, $hote, $utilisateur, $mdp);
+		echo '<h4 class="goood">Le compte <i>numéro '.$suppCompte.'</i> a été supprimé.</h4>'; //Informe l'utilisateur que la suppresion c'est bien déroulé.
+	}
+	catch (Exception $e)
+	{
+		die('Erreur : ' . $e->getMessage());
+	}
+}
+
+function autoInc ($base, $hote, $utilisateur, $mdp){
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$reponse = $bdd->query('SELECT max(id)+1 AS maxID FROM compte');
+		$donnees = $reponse->fetch();
+		$autoInc = $bdd->query('ALTER TABLE compte AUTO_INCREMENT = '.$donnees['maxID'].'') ;
+		$autoInc->closeCursor();
+	}
+	catch (Exception $e)
+	{
+		die('Erreur : ' . $e->getMessage());
 	}
 }

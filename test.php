@@ -27,7 +27,7 @@ if(isset($_POST['identifiant']) && !empty($_POST['identifiant']) && isset($_POST
 	}
 }
 
-if(false){Z
+if(false){
 
 echo '
 	<div class = "content">
@@ -50,12 +50,19 @@ echo '
 ';
 
 }
-
-if(isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['nom']) && !empty($_POST['nom']) &&)
-
+ 
 echo '
 	<div class = "content">
 ';
+
+if(isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['prenom']) && !empty($_POST['prenom']) &&isset($_POST['mail']) && !empty($_POST['mail']) &&isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['adresse']) && !empty($_POST['adresse']) &&isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) && isset($_POST['boutiqueGeree']) && !empty($_POST['boutiqueGeree']) && isset($_POST['login']) && !empty($_POST['login']) &&isset($_POST['mdp']) && !empty($_POST['mdp'])){
+	insertTableau($base, $hote, $utilisateur, $mdp, $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['telephone'], $_POST['adresse'], $_POST['cp'], $_POST['ville'], $_POST['boutiqueGeree'], $_POST['statut'], $_POST['login'], $_POST['mdp']);
+}
+
+if(isset($_GET['suppCompte']) && !empty($_GET['suppCompte'])){
+	suppTableau($_GET['suppCompte'], $base, $hote, $utilisateur, $mdp);
+}
+
 	creaTableau("id", $base, $hote, $utilisateur, $mdp);
 echo'
 	</div>
@@ -74,8 +81,13 @@ echo '
 			<label>CP :</label><input type="text" id="cp" name = "cp" /><br/><br/>
 			<label>Ville :</label><input type="text" id="ville" name = "ville" /><br/><br/>
 			';
-			listVille($base, $hote, $utilisateur, $mdp);
+			listBoutique($base, $hote, $utilisateur, $mdp);
 			echo'
+			<label>Statut :</label>
+				<input type="radio" id="statut" name="statut" value="B" checked="checked"/>Administrateur de boutique
+				<label> </label><input type="radio" id="statut" name="statut" value="G"/>Administrateur général
+			<br>
+			<br>
 			<label>Identifiant :</label><input type="text" id="login" name = "login" /><br/><br/>
 			<label>Mot de passe :</label><input type="text" id="mdp" name = "mdp" /><br/><br/>
 			<input name="effacer" type="reset" value="Effacer" />
