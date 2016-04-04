@@ -327,7 +327,7 @@ function imageRandomProduit($base, $hote, $utilisateur, $mdp) {
 	echo '<div class="produitaccalign">';
 	while ( $donnees = $reponse->fetch() ) {
 		if ($donnees['produit_id'] == $prod1 || $donnees['produit_id'] == $prod2 || $donnees['produit_id'] == $prod3) {
-			echo '<a href="detailProduit.php?idProduit='.$donnees['produit_id'].'"><div class="produitacc"><img class="produitacc" src="img/produits/'.$donnees['image'].'"></img></div></a>';
+			echo '<div class="produitacc"><a href="detailProduit.php?idProduit='.$donnees['produit_id'].'"><img class="produitacc" src="img/produits/'.$donnees['image'].'"></img></a></div>';
 		}
 		
 	} echo '<br></div>';

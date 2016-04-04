@@ -565,6 +565,7 @@ img.produitacc {
 
 div.produitacc {
 	display: inline-block;
+	width: 310px;
 }
 
 div.produitaccalign {
