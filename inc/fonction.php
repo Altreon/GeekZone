@@ -327,7 +327,7 @@ function imageRandomProduit($base, $hote, $utilisateur, $mdp) {
 	echo '<div class="produitaccalign">';
 	while ( $donnees = $reponse->fetch() ) {
 		if ($donnees['produit_id'] == $prod1 || $donnees['produit_id'] == $prod2 || $donnees['produit_id'] == $prod3) {
-			echo '<div class="produitacc"><a href="detailProduit.php?idProduit='.$donnees['produit_id'].'"><img class="produitacc" src="img/produits/'.$donnees['image'].'"></img></a></div>';
+			echo '<div class="produitacc"><a href="detailProduit.php?idProduit='.$donnees['produit_id'].'"><img class="produitacc accueilBout" src="img/produits/'.$donnees['image'].'"></img></a></div>';
 		}
 		
 	} echo '<br></div>';
@@ -346,8 +346,8 @@ function imageRandomBoutique($base, $hote, $utilisateur, $mdp) {
 	echo '<div class="produitaccalign">';
 	while ( $donnees = $reponse->fetch() ) {
 		if ($donnees['id'] == $bout) {
-			echo '<h1 class="bvenue">Boutique de '.$donnees['ville'];
-			echo '<a href="boutique.php?boutique='.$donnees['ville'].'"><img class="boutique" src="img/boutiques/'.$donnees['image'].'"></img></a>';
+			echo '<h1 class="bvenue">Boutique de '.$donnees['ville'].'</h1>';
+			echo '<div class="lienImage"><a href="boutique.php?boutique='.$donnees['ville'].'"><img class="boutique accueilBout" src="img/boutiques/'.$donnees['image'].'"></img></a></div>';
 		}
 	} echo '<br></div>';
 }

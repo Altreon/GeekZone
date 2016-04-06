@@ -1,8 +1,7 @@
-<?php
-echo '
+
 <link rel="stylesheet" type="text/css" media="screen" href="css/GeekZone.css"/>
-	';
 	
+<?php	
 $page="accueil";	
 $base='geekzone';
 $hote='localhost';
@@ -11,13 +10,13 @@ $mdp='';
 
 include 'inc/titre.php';	
 include 'inc/fonction.php';
-	
-echo '
-	<body>
-	';
-include 'inc/border.php';
+?>
 
-echo '
+<body>
+	
+<?php include 'inc/border.php'; ?>
+
+
 	<div class = "content">
 		<p class = "acc">Bienvenue chez GeekZone!</p>
 		<div class="acc">
@@ -25,11 +24,13 @@ echo '
 			<br>
 			Voici certains de nos produits qui pourraient vous intéresser:
 			<br>		
-			</h1>';
+			</h1>
 			
-imageRandomProduit($base, $hote, $utilisateur, $mdp);		
+<?php
+
+imageRandomProduit($base, $hote, $utilisateur, $mdp);	?>	
 		
-		echo '<br></div>
+	<br></div>
 	</div>
 		
 	<div class = "accboutiques">
@@ -45,15 +46,16 @@ imageRandomProduit($base, $hote, $utilisateur, $mdp);
 		</p>
 		
 	</div>	
-';
-		
-echo '<div class="acc">
-		<h1 class="bvenue">Une de nos boutiques:</h1>
-		<br>
-		';
-		
-imageRandomBoutique($base, $hote, $utilisateur, $mdp);	
 
-echo'<br></div></body>';
 
-include 'inc/basPage.php';
+<div class="acc">
+	<h1 class="bvenue">Une de nos boutiques:</h1>
+	<br>
+		
+<?php 		
+imageRandomBoutique($base, $hote, $utilisateur, $mdp);	?>
+
+<br></div></body>
+
+<?php 
+include 'inc/basPage.php'; ?>
