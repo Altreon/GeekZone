@@ -55,7 +55,7 @@ echo '
 	<div class = "content">
 ';
 
-if(isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['prenom']) && !empty($_POST['prenom']) &&isset($_POST['mail']) && !empty($_POST['mail']) &&isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['adresse']) && !empty($_POST['adresse']) &&isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) && isset($_POST['boutiqueGeree']) && !empty($_POST['boutiqueGeree']) && isset($_POST['login']) && !empty($_POST['login']) &&isset($_POST['mdp']) && !empty($_POST['mdp'])){
+if(isset($_POST['envoyerAjout']) && !empty($_POST['envoyerAjout']) && isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['prenom']) && !empty($_POST['prenom']) &&isset($_POST['mail']) && !empty($_POST['mail']) &&isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['adresse']) && !empty($_POST['adresse']) &&isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) && isset($_POST['boutiqueGeree']) && !empty($_POST['boutiqueGeree']) && isset($_POST['login']) && !empty($_POST['login']) &&isset($_POST['mdp']) && !empty($_POST['mdp'])){
 	insertTableau($base, $hote, $utilisateur, $mdp, $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['telephone'], $_POST['adresse'], $_POST['cp'], $_POST['ville'], $_POST['boutiqueGeree'], $_POST['statut'], $_POST['login'], $_POST['mdp']);
 }
 
@@ -64,9 +64,19 @@ if(isset($_GET['suppCompte']) && !empty($_GET['suppCompte'])){
 }
 
 	creaTableau("id", $base, $hote, $utilisateur, $mdp);
-echo'
-	</div>
-';
+
+if(isset($_GET['suppCompte']) && !empty($_GET['suppCompte'])){
+	suppTableau($_GET['suppCompte'], $base, $hote, $utilisateur, $mdp);
+}
+
+if(isset($_POST['envoyerModif']) && !empty($_POST['envoyerModif']) && isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['prenom']) && !empty($_POST['prenom']) &&isset($_POST['mail']) && !empty($_POST['mail']) &&isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['adresse']) && !empty($_POST['adresse']) &&isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) && isset($_POST['boutiqueGeree']) && !empty($_POST['boutiqueGeree']) && isset($_POST['statut']) && !empty($_POST['statut']) && isset($_POST['login']) && !empty($_POST['login']) && isset($_POST['mdp']) && !empty($_POST['mdp']) && isset($_POST['hdIdCompte']) && !empty($_POST['hdIdCompte'])){
+	updateTableau($base, $hote, $utilisateur, $mdp, $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['telephone'], $_POST['adresse'], $_POST['cp'], $_POST['ville'], $_POST['boutiqueGeree'], $_POST['statut'], $_POST['login'], $_POST['mdp'], $_POST['hdIdCompte']);
+}
+
+
+if ( isset($_GET['editCompte']) && !empty($_GET['editCompte']) ) {
+	editTableau($_GET['editCompte'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'une personne
+}else{
 
 //Affiche le formulaire d'ajout de people
 echo '<h2>Ajouter un compte</h2>';
@@ -81,7 +91,7 @@ echo '
 			<label>CP :</label><input type="text" id="cp" name = "cp" /><br/><br/>
 			<label>Ville :</label><input type="text" id="ville" name = "ville" /><br/><br/>
 			';
-			listBoutique($base, $hote, $utilisateur, $mdp);
+			listBoutique($base, $hote, $utilisateur, $mdp, null);
 			echo'
 			<label>Statut :</label>
 				<input type="radio" id="statut" name="statut" value="B" checked="checked"/>Administrateur de boutique
@@ -90,14 +100,17 @@ echo '
 			<br>
 			<label>Identifiant :</label><input type="text" id="login" name = "login" /><br/><br/>
 			<label>Mot de passe :</label><input type="text" id="mdp" name = "mdp" /><br/><br/>
-			<input name="effacer" type="reset" value="Effacer" />
-			<input name="envoyer" type="submit" value="Envoyer" />
+			<input name="effacerAjout" type="reset" value="Effacer" />
+			<input name="envoyerAjout" type="submit" value="Envoyer" />
 		</fieldset>
 	</form>
 ';
 
 }
-
+}
+echo'
+	</div>
+';
 echo'</body>';
 
 include 'inc/basPage.php';

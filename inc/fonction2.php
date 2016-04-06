@@ -252,7 +252,7 @@ function attention(idEffacer, prenom, nom) {
 </script>';
 
 //Perlet de lister les villes de la base de données
-function listBoutique($base, $hote, $utilisateur, $mdp){
+function listBoutique($base, $hote, $utilisateur, $mdp, $boutiqueGeree){
 	try
 	{
 		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
@@ -265,8 +265,13 @@ function listBoutique($base, $hote, $utilisateur, $mdp){
 		$reponse->execute( array() );
 		while ( $donnees = $reponse->fetch() )
 		{
-			echo '<option value="'.$donnees['id'].'" >'
-					.$donnees['ville'].'</option>';
+			if($boutiqueGeree != null && $boutiqueGeree == $donnees['id']){
+				echo '<option value="'.$donnees['id'].'" selected="selected">'
+						.$donnees['ville'].'</option>';
+			}else{
+				echo '<option value="'.$donnees['id'].'" >'
+						.$donnees['ville'].'</option>';
+			}
 		}
 		$reponse->closeCursor();
 	}
@@ -348,5 +353,118 @@ function autoInc ($base, $hote, $utilisateur, $mdp){
 	catch (Exception $e)
 	{
 		die('Erreur : ' . $e->getMessage());
+	}
+}
+
+function editTableau($editCompte, $base, $hote, $utilisateur, $mdp) {
+	// Ici on édite la fiche d'une personne
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$reponse = $bdd->prepare('SELECT * FROM compte WHERE id = ? ');
+		//On envoie la requète avec les valeurs nécessaires:
+		$reponse->execute( array($editCompte) );
+
+		$donnees = $reponse->fetch(); // Découpage ligne à ligne de $reponse (une seul ligne ici)
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+
+		//Formulaire d'édition d'une personne.
+		?>
+		<h2>Modification d'un compte</h2>
+		<form class="ajoutCompte" method="post" action="test.php">
+		<fieldset>
+		<legend>Modification du compte numéro <b><?php echo $donnees['id']; ?></b></legend>
+			<label>Nom :</label><input type="text" id="nom" name = "nom" value="<?php echo $donnees['nom']; ?>"/><br/><br/>
+			<label>Prénom :</label><input type="text" id="prenom" name = "prenom" value="<?php echo $donnees['prenom']; ?>"/><br/><br/>
+			<label>Mail :</label><input type="text" id="mail" name = "mail" value="<?php echo $donnees['mail']; ?>"/><br/><br/>
+			<label>Téléphone :</label><input type="text" id="telephone" name = "telephone" value="<?php echo $donnees['telephone']; ?>"/><br/><br/>
+			<label>Adresse :</label><input type="text" id="adresse" name = "adresse" value="<?php echo $donnees['adresse']; ?>"/><br/><br/>
+			<label>CP :</label><input type="text" id="cp" name = "cp" value="<?php echo $donnees['cp']; ?>"/><br/><br/>
+			<label>Ville :</label><input type="text" id="ville" name = "ville" value="<?php echo $donnees['ville']; ?>"/><br/><br/>
+			<?php
+			listBoutique($base, $hote, $utilisateur, $mdp, $donnees['boutiqueGeree']);
+			?>
+			<label>Statut :</label>
+				<?php if($donnees['statut'] == "B"){ ?>
+					<input type="radio" id="statut" name="statut" value="B" checked="checked"/>Administrateur de boutique
+					<label> </label><input type="radio" id="statut" name="statut" value="G"/>Administrateur général
+				<?php }else{ ?>
+					<input type="radio" id="statut" name="statut" value="B"/>Administrateur de boutique
+					<label> </label><input type="radio" id="statut" name="statut" value="G" checked="checked"/>Administrateur général
+				<?php } ?>
+			<br>
+			<br>
+			<label>Identifiant :</label><input type="text" id="login" name = "login" value="<?php echo $donnees['login']; ?>"/><br/><br/>
+			<label>Mot de passe :</label><input type="text" id="mdp" name = "mdp" value="<?php echo $donnees['mdp']; ?>"/><br/><br/>
+			
+			<input type="hidden" name="hdIdCompte" id="hdIdCompte" 
+			value=" <?php echo $donnees['id']; ?>" /> <!-- cette input "caché" permetra de récupérer plus tard dans $_POST l'id du compte -->
+			<input name="effacerModif" type="reset" value="Effacer" />
+			<input name="envoyerModif" type="submit" value="Envoyer" />
+		</fieldset>
+		</form>
+		<?php
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function updateTableau($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $boutiqueGeree, $statut, $login, $motdp, $id) {
+	//Sécurise en empéchant les commandes JavaScript
+	$nom = htmlspecialchars($nom);
+	$prenom = htmlspecialchars($prenom);
+	$mail = $mail;
+	$telephone = htmlspecialchars($telephone);
+	$adresse = $adresse;
+	$cp = $cp;
+	$ville = htmlspecialchars($ville);
+	$boutiqueGeree = htmlspecialchars($boutiqueGeree);
+	$statut = $statut;
+	$login = htmlspecialchars($login);
+	$motdp = htmlspecialchars($motdp);
+	$id = htmlspecialchars($id);
+	
+	echo'<h4>'.$id.'</h4>';
+
+	// Ici on modifie un people
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$modification = $bdd->prepare('UPDATE compte SET nom = :nomCompte,
+		prenom = :prenomCompte, mail = :mailCompte, telephone = :telephoneCompte,
+		adresse = :adresseCompte, cp = :cpCompte, ville = :villeCompte,
+		boutiqueGeree = :boutiqueGereeCompte, statut = :statutCompte,
+		login = :loginCompte, mdp = :mdpCompte, WHERE id = :idCompte');
+		//On envoie la requète avec les valeurs nécessaires:
+		$modification->execute(array(
+				'nomCompte' => $nom,
+				'prenomCompte' => $prenom,
+				'mailCompte' => $mail,
+				'telephoneCompte' => $telephone,
+				'adresseCompte' => $adresse,
+				'cpCompte' => $cp,
+				'villeCompte' => $ville,
+				'boutiqueGereeCompte' => $boutiqueGeree,
+				'statutCompte' => $statut,
+				'loginCompte' => $login,
+				'mdpCompte' => $motdp,
+				'idCompte' => $id
+		));
+		echo '<h4 class="goood">Les données à propos du compte '.$nom.' '.$prenom.' ont bien été mises à jour</h4>'; //Informe l'utilisateur que la modification c'est bien déroulé.
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$modification->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
 	}
 }
