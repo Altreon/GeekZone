@@ -20,7 +20,7 @@ echo '
 
 include 'inc/france.inc.php';
 
-for($i=0; $i<count($villes); $i=$i+1) {
+for($i=0; $i<count($villes); $i++) {
  	echo '<DIV STYLE="
  	 position:absolute;
  	 top:'.$coordy[$i].';

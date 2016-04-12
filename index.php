@@ -27,23 +27,22 @@ include 'inc/fonction.php';
 			</h1>
 			
 <?php
-
 imageRandomProduit($base, $hote, $utilisateur, $mdp);	?>	
 		
 	<br></div>
-	</div>
+	
 		
 	<div class = "accboutiques">
 		<p>
    			<map name="mapacc" id="mapacc">
       			<area shape="rect" coords="0,0,270,122" href="boutiquesmap.php"/>
 				<area shape="rect" coords="910,0,1184,122" href="categorieProduit.php"/>
-   			</map>
+   			</map></p>
 			<hr class="produit">
 			<img src="imgcedric/bouton/gz.png" usemap="mapacc" alt="image"/>
 			<br>
 			<hr class="produit">
-		</p>
+		
 		
 	</div>	
 
@@ -55,7 +54,7 @@ imageRandomProduit($base, $hote, $utilisateur, $mdp);	?>
 <?php 		
 imageRandomBoutique($base, $hote, $utilisateur, $mdp);	?>
 
-<br></div></body>
+<br></div></div></body>
 
 <?php 
 include 'inc/basPage.php'; ?>
