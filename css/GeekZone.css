@@ -221,7 +221,7 @@ label {
 	float: left;
 }
 
-select, input.form, textarea {
+select, input.form, textarea, input.formGestion {
 	background-color:#2efeab;
 	padding:3px;
 	border:1px solid #01d681;
@@ -232,6 +232,14 @@ select, input.form, textarea {
 }
  
 input.form {
+	width:170px;
+	margin-left:5px;
+	box-shadow:1px 1px 1px #019a5c;
+	cursor:pointer;
+	font-family:FixedsysTTF;
+}
+
+input.formGestion {
 	width:100px;
 	margin-left:5px;
 	box-shadow:1px 1px 1px #019a5c;
@@ -602,4 +610,8 @@ div.lienImage {
 
 div.boutList {
 	text-align:center;
+}
+
+div.gestionContent {
+	margin-top: 75px;
 }
