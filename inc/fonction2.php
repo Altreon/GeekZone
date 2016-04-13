@@ -352,7 +352,8 @@ function imageRandomBoutique($base, $hote, $utilisateur, $mdp) {
 }
 
 //Permet d'afficher le tableau des comptes de la base de données.
-function creaTableauUser($tri, $base, $hote, $utilisateur, $mdp) {
+function creaTableauUser
+($tri, $base, $hote, $utilisateur, $mdp) {
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
