@@ -56,26 +56,21 @@ echo '
 ';
 
 if(isset($_POST['envoyerAjout']) && !empty($_POST['envoyerAjout']) && isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['prenom']) && !empty($_POST['prenom']) &&isset($_POST['mail']) && !empty($_POST['mail']) &&isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['adresse']) && !empty($_POST['adresse']) &&isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) && isset($_POST['boutiqueGeree']) && !empty($_POST['boutiqueGeree']) && isset($_POST['login']) && !empty($_POST['login']) &&isset($_POST['mdp']) && !empty($_POST['mdp'])){
-	insertTableau($base, $hote, $utilisateur, $mdp, $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['telephone'], $_POST['adresse'], $_POST['cp'], $_POST['ville'], $_POST['boutiqueGeree'], $_POST['statut'], $_POST['login'], $_POST['mdp']);
-}
-
-if(isset($_GET['suppCompte']) && !empty($_GET['suppCompte'])){
-	suppTableau($_GET['suppCompte'], $base, $hote, $utilisateur, $mdp);
-}
-
-	creaTableau("id", $base, $hote, $utilisateur, $mdp);
-
-if(isset($_GET['suppCompte']) && !empty($_GET['suppCompte'])){
-	suppTableau($_GET['suppCompte'], $base, $hote, $utilisateur, $mdp);
+	insertTableauUser($base, $hote, $utilisateur, $mdp, $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['telephone'], $_POST['adresse'], $_POST['cp'], $_POST['ville'], $_POST['boutiqueGeree'], $_POST['statut'], $_POST['login'], $_POST['mdp']);
 }
 
 if(isset($_POST['envoyerModif']) && !empty($_POST['envoyerModif']) && isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['prenom']) && !empty($_POST['prenom']) &&isset($_POST['mail']) && !empty($_POST['mail']) &&isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['adresse']) && !empty($_POST['adresse']) &&isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) && isset($_POST['boutiqueGeree']) && !empty($_POST['boutiqueGeree']) && isset($_POST['statut']) && !empty($_POST['statut']) && isset($_POST['login']) && !empty($_POST['login']) && isset($_POST['mdp']) && !empty($_POST['mdp']) && isset($_POST['hdIdCompte']) && !empty($_POST['hdIdCompte'])){
-	updateTableau($base, $hote, $utilisateur, $mdp, $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['telephone'], $_POST['adresse'], $_POST['cp'], $_POST['ville'], $_POST['boutiqueGeree'], $_POST['statut'], $_POST['login'], $_POST['mdp'], $_POST['hdIdCompte']);
+	updateTableauUser($base, $hote, $utilisateur, $mdp, $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['telephone'], $_POST['adresse'], $_POST['cp'], $_POST['ville'], $_POST['boutiqueGeree'], $_POST['statut'], $_POST['login'], $_POST['mdp'], $_POST['hdIdCompte']);
 }
 
+if(isset($_GET['suppCompte']) && !empty($_GET['suppCompte'])){
+	suppTableauUser($_GET['suppCompte'], $base, $hote, $utilisateur, $mdp);
+}
+
+creaTableauUser("id", $base, $hote, $utilisateur, $mdp);
 
 if ( isset($_GET['editCompte']) && !empty($_GET['editCompte']) ) {
-	editTableau($_GET['editCompte'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'une personne
+	editTableauUser($_GET['editCompte'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'une personne
 }else{
 
 //Affiche le formulaire d'ajout de people
