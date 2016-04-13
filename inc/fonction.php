@@ -405,4 +405,61 @@ function creaTableau($tri, $base, $hote, $utilisateur, $mdp) {
 	}
 }
 
+function VerifId($log,$mdpSession,$base,$hote,$utilisateur,$mdp) {
+
+	try {
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf8');
+
+		$reponse = $bdd->query('SELECT * FROM compte');
+		$nb = $reponse->rowCount();
+
+		$isvalid=false;
+		while (!$isvalid && $donnees = $reponse->fetch()) {
+			if ($log == $donnees['login'] && $mdpSession == $donnees['mdp']) {
+				$isvalid=true;
+			}
+		}
+		return $isvalid;
+	}
+
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+
+}
+
+function session($log,$mdpSession,$base,$hote,$utilisateur,$mdp) {
+
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf8');
+
+		$reponse = $bdd->query('SELECT * FROM compte');
+		$nb = $reponse->rowCount();
+
+
+		session_start();
+
+
+		$_SESSION['logCompte']=$log;
+
+		while ($donnees = $reponse->fetch()) {
+			if ($donnees['login'] == $log) {
+				$_SESSION['statCompte']=$donnees['statut'];
+			}
+		}
+
+	}
+
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+
+}
 	

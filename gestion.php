@@ -15,7 +15,50 @@ include 'inc/fonction.php';
 	
 <?php include 'inc/border.php'; ?>
 
-<?php if (false) { ?>
+<?php if (!isset($_SESSION['logCompte'])) { ?>
+	<div class = "content">
+		<div class="gestionForm">
+			<form class="connexion" action="gestion.php" method="post">
+				<fieldset class="connexion">
+					<legend>Identifiez-vous</legend>
+					<br>
+					Identifiant : <input id="identifiant" class="input" name="identifiant" type="text" value="" size="50" />
+					<br>
+					<br>
+					Mot de passe : <input id="mdp" class="input" name="mdp" type="text" value="" size="50" />
+					<br>
+					<br>
+					<input class="produitFilter" type="submit" name="send"></input>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	
+<?php if (isset($_POST['identifiant']) && !empty($_POST['identifiant']) &&
+		isset($_POST['mdp']) && !empty($_POST['mdp'])) {
+		$verif=VerifId($_POST['identifiant'],$_POST['mdp'],$base,$hote,$utilisateur,$mdp);
+		
+		if (!$verif) {
+			echo '<p class="produitPrix">ERREUR! Mauvais login ou mot de passe!</p>';
+		}
+		
+		else {
+			session($_POST['identifiant'],$_POST['mdp'],$base,$hote,$utilisateur,$mdp);
+			header('Location: gestion.php');
+		} 
+		
+	
+		
+		
+	 } ?>
+	
+	 <br>
+	 <br>
+	 <br>
+	 <div class="contact">
+	 <a href="gestion.php"><button class="contact"><span>Connexion</span></button></a>
+	 
+	 </div>
 	
 <?php } else { ?>
 
@@ -23,6 +66,7 @@ include 'inc/fonction.php';
 	<p class="produit">Bienvenue sur la page d'administration du site.<br><br>Accès aux pages de gestion ci-dessous :</p>
 </div>
 
+<br>
 <br>
 
 <map name="mapacc" id="mapacc">
@@ -33,12 +77,12 @@ include 'inc/fonction.php';
 
 <a href="gestionUtilisateur.php"><img class="userBout" src="imgcedric/bouton/utilisateurs.png"/></a>
 
-<?php } ?>
-
 <br>
 <br>
 <br>
 <div class="contact">
-<a href="index.php"><button class="contact"><span>Accueil</span></button></a>
+<a href="deconnexion.php"><button class="contact"><span>Déconnexion</span></button></a>
 
 </div>
+
+<?php } ?>
