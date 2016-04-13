@@ -15,6 +15,9 @@ include 'inc/fonction.php';
 	
 <?php include 'inc/border.php'; ?>
 
+<?php if (false) { ?>
+	
+<?php } else { ?>
 
 <div class="gestionContent">
 	<p class="produit">Bienvenue sur la page d'administration du site.<br><br>Accès aux pages de gestion ci-dessous :</p>
@@ -28,7 +31,9 @@ include 'inc/fonction.php';
 </map>
 <img src="imgcedric/bouton/gz.png" usemap="mapacc" alt="image"/>
 
-<a href="test.php"></a><img class="userBout" src="imgcedric/bouton/utilisateurs.png"/></a>
+<a href="gestionUtilisateur.php"><img class="userBout" src="imgcedric/bouton/utilisateurs.png"/></a>
+
+<?php } ?>
 
 <br>
 <br>
