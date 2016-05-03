@@ -711,3 +711,68 @@ function creaTableauUser
 	}
 }
 
+function insertTableauBoutique($base, $hote, $utilisateur, $mdp, $rue, $cp, $ville, $image, $telephone,
+		$lundi_matin_debut, $lundi_matin_fin, $lundi_apres_debut, $lundi_apres_fin,
+		$mardi_matin_debut, $mardi_matin_fin, $mardi_apres_debut, $mardi_apres_fin,
+		$mercredi_matin_debut, $mercredi_matin_fin, $mercredi_apres_debut, $mercredi_apres_fin,
+		$jeudi_matin_debut, $jeudi_matin_fin, $jeudi_apres_debut, $jeudi_apres_fin,
+		$vendredi_matin_debut, $vendredi_matin_fin, $vendredi_apres_debut, $vendredi_apres_fin,
+		$samedi_matin_debut, $samedi_matin_fin, $samedi_apres_debut, $samedi_apres_fin,
+		$dimanche_matin_debut, $dimanche_matin_fin, $dimanche_apres_debut, $dimanche_apres_fin){
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$insertion = $bdd->prepare('INSERT INTO boutique (id, rue, cp, ville, image, telephone) VALUES (\'\', :rue, :cp, :ville, :image, :telephone)');
+		//On envoie la requète avec les valeurs nécessaires:
+		$insertion->execute(array(
+				'rue' => $rue,
+				'cp' => $cp,
+				'ville' => $ville,
+				'image' => $image,
+				'telephone' => $telephone
+		));
+		$dernierId = $bdd->lastInsertId();
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$insertion->closeCursor();
+
+		//On prépare la requète:
+		$insertion = $bdd->prepare('INSERT INTO horaires (boutique_id, lundi_matin_debut, lundi_matin_fin, lundi_apres_debut, lundi_apres_fin,
+										mardi_matin_debut, mardi_matin_fin, mardi_apres_debut, mardi_apres_fin,
+										mercredi_matin_debut, mercredi_matin_fin, mercredi_apres_debut, mercredi_apres_fin,
+										jeudi_matin_debut, jeudi_matin_fin, jeudi_apres_debut, jeudi_apres_fin,
+										vendredi_matin_debut, vendredi_matin_fin, vendredi_apres_debut, vendredi_apres_fin,
+										samedi_matin_debut, samedi_matin_fin, samedi_apres_debut, samedi_apres_fin,
+										dimanche_matin_debut, dimanche_matin_fin, dimanche_apres_debut, dimanche_apres_fin)
+									VALUES (:lundi_matin_debut, :lundi_matin_fin, :lundi_apres_debut, :lundi_apres_fin,
+											:mardi_matin_debut, :mardi_matin_fin, :mardi_apres_debut, :mardi_apres_fin,
+											:mercredi_matin_debut, :mercredi_matin_fin, :mercredi_apres_debut, :mercredi_apres_fin,
+											:jeudi_matin_debut, :jeudi_matin_fin, :jeudi_apres_debut, :jeudi_apres_fin,
+											:vendredi_matin_debut, :vendredi_matin_fin, :vendredi_apres_debut, :vendredi_apres_fin,
+											:samedi_matin_debut, :samedi_matin_fin, :samedi_apres_debut, :samedi_apres_fin,
+											:dimanche_matin_debut, :dimanche_matin_fin, :dimanche_apres_debut, :dimanche_apres_fin)');
+		//On envoie la requète avec les valeurs nécessaires:
+		/*$insertion->execute(array(
+		 'lundi_matin_debut' => $lundi_matin_debut, 'lundi_matin_fin' => $lundi_matin_debut, 'lundi_apres_debut' => $lundi_apres_debut, 'lundi_apres_fin' => $lundi_apres_fin,
+		 'mardi_matin_debut' => $mardi_matin_debut, 'mardi_matin_fin' => $mardi_matin_fin, 'mardi_apres_debut' => $mardi_apres_debut, 'mardi_apres_fin' => $mardi_apres_fin,
+		 'mercredi_matin_debut' => $, 'mercredi_matin_fin' => $, 'mercredi_apres_debut' => $, 'mercredi_apres_fin' => $,
+		 'jeudi_matin_debut' => $, 'jeudi_matin_fin' => $, 'jeudi_apres_debut' => $, 'jeudi_apres_fin' => $,
+		 'vendredi_matin_debut' => $, 'vendredi_matin_fin' => $, 'vendredi_apres_debut' => $, 'vendredi_apres_fin' => $,
+		 'samedi_matin_debut' => $, 'samedi_matin_fin' => $, 'samedi_apres_debut' => $, 'samedi_apres_fin' => $,
+		 'dimanche_matin_debut' => $, 'dimanche_matin_fin' => $, 'dimanche_apres_debut' => $, 'dimanche_apres_fin' => $
+		));*/
+		$dernierId = $bdd->lastInsertId();
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$insertion->closeCursor();
+		echo '<h4 class="goood">Le nouveau people '.$nom.' '.$prenom.' a bien été
+		enregistré avec l\'identifiant '.$dernierId.'</h4>'; //Informe l'utilisateur que l'insertion c'est bien déroulé.
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+
+

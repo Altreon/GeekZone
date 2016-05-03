@@ -214,10 +214,18 @@ form.gestion {
     background-color: rgb(185, 211, 234);
 }
 
+form.boutique {
+	max-width: none;
+}
+
 label {
 	display: block;
 	width: 175px;
 	float: left;
+}
+
+label.horaire {
+	width: 70px;
 }
 
 select, input.form, textarea, input.formGestion {
@@ -244,6 +252,10 @@ input.formGestion {
 	box-shadow:1px 1px 1px #019a5c;
 	cursor:pointer;
 	font-family:FixedsysTTF;
+}
+
+input.horaire {
+	width: 50px;
 }
 
 input.produitFilter {
