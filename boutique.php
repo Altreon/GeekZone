@@ -12,7 +12,7 @@ echo '
 
 include 'inc/titre.php';
 include 'inc/border.php';
-include 'inc/fonction.php';
+include 'inc/fonction2.php';
 
 echo'
 	<div class = "content">

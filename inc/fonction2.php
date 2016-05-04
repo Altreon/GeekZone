@@ -755,32 +755,32 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['mardi_apres_debut'].'</p>
 														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['mardi_apres_fin'].'</p></th>
 					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['mercredi_matin_debut'].'</p>
-														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['mercredi_matin_debut'].'</p></th>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['mercredi_matin_fin'].'</p></th>
 					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['jeudi_matin_debut'].'</p>
-														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['jeudi_matin_debut'].'</p></th>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['jeudi_matin_fin'].'</p></th>
 					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['vendredi_matin_debut'].'</p>
-														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['vendredi_matin_debut'].'</p></th>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['vendredi_matin_fin'].'</p></th>
 					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['samedi_matin_debut'].'</p>
-														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['samedi_matin_debut'].'</p></th>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['samedi_matin_fin'].'</p></th>
 					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['dimanche_matin_debut'].'</p>
-														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['dimanche_matin_debut'].'</p></th>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['dimanche_matin_fin'].'</p></th>
 				</tr>
 				<tr>
 					<th class="boutinfos" rowspan = "1">Après-midi</th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
-														<label class="horaire">Fin:</label><p><p></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
-														<label class="horaire">Fin:</label><p><p></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
-														<label class="horaire">Fin:</label><p><p></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
-														<label class="horaire">Fin:</label><p><p></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
-														<label class="horaire">Fin:</label><p><p></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
-														<label class="horaire">Fin:</label><p><p></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
-														<label class="horaire">Fin:</label><p><p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['lundi_apres_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['lundi_apres_fin'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['mardi_apres_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['mardi_apres_fin'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['mercredi_apres_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['mercredi_apres_fin'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['jeudi_apres_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['jeudi_apres_fin'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['vendredi_apres_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['vendredi_apres_fin'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['samedi_apres_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['samedi_apres_fin'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['dimanche_apres_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['dimanche_apres_fin'].'</p></th>
 				</tr>
 			</table>
 			</th>
