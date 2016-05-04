@@ -82,7 +82,7 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 				<div class = "produitminimg">
 					'; for ($i=0; $i<count($cheminsImage); $i++) {
 					if ($cheminsImage[$i].'.jpg'!=$Image) {
-						echo '<img class="imgmin" src="
+						echo '<img class="imgmin" src="';
 					}
 				}
 				echo '</div>
