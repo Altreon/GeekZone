@@ -64,16 +64,28 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 				<hr class="produit">
 				
 				'; $cheminsImage=array('img/produits/'.pathinfo('img/produits/'.$donnees['image'], PATHINFO_FILENAME));
+				echo '<h4>';echo json_encode($cheminsImage);echo'</h4>';
 
 					if (file_exists($cheminsImage[0].'-1'.'.jpg')) {
 						array_push($cheminsImage, $cheminsImage[0].'-1');
-						print_r($cheminsImage);
+						if (file_exists($cheminsImage[0].'-2'.'.jpg')) {
+							array_push($cheminsImage, $cheminsImage[0].'-2');
+						}
 					}
+					$nbImage=0;
+					$Image=$cheminsImage[$nbImage].'.jpg';
 					
-
 				echo '<div class = "produitimg">
-					<img class="detproduit" onclick="changeImage()" src="'.$cheminsImage[0].'.jpg"></img>
-				</div>			
+					<img class="detproduit" onClick="changeImage(\''.$cheminsImage[0].'\')" src="'.$Image.'"></img>
+				</div>	
+					<br>
+				<div class = "produitminimg">
+					'; for ($i=0; $i<count($cheminsImage); $i++) {
+					if ($cheminsImage[$i].'.jpg'!=$Image) {
+						echo '<img class="imgmin" src="
+					}
+				}
+				echo '</div>
 					<br><br>
 				<div class="produitdet">			
 					<p class="detailproduitPrix">
