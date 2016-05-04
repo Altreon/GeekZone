@@ -31,7 +31,7 @@ echo '
 	<div class = "content">
 ';
 
-if(isset($_POST['envoyerAjoutBoutique']) && !empty($_POST['envoyerAjout']) && isset($_POST['rue']) && !empty($_POST['rue']) && isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) &&isset($_POST['image']) && !empty($_POST['image']) && isset($_POST['telephone']) && !empty($_POST['telephone'])){
+if(isset($_POST['envoyerAjout']) && isset($_POST['rue']) && !empty($_POST['rue']) && isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) &&isset($_POST['image']) && !empty($_POST['image']) && isset($_POST['telephone']) && !empty($_POST['telephone'])){
 	insertTableauBoutique($base, $hote, $utilisateur, $mdp, $_POST['rue'], $_POST['cp'], $_POST['ville'], $_POST['image'], $_POST['telephone'],
 							$_POST['lundi_matin_debut'], $_POST['lundi_matin_fin'], $_POST['lundi_apres_debut'], $_POST['lundi_apres_fin'],
 							$_POST['mardi_matin_debut'],$_POST['mardi_matin_fin'], $_POST['mardi_apres_debut'], $_POST['mardi_apres_fin'],
@@ -50,20 +50,20 @@ if(isset($_GET['suppCompteBoutique']) && !empty($_GET['suppCompte'])){
 	suppTableauBoutique($_GET['suppBoutique'], $base, $hote, $utilisateur, $mdp);
 }
 
-//creaTableauBoutique("id", $base, $hote, $utilisateur, $mdp);
+creaTableauBoutique("id", $base, $hote, $utilisateur, $mdp);
 
 if ( isset($_GET['editCompteBoutique']) && !empty($_GET['editCompte']) ) {
 	editTableauBoutique($_GET['editBoutique'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'une personne
 }else{
 
 //Affiche le formulaire d'ajout de people
-echo '<h2>Ajouter un compte</h2>';
+echo '<h2>Ajouter une boutique</h2>';
 echo '
-	<form class="gestion boutique" method="post" action="test.php">
+	<form class="gestion boutique" method="post" action="gestionBoutiques.php">
 		<fieldset>
 			<label>Rue :</label><input class="formGestion" type="text" id="rue" name = "rue" /><br/><br/>
 			<label>CP :</label><input class="formGestion" type="text" id="cp" name = "cp" /><br/><br/>
-			<label>Ville :</label><input class="formGestion" type="ville" id="ville" name = "mail" /><br/><br/>
+			<label>Ville :</label><input class="formGestion" type="text" id="ville" name = "ville" /><br/><br/>
 			<label>Nom du fichier image :</label><input class="formGestion" type="text" id="image" name = "image" /><br/><br/>
 			<label>Téléphone :</label><input class="formGestion" type="text" id="telephone" name = "telephone" /><br/><br/>
 			<label>Horaires :</label><br/><br/>

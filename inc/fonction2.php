@@ -657,8 +657,7 @@ function imageRandomBoutique($base, $hote, $utilisateur, $mdp) {
 }
 
 //Permet d'afficher le tableau des comptes de la base de données.
-function creaTableauUser
-($tri, $base, $hote, $utilisateur, $mdp) {
+function creaTableauUser ($tri, $base, $hote, $utilisateur, $mdp) {
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
@@ -711,6 +710,111 @@ function creaTableauUser
 	}
 }
 
+//Permet d'afficher le tableau des boutiques de la base de données.
+function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		$reponseBoutique = $bdd->query('SELECT * FROM boutique ORDER BY '.$tri.''); // Envoi de la requête
+		$nb = $reponseBoutique->rowCount(); // Compte du nombre de lignes retournées
+		echo '<table>'; // Déclaration d'un tableau et de sa ligne d'en-tête
+		echo '<tr><th class="noBorder"></th><th>NUMERO</th><th>RUE</th><th>CODE POSTAL</th><th>VILLE</th><th>FICHIER D\'IMAGE</th><th>TELEPHONE</th></tr>';
+		$reponseHoraire;
+		while ( $donnees = $reponseBoutique->fetch() ) // Découpage ligne à ligne de $reponse
+		{
+			$reponseHoraire = $bdd->query('SELECT * FROM horaire WHERE boutique_id = '.$donnees['id'].''); // Envoi de la requête
+			echo '<tr>'; // Une ligne appelle les données de $donnees['']
+			echo '<td class="noBorder"></td>';
+			echo '<td class="c1">'.$donnees['id'].'</td>';
+			echo '<td class="c1">'.$donnees['rue'].'</td>';
+			echo '<td class="c1">'.$donnees['cp'].'</td>';
+			echo '<td class="c1">'.$donnees['ville'].'</td>';
+			echo '<td class="c1">'.$donnees['image'].'</td>';
+			echo '<td class="c1">'.$donnees['telephone'].'</td>';
+			echo '</tr>';
+				
+			echo '<th>HORAIRES';
+			echo'<td class="c1" colspan=6>
+			<table class="horaire">
+				<tr>
+					<th class="boutinfos" rowspan = "1"></th>
+					<th class="boutinfos" rowspan = "1">Lundi</th>
+					<th class="boutinfos" rowspan = "1">Mardi</th>
+					<th class="boutinfos" rowspan = "1">Mercredi</th>
+					<th class="boutinfos" rowspan = "1">Jeudi</th>
+					<th class="boutinfos" rowspan = "1">Vendredi</th>
+					<th class="boutinfos" rowspan = "1">Samedi</th>
+					<th class="boutinfos" rowspan = "1">Dimanche</th>
+				</tr>
+				<tr>
+					<th class="boutinfos" rowspan = "1">Matin</th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="lundi_matin_debut" name = "lundi_matin_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="lundi_matin_fin" name = "lundi_matin_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mardi_matin_debut" name = "mardi_matin_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="mardi_matin_fin" name = "mardi_matin_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mercredi_matin_debut" name = "mercredi_matin_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="mercredi_matin_fin" name = "mercredi_matin_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="jeudi_matin_debut" name = "jeudi_matin_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="jeudi_matin_fin" name = "jeudi_matin_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="vendredi_matin_debut" name = "vendredi_matin_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="vendredi_matin_fin" name = "vendredi_matin_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="samedi_matin_debut" name = "samedi_matin_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="samedi_matin_fin" name = "samedi_matin_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="dimanche_matin_debut" name = "dimanche_matin_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="dimanche_matin_fin" name = "dimanche_matin_fin" /></th>
+				</tr>
+				<tr>
+					<th class="boutinfos" rowspan = "1">Après-midi</th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="lundi_apres_debut" name = "lundi_apres_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="lundi_apres_fin" name = "lundi_apres_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mardi_apres_debut" name = "mardi_apres_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="mardi_apres_fin" name = "mardi_apres_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mercredi_apres_debut" name = "mercredi_apres_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="mercredi_apres_fin" name = "mercredi_apres_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="jeudi_apres_debut" name = "jeudi_apres_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="jeudi_apres_fin" name = "jeudi_apres_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="vendredi_apres_debut" name = "vendredi_apres_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="vendredi_apres_fin" name = "vendredi_apres_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="samedi_apres_debut" name = "samedi_apres_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="samedi_apres_fin" name = "samedi_apres_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="dimanche_apres_debut" name = "dimanche_apres_debut" /><br/><br/>
+														<label class="horaire">Fin:</label><input class="horaire" type="text" id="dimanche_apres_fin" name = "dimanche_apres_fin" /></th>
+				</tr>
+			</table>
+			</th>
+			';
+
+			//Si l'utilisateur est administrateur, le possibilité de modifier ou de supprimer une boutique lui est offerte.
+			//if($_SESSION['statPeople'] == "A"){
+			//Modification
+			/*
+			echo '<td class="c1">
+				<input class="form" type="image" id="editCompte" name="editCompte" src="img/edit.png"
+				onclick="location.href=\'test.php?editCompte='
+					.$donnees['id'].'\'"/></td>';
+
+			//Suppresion
+			echo '<td class="c1">
+					<input class="form" type="image" id="suppCompte" name="suppCompte" src="img/icon_suppr.gif"
+					onclick="attention('.$donnees['id'].', \''.$donnees['prenom'].'\',
+					\''.$donnees['nom'].'\');"/></td>';
+			echo '</tr>';
+			//}
+			*/
+		}
+		echo '</table>'; // Fin du tableau
+		echo '<p>Il y a '.$nb.' boutiques.</p>'; // Affichade du compte des lignes
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponseBoutique->closeCursor();
+		//$reponseHoraire->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
 function insertTableauBoutique($base, $hote, $utilisateur, $mdp, $rue, $cp, $ville, $image, $telephone,
 		$lundi_matin_debut, $lundi_matin_fin, $lundi_apres_debut, $lundi_apres_fin,
 		$mardi_matin_debut, $mardi_matin_fin, $mardi_apres_debut, $mardi_apres_fin,
@@ -745,7 +849,7 @@ function insertTableauBoutique($base, $hote, $utilisateur, $mdp, $rue, $cp, $vil
 										vendredi_matin_debut, vendredi_matin_fin, vendredi_apres_debut, vendredi_apres_fin,
 										samedi_matin_debut, samedi_matin_fin, samedi_apres_debut, samedi_apres_fin,
 										dimanche_matin_debut, dimanche_matin_fin, dimanche_apres_debut, dimanche_apres_fin)
-									VALUES (:lundi_matin_debut, :lundi_matin_fin, :lundi_apres_debut, :lundi_apres_fin,
+									VALUES (:boutique_id, :lundi_matin_debut, :lundi_matin_fin, :lundi_apres_debut, :lundi_apres_fin,
 											:mardi_matin_debut, :mardi_matin_fin, :mardi_apres_debut, :mardi_apres_fin,
 											:mercredi_matin_debut, :mercredi_matin_fin, :mercredi_apres_debut, :mercredi_apres_fin,
 											:jeudi_matin_debut, :jeudi_matin_fin, :jeudi_apres_debut, :jeudi_apres_fin,
@@ -753,19 +857,20 @@ function insertTableauBoutique($base, $hote, $utilisateur, $mdp, $rue, $cp, $vil
 											:samedi_matin_debut, :samedi_matin_fin, :samedi_apres_debut, :samedi_apres_fin,
 											:dimanche_matin_debut, :dimanche_matin_fin, :dimanche_apres_debut, :dimanche_apres_fin)');
 		//On envoie la requète avec les valeurs nécessaires:
-		/*$insertion->execute(array(
+		$insertion->execute(array(
+		 'boutique_id' => $dernierId, 
 		 'lundi_matin_debut' => $lundi_matin_debut, 'lundi_matin_fin' => $lundi_matin_debut, 'lundi_apres_debut' => $lundi_apres_debut, 'lundi_apres_fin' => $lundi_apres_fin,
 		 'mardi_matin_debut' => $mardi_matin_debut, 'mardi_matin_fin' => $mardi_matin_fin, 'mardi_apres_debut' => $mardi_apres_debut, 'mardi_apres_fin' => $mardi_apres_fin,
-		 'mercredi_matin_debut' => $, 'mercredi_matin_fin' => $, 'mercredi_apres_debut' => $, 'mercredi_apres_fin' => $,
-		 'jeudi_matin_debut' => $, 'jeudi_matin_fin' => $, 'jeudi_apres_debut' => $, 'jeudi_apres_fin' => $,
-		 'vendredi_matin_debut' => $, 'vendredi_matin_fin' => $, 'vendredi_apres_debut' => $, 'vendredi_apres_fin' => $,
-		 'samedi_matin_debut' => $, 'samedi_matin_fin' => $, 'samedi_apres_debut' => $, 'samedi_apres_fin' => $,
-		 'dimanche_matin_debut' => $, 'dimanche_matin_fin' => $, 'dimanche_apres_debut' => $, 'dimanche_apres_fin' => $
-		));*/
-		$dernierId = $bdd->lastInsertId();
+		 'mercredi_matin_debut' => $mercredi_matin_debut, 'mercredi_matin_fin' => $mercredi_matin_fin, 'mercredi_apres_debut' => $mercredi_apres_debut, 'mercredi_apres_fin' => $mercredi_apres_fin,
+		 'jeudi_matin_debut' => $jeudi_matin_debut, 'jeudi_matin_fin' => $jeudi_matin_fin, 'jeudi_apres_debut' => $jeudi_apres_debut, 'jeudi_apres_fin' => $jeudi_apres_fin,
+		 'vendredi_matin_debut' => $vendredi_matin_debut, 'vendredi_matin_fin' => $vendredi_matin_fin, 'vendredi_apres_debut' => $vendredi_apres_debut, 'vendredi_apres_fin' => $vendredi_apres_fin,
+		 'samedi_matin_debut' => $samedi_matin_debut, 'samedi_matin_fin' => $samedi_matin_fin, 'samedi_apres_debut' => $samedi_apres_debut, 'samedi_apres_fin' => $samedi_apres_fin,
+		 'dimanche_matin_debut' => $dimanche_matin_debut, 'dimanche_matin_fin' => $dimanche_matin_fin, 'dimanche_apres_debut' => $dimanche_apres_debut, 'dimanche_apres_fin' => $dimanche_apres_fin
+		));
 		// On libère la connexion du serveur pour d'autres requêtes :
 		$insertion->closeCursor();
-		echo '<h4 class="goood">Le nouveau people '.$nom.' '.$prenom.' a bien été
+
+		echo '<h4 class="goood">La nouvelle boutique située à '.$ville.' a bien été
 		enregistré avec l\'identifiant '.$dernierId.'</h4>'; //Informe l'utilisateur que l'insertion c'est bien déroulé.
 	}
 	catch (Exception $erreur)
