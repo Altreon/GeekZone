@@ -14,9 +14,9 @@ include 'inc/fonction.php';
 <body>
 	
 <?php include 'inc/border.php'; ?>
-
+<div class = "content">
 <?php if (!isset($_SESSION['logCompte'])) { ?>
-	<div class = "content">
+	
 		<div class="gestionForm">
 			<form class="connexion" action="gestion.php" method="post">
 				<fieldset class="connexion">
@@ -32,7 +32,7 @@ include 'inc/fonction.php';
 				</fieldset>
 			</form>
 		</div>
-	</div>
+	
 	
 <?php if (isset($_POST['identifiant']) && !empty($_POST['identifiant']) &&
 		isset($_POST['mdp']) && !empty($_POST['mdp'])) {
@@ -61,21 +61,22 @@ include 'inc/fonction.php';
 	 </div>
 	
 <?php } else { ?>
-
-<div class="gestionContent">
-	<p class="produit">Bienvenue sur la page d'administration du site.<br><br>Accès aux pages de gestion ci-dessous :</p>
+<div class="gestionZone">
+	<div class="gestionContent">
+		<p class="produit">Bienvenue sur la page d'administration du site.<br><br>Accès aux pages de gestion ci-dessous :</p>
+	</div>
+	
+	<br>
+	<br>
+	
+	<map name="mapacc" id="mapacc">
+	      <area shape="rect" coords="0,0,270,122" href="gestionBoutiques.php"/>
+			<area shape="rect" coords="910,0,1184,122" href="gestionProduits.php"/>
+	</map>
+	<img src="imgcedric/bouton/gz.png" usemap="mapacc" alt="image"/>
+	
+	<a href="gestionUtilisateur.php"><img class="userBout" src="imgcedric/bouton/utilisateurs.png"/></a><br/>
 </div>
-
-<br>
-<br>
-
-<map name="mapacc" id="mapacc">
-      <area shape="rect" coords="0,0,270,122" href="gestionBoutiques.php"/>
-		<area shape="rect" coords="910,0,1184,122" href="gestionProduits.php"/>
-</map>
-<img src="imgcedric/bouton/gz.png" usemap="mapacc" alt="image"/>
-
-<a href="gestionUtilisateur.php"><img class="userBout" src="imgcedric/bouton/utilisateurs.png"/></a>
 
 <br>
 <br>
@@ -85,4 +86,4 @@ include 'inc/fonction.php';
 
 </div>
 
-<?php } ?>
+<?php } ?></div>
