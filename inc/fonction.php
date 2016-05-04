@@ -1,5 +1,6 @@
-<?php
 
+
+<?php
 function produitList($filter, $tri, $decroissant, $recherche, $base, $hote, $utilisateur, $mdp) {
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
@@ -62,9 +63,16 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 								
 				<hr class="produit">
 				
-				
-				<div class = "produitimg">
-					<img class="detproduit" src="img/produits/'.$donnees['image'].'"></img>
+				'; $cheminsImage=array('img/produits/'.pathinfo('img/produits/'.$donnees['image'], PATHINFO_FILENAME));
+
+					if (file_exists($cheminsImage[0].'-1'.'.jpg')) {
+						array_push($cheminsImage, $cheminsImage[0].'-1');
+						print_r($cheminsImage);
+					}
+					
+
+				echo '<div class = "produitimg">
+					<img class="detproduit" onclick="changeImage()" src="'.$cheminsImage[0].'.jpg"></img>
 				</div>			
 					<br><br>
 				<div class="produitdet">			
@@ -461,5 +469,4 @@ function session($log,$mdpSession,$base,$hote,$utilisateur,$mdp) {
 		die('Erreur : ' . $erreur->getMessage());
 	}
 
-}
-	
+}?>

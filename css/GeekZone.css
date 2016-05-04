@@ -522,6 +522,10 @@ td {
 	font-size : 20px
 }
 
+tr.noBorder, td.noBorder {
+	border:none;
+}
+
 div.details {
 	margin-top:-60px;
 	margin-right:auto;
