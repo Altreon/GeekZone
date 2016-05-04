@@ -215,7 +215,7 @@ form.gestion {
 }
 
 form.boutique {
-	max-width: none;
+	max-width: 1146px;
 }
 
 label {
@@ -503,6 +503,11 @@ div.accboutiques {
 }
 
 table.compte {
+	margin-left: auto;
+    margin-right: auto;
+}
+
+table.gestion {
 	margin-left: auto;
     margin-right: auto;
 }

@@ -108,6 +108,8 @@ function boutique($name, $base, $hote, $utilisateur, $mdp) {
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
 		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
 		{
+			$reponseHoraires = $bdd->query('SELECT * FROM horaires WHERE boutique_id = '.$donnees['id'].''); // Envoi de la requête
+			$donneesHoraires = $reponseHoraires->fetch();
 			echo '
 				<table>
 					<tr>
@@ -129,24 +131,82 @@ function boutique($name, $base, $hote, $utilisateur, $mdp) {
 									<th class="boutinfos" rowspan = "1">Dimanche</th>
 								</tr>
 								<tr>
-									<th class="boutinfos" rowspan = "1">Matin</th>
-									<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
-									<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
-									<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
-									<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
-									<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
-									<th class="boutinfos" rowspan = "1">de 08h30 à 12h30</th>
-									<th class="boutinfos" rowspan = "1">Fermée</th>
+									<th class="boutinfos" rowspan = "1">Matin</th>';
+									if($donneesHoraires['lundi_matin_debut'] != "fermé" && $donneesHoraires['lundi_matin_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['lundi_matin_debut'].' à '.$donneesHoraires['lundi_matin_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['mardi_matin_debut'] != "fermé" && $donneesHoraires['mardi_matin_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['mardi_matin_debut'].' à '.$donneesHoraires['mardi_matin_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['mercredi_matin_debut'] != "fermé" && $donneesHoraires['mercredi_matin_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['mercredi_matin_debut'].' à '.$donneesHoraires['mercredi_matin_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['jeudi_matin_debut'] != "fermé" && $donneesHoraires['jeudi_matin_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['jeudi_matin_debut'].' à '.$donneesHoraires['jeudi_matin_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['vendredi_matin_debut'] != "fermé" && $donneesHoraires['vendredi_matin_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['vendredi_matin_debut'].' à '.$donneesHoraires['vendredi_matin_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['samedi_matin_debut'] != "fermé" && $donneesHoraires['samedi_matin_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['samedi_matin_debut'].' à '.$donneesHoraires['samedi_matin_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['dimanche_matin_debut'] != "fermé" && $donneesHoraires['dimanche_matin_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['dimanche_matin_debut'].' à '.$donneesHoraires['dimanche_matin_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+								echo'
 								</tr>
 								<tr>
-									<th class="boutinfos" rowspan = "1">Après-midi</th>
-									<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
-									<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
-									<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
-									<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
-									<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
-									<th class="boutinfos" rowspan = "1">de 14h00 à 19h00</th>
-									<th class="boutinfos" rowspan = "1">Fermée</th>
+									<th class="boutinfos" rowspan = "1">Après-midi</th>';
+									if($donneesHoraires['lundi_apres_debut'] != "fermé" && $donneesHoraires['lundi_apres_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['lundi_apres_debut'].' à '.$donneesHoraires['lundi_apres_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['mardi_apres_debut'] != "fermé" && $donneesHoraires['mardi_apres_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['mardi_apres_debut'].' à '.$donneesHoraires['mardi_apres_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['mercredi_apres_debut'] != "fermé" && $donneesHoraires['mercredi_apres_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['mercredi_apres_debut'].' à '.$donneesHoraires['mercredi_apres_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['jeudi_apres_debut'] != "fermé" && $donneesHoraires['jeudi_apres_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['jeudi_apres_debut'].' à '.$donneesHoraires['jeudi_apres_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['vendredi_apres_debut'] != "fermé" && $donneesHoraires['vendredi_apres_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['vendredi_apres_debut'].' à '.$donneesHoraires['vendredi_apres_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['samedi_apres_debut'] != "fermé" && $donneesHoraires['samedi_apres_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['samedi_apres_debut'].' à '.$donneesHoraires['samedi_apres_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+									if($donneesHoraires['dimanche_apres_debut'] != "fermé" && $donneesHoraires['dimanche_apres_fin'] != "fermé"){
+										echo'<th class="boutinfos" rowspan = "1">de '.$donneesHoraires['dimanche_apres_debut'].' à '.$donneesHoraires['dimanche_apres_fin'].'</th>';
+									}else{
+										echo'<th class="boutinfos" rowspan = "1">Fermé';
+									}
+								echo'
 								</tr>
 							</table>
 						</th>
@@ -234,7 +294,7 @@ function creaTableau($tri, $base, $hote, $utilisateur, $mdp) {
 				//Modification
 				echo '<td class="c1">
 				<input type="image" id="editCompte" name="editCompte" src="img/edit.png"
-				onclick="location.href=\'test.php?editCompte='
+				onclick="location.href=\'gestionUtilisateur.php?editCompte='
 						.$donnees['id'].'\'"/></td>';
 
 				//Suppresion
@@ -255,16 +315,6 @@ function creaTableau($tri, $base, $hote, $utilisateur, $mdp) {
 		die('Erreur : ' . $erreur->getMessage());
 	}
 }
-
-//Permet de demander à l'utilisateur de confirmer la suppression de la personne de la base de données.
-echo '<script type=\'text/javascript\'>
-function attention(idEffacer, prenom, nom) {
-	if( confirm(\'Etes-vous certain de vouloir effacer le compte de \'+prenom+\' \'+nom+\' ? \') )
-	{
-		location.href=\'test.php?suppCompte=\'+idEffacer;
-	}
-}
-</script>';
 
 //Perlet de lister les villes de la base de données (!!! ancienne focntion !!!)
 function listBoutique($base, $hote, $utilisateur, $mdp, $boutiqueGeree){
@@ -318,193 +368,6 @@ function boutiquelist($base, $hote, $utilisateur, $mdp) {
 		echo'</table></div>';
 		
 	
-	}
-	catch (Exception $erreur)
-	{
-		die('Erreur : ' . $erreur->getMessage());
-	}
-}
-
-//Permet d'ajouter un compte dans la base de données.
-function insertTableau($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $boutiqueGeree, $statut, $login, $motdp) {
-	try{
-		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
-		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
-		$bdd->exec('SET NAMES utf16');
-		//On prépare la requète:
-		$insertion = $bdd->prepare('INSERT INTO compte (id, nom, prenom, mail, telephone, adresse, cp, ville, boutiqueGeree, statut, login, mdp) VALUES (\'\', :nom, :prenom, :mail, :telephone, :adresse, :cp, :ville, :boutiqueGeree, :statut, :login, :mdp)');
-		//On envoie la requète avec les valeurs nécessaires:
-		$insertion->execute(array(
-				'nom' => $nom,
-				'prenom' => $prenom,
-				'mail' => $mail,
-				'telephone' => $telephone,
-				'adresse' => $adresse,
-				'cp' => $cp,
-				'ville' => $ville,
-				'boutiqueGeree' => $boutiqueGeree,
-				'statut' => $statut,
-				'login' => $login,
-				'mdp' => $motdp
-		));
-		$dernierId = $bdd->lastInsertId();
-		echo '<h4 class="goood">Le nouveau compte de '.$nom.' '.$prenom.' a bien été
-		enregistré avec l\'identifiant '.$dernierId.'</h4>'; //Informe l'utilisateur que l'insertion c'est bien déroulé.
-		// On libère la connexion du serveur pour d'autres requêtes :
-		$insertion->closeCursor();
-	}
-	catch (Exception $erreur)
-	{
-		die('Erreur : ' . $erreur->getMessage());
-	}
-}
-
-function suppTableau($suppCompte, $base, $hote, $utilisateur, $mdp) {
-	try
-	{
-		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
-		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
-		//On prépare la requète:
-		$modification = $bdd->prepare('DELETE FROM compte WHERE id=:idCompte');
-		//On envoie la requète avec les valeurs nécessaires:
-		$modification->execute(array(
-				'idCompte' => $suppCompte
-		));
-
-		// On libère la connexion du serveur pour d'autres requêtes :
-		$modification->closeCursor();
-		// On modifie l'auto-incremente pour que l'id de la prochaine personne ajouter suives les autres :
-		autoInc($base, $hote, $utilisateur, $mdp);
-		echo '<h4 class="goood">Le compte <i>numéro '.$suppCompte.'</i> a été supprimé.</h4>'; //Informe l'utilisateur que la suppresion c'est bien déroulé.
-	}
-	catch (Exception $e)
-	{
-		die('Erreur : ' . $e->getMessage());
-	}
-}
-
-function autoInc ($base, $hote, $utilisateur, $mdp){
-	try
-	{
-		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
-		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
-		$reponse = $bdd->query('SELECT max(id)+1 AS maxID FROM compte');
-		$donnees = $reponse->fetch();
-		$autoInc = $bdd->query('ALTER TABLE compte AUTO_INCREMENT = '.$donnees['maxID'].'') ;
-		$autoInc->closeCursor();
-	}
-	catch (Exception $e)
-	{
-		die('Erreur : ' . $e->getMessage());
-	}
-}
-
-function editTableau($editCompte, $base, $hote, $utilisateur, $mdp) {
-	// Ici on édite la fiche d'une personne
-	try
-	{
-		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
-		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
-		$bdd->exec('SET NAMES utf16');
-		//On prépare la requète:
-		$reponse = $bdd->prepare('SELECT * FROM compte WHERE id = ? ');
-		//On envoie la requète avec les valeurs nécessaires:
-		$reponse->execute( array($editCompte) );
-
-		$donnees = $reponse->fetch(); // Découpage ligne à ligne de $reponse (une seul ligne ici)
-		// On libère la connexion du serveur pour d'autres requêtes :
-		$reponse->closeCursor();
-
-		//Formulaire d'édition d'une personne.
-		?>
-		<h2>Modification d'un compte</h2>
-		<form class="ajoutCompte" method="post" action="test.php">
-		<fieldset>
-		<legend>Modification du compte numéro <b><?php echo $donnees['id']; ?></b></legend>
-			<label>Nom :</label><input type="text" id="nom" name = "nom" value="<?php echo $donnees['nom']; ?>"/><br/><br/>
-			<label>Prénom :</label><input type="text" id="prenom" name = "prenom" value="<?php echo $donnees['prenom']; ?>"/><br/><br/>
-			<label>Mail :</label><input type="text" id="mail" name = "mail" value="<?php echo $donnees['mail']; ?>"/><br/><br/>
-			<label>Téléphone :</label><input type="text" id="telephone" name = "telephone" value="<?php echo $donnees['telephone']; ?>"/><br/><br/>
-			<label>Adresse :</label><input type="text" id="adresse" name = "adresse" value="<?php echo $donnees['adresse']; ?>"/><br/><br/>
-			<label>CP :</label><input type="text" id="cp" name = "cp" value="<?php echo $donnees['cp']; ?>"/><br/><br/>
-			<label>Ville :</label><input type="text" id="ville" name = "ville" value="<?php echo $donnees['ville']; ?>"/><br/><br/>
-			<?php
-			listBoutique($base, $hote, $utilisateur, $mdp, $donnees['boutiqueGeree']);
-			?>
-			<label>Statut :</label>
-				<?php if($donnees['statut'] == "B"){ ?>
-					<input type="radio" id="statut" name="statut" value="B" checked="checked"/>Administrateur de boutique
-					<label> </label><input type="radio" id="statut" name="statut" value="G"/>Administrateur général
-				<?php }else{ ?>
-					<input type="radio" id="statut" name="statut" value="B"/>Administrateur de boutique
-					<label> </label><input type="radio" id="statut" name="statut" value="G" checked="checked"/>Administrateur général
-				<?php } ?>
-			<br>
-			<br>
-			<label>Identifiant :</label><input type="text" id="login" name = "login" value="<?php echo $donnees['login']; ?>"/><br/><br/>
-			<label>Mot de passe :</label><input type="text" id="mdp" name = "mdp" value="<?php echo $donnees['mdp']; ?>"/><br/><br/>
-			
-			<input type="hidden" name="hdIdCompte" id="hdIdCompte" 
-			value=" <?php echo $donnees['id']; ?>" /> <!-- cette input "caché" permetra de récupérer plus tard dans $_POST l'id du compte -->
-			<input name="effacerModif" type="reset" value="Effacer" />
-			<input name="envoyerModif" type="submit" value="Envoyer" />
-		</fieldset>
-		</form>
-		<?php
-	}
-	catch (Exception $erreur)
-	{
-		die('Erreur : ' . $erreur->getMessage());
-	}
-}
-
-function updateTableau($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $boutiqueGeree, $statut, $login, $motdp, $id) {
-	//Sécurise en empéchant les commandes JavaScript
-	$nom = htmlspecialchars($nom);
-	$prenom = htmlspecialchars($prenom);
-	$mail = $mail;
-	$telephone = htmlspecialchars($telephone);
-	$adresse = $adresse;
-	$cp = $cp;
-	$ville = htmlspecialchars($ville);
-	$boutiqueGeree = htmlspecialchars($boutiqueGeree);
-	$statut = $statut;
-	$login = htmlspecialchars($login);
-	$motdp = htmlspecialchars($motdp);
-	$id = htmlspecialchars($id);
-	
-	echo'<h4>'.$id.'</h4>';
-
-	// Ici on modifie un people
-	try
-	{
-		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
-		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
-		$bdd->exec('SET NAMES utf16');
-		//On prépare la requète:
-		$modification = $bdd->prepare('UPDATE compte SET nom = :nomCompte,
-		prenom = :prenomCompte, mail = :mailCompte, telephone = :telephoneCompte,
-		adresse = :adresseCompte, cp = :cpCompte, ville = :villeCompte,
-		boutiqueGeree = :boutiqueGereeCompte, statut = :statutCompte,
-		login = :loginCompte, mdp = :mdpCompte, WHERE id = :idCompte');
-		//On envoie la requète avec les valeurs nécessaires:
-		$modification->execute(array(
-				'nomCompte' => $nom,
-				'prenomCompte' => $prenom,
-				'mailCompte' => $mail,
-				'telephoneCompte' => $telephone,
-				'adresseCompte' => $adresse,
-				'cpCompte' => $cp,
-				'villeCompte' => $ville,
-				'boutiqueGereeCompte' => $boutiqueGeree,
-				'statutCompte' => $statut,
-				'loginCompte' => $login,
-				'mdpCompte' => $motdp,
-				'idCompte' => $id
-		));
-		echo '<h4 class="goood">Les données à propos du compte '.$nom.' '.$prenom.' ont bien été mises à jour</h4>'; //Informe l'utilisateur que la modification c'est bien déroulé.
-		// On libère la connexion du serveur pour d'autres requêtes :
-		$modification->closeCursor();
 	}
 	catch (Exception $erreur)
 	{
@@ -664,7 +527,7 @@ function creaTableauUser ($tri, $base, $hote, $utilisateur, $mdp) {
 		$bdd->exec('SET NAMES utf16');
 		$reponse = $bdd->query('SELECT * FROM compte ORDER BY '.$tri.''); // Envoi de la requête
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
-		echo '<table>'; // Déclaration d'un tableau et de sa ligne d'en-tête
+		echo '<table class="gestion">'; // Déclaration d'un tableau et de sa ligne d'en-tête
 		echo '<tr><th>NUMERO</th><th>NOM</th><th>PRENOM</th><th>MAIL</th><th>TELEPHONE</th>
 		<th>ADRESSE</th><th>CP</th><th>VILLE</th><th>BOUTIQUE GÉRÉE</th><th>STATUT</th><th>LOGIN</th><th>MDP</th></tr>';
 		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
@@ -687,14 +550,14 @@ function creaTableauUser ($tri, $base, $hote, $utilisateur, $mdp) {
 			//if($_SESSION['statPeople'] == "A"){
 			//Modification
 			echo '<td class="c1">
-				<input class="form" type="image" id="editCompte" name="editCompte" src="img/edit.png"
-				onclick="location.href=\'test.php?editCompte='
+				<input type="image" id="editCompte" name="editCompte" src="img/edit.png"
+				onclick="location.href=\'gestionUtilisateur.php?editCompte='
 					.$donnees['id'].'\'"/></td>';
 
 			//Suppresion
 			echo '<td class="c1">
-					<input class="form" type="image" id="suppCompte" name="suppCompte" src="img/icon_suppr.gif"
-					onclick="attention('.$donnees['id'].', \''.$donnees['prenom'].'\',
+					<input type="image" id="suppCompte" name="suppCompte" src="img/icon_suppr.gif"
+					onclick="attentionUser('.$donnees['id'].', \''.$donnees['prenom'].'\',
 					\''.$donnees['nom'].'\');"/></td>';
 			echo '</tr>';
 			//}
@@ -703,6 +566,186 @@ function creaTableauUser ($tri, $base, $hote, $utilisateur, $mdp) {
 		echo '<p>Il y a '.$nb.' comptes.</p>'; // Affichade du compte des lignes
 		// On libère la connexion du serveur pour d'autres requêtes :
 		$reponse->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+//Permet d'ajouter un compte dans la base de données.
+function insertTableauUser($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $boutiqueGeree, $statut, $login, $motdp) {
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$insertion = $bdd->prepare('INSERT INTO compte (id, nom, prenom, mail, telephone, adresse, cp, ville, boutiqueGeree, statut, login, mdp) VALUES (\'\', :nom, :prenom, :mail, :telephone, :adresse, :cp, :ville, :boutiqueGeree, :statut, :login, :mdp)');
+		//On envoie la requète avec les valeurs nécessaires:
+		$insertion->execute(array(
+				'nom' => $nom,
+				'prenom' => $prenom,
+				'mail' => $mail,
+				'telephone' => $telephone,
+				'adresse' => $adresse,
+				'cp' => $cp,
+				'ville' => $ville,
+				'boutiqueGeree' => $boutiqueGeree,
+				'statut' => $statut,
+				'login' => $login,
+				'mdp' => $motdp
+		));
+		$dernierId = $bdd->lastInsertId();
+		echo '<h4 class="goood">Le nouveau compte de '.$nom.' '.$prenom.' a bien été
+		enregistré avec l\'identifiant '.$dernierId.'</h4>'; //Informe l'utilisateur que l'insertion c'est bien déroulé.
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$insertion->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function suppTableauUser($suppCompte, $base, $hote, $utilisateur, $mdp) {
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		//On prépare la requète:
+		$modification = $bdd->prepare('DELETE FROM compte WHERE id=:idCompte');
+		//On envoie la requète avec les valeurs nécessaires:
+		$modification->execute(array(
+				'idCompte' => $suppCompte
+		));
+
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$modification->closeCursor();
+		// On modifie l'auto-incremente pour que l'id de la prochaine personne ajouter suives les autres :
+		autoInc($base, $hote, $utilisateur, $mdp, "compte");
+		echo '<h4 class="goood">Le compte <i>numéro '.$suppCompte.'</i> a été supprimé.</h4>'; //Informe l'utilisateur que la suppresion c'est bien déroulé.
+	}
+	catch (Exception $e)
+	{
+		die('Erreur : ' . $e->getMessage());
+	}
+}
+
+//Permet de demander à l'utilisateur de confirmer la suppression de la personne de la base de données.
+echo '<script type=\'text/javascript\'>
+function attentionUser(idEffacer, prenom, nom) {
+	if( confirm(\'Etes-vous certain de vouloir effacer le compte de \'+prenom+\' \'+nom+\' ? \') )
+	{
+		location.href=\'gestionUtilisateur.php?suppCompte=\'+idEffacer;
+	}
+}
+</script>';
+
+function editTableauUser($editCompte, $base, $hote, $utilisateur, $mdp) {
+	// Ici on édite la fiche d'une personne
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$reponse = $bdd->prepare('SELECT * FROM compte WHERE id = ? ');
+		//On envoie la requète avec les valeurs nécessaires:
+		$reponse->execute( array($editCompte) );
+
+		$donnees = $reponse->fetch(); // Découpage ligne à ligne de $reponse (une seul ligne ici)
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+
+		//Formulaire d'édition d'une personne.
+		?>
+		<h2>Modification d'un compte</h2>
+		<form class="gestion" method="post" action="gestionUtilisateur.php">
+		<fieldset>
+		<legend>Modification du compte numéro <b><?php echo $donnees['id']; ?></b></legend>
+			<label>Nom :</label><input type="text" id="nom" name = "nom" value="<?php echo $donnees['nom']; ?>"/><br/><br/>
+			<label>Prénom :</label><input type="text" id="prenom" name = "prenom" value="<?php echo $donnees['prenom']; ?>"/><br/><br/>
+			<label>Mail :</label><input type="text" id="mail" name = "mail" value="<?php echo $donnees['mail']; ?>"/><br/><br/>
+			<label>Téléphone :</label><input type="text" id="telephone" name = "telephone" value="<?php echo $donnees['telephone']; ?>"/><br/><br/>
+			<label>Adresse :</label><input type="text" id="adresse" name = "adresse" value="<?php echo $donnees['adresse']; ?>"/><br/><br/>
+			<label>CP :</label><input type="text" id="cp" name = "cp" value="<?php echo $donnees['cp']; ?>"/><br/><br/>
+			<label>Ville :</label><input type="text" id="ville" name = "ville" value="<?php echo $donnees['ville']; ?>"/><br/><br/>
+			<?php
+			listBoutique($base, $hote, $utilisateur, $mdp, $donnees['boutiqueGeree']);
+			?>
+			<label>Statut :</label>
+				<?php if($donnees['statut'] == "B"){ ?>
+					<input type="radio" id="statut" name="statut" value="B" checked="checked"/>Administrateur de boutique
+					<label> </label><input type="radio" id="statut" name="statut" value="G"/>Administrateur général
+				<?php }else{ ?>
+					<input type="radio" id="statut" name="statut" value="B"/>Administrateur de boutique
+					<label> </label><input type="radio" id="statut" name="statut" value="G" checked="checked"/>Administrateur général
+				<?php } ?>
+			<br>
+			<br>
+			<label>Identifiant :</label><input type="text" id="login" name = "login" value="<?php echo $donnees['login']; ?>"/><br/><br/>
+			<label>Mot de passe :</label><input type="text" id="mdp" name = "mdp" value="<?php echo $donnees['mdp']; ?>"/><br/><br/>
+			
+			<input type="hidden" name="hdIdCompte" id="hdIdCompte" 
+			value=" <?php echo $donnees['id']; ?>" /> <!-- cette input "caché" permetra de récupérer plus tard dans $_POST l'id du compte -->
+			<input name="effacerModif" type="reset" value="Effacer" />
+			<input name="envoyerModif" type="submit" value="Envoyer" />
+		</fieldset>
+		</form>
+		<?php
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function updateTableauUser($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $boutiqueGeree, $statut, $login, $motdp, $id) {
+	//Sécurise en empéchant les commandes JavaScript
+	$nom = htmlspecialchars($nom);
+	$prenom = htmlspecialchars($prenom);
+	$mail = $mail;
+	$telephone = htmlspecialchars($telephone);
+	$adresse = $adresse;
+	$cp = $cp;
+	$ville = htmlspecialchars($ville);
+	$boutiqueGeree = htmlspecialchars($boutiqueGeree);
+	$statut = $statut;
+	$login = htmlspecialchars($login);
+	$motdp = htmlspecialchars($motdp);
+	$id = htmlspecialchars($id);
+
+	// Ici on modifie un people
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$modification = $bdd->prepare('UPDATE compte SET nom = :nomCompte,
+		prenom = :prenomCompte, mail = :mailCompte, telephone = :telephoneCompte,
+		adresse = :adresseCompte, cp = :cpCompte, ville = :villeCompte,
+		boutiqueGeree = :boutiqueGereeCompte, statut = :statutCompte,
+		login = :loginCompte, mdp = :mdpCompte WHERE id = :idCompte');
+		//On envoie la requète avec les valeurs nécessaires:
+		$modification->execute(array(
+				'nomCompte' => $nom,
+				'prenomCompte' => $prenom,
+				'mailCompte' => $mail,
+				'telephoneCompte' => $telephone,
+				'adresseCompte' => $adresse,
+				'cpCompte' => $cp,
+				'villeCompte' => $ville,
+				'boutiqueGereeCompte' => $boutiqueGeree,
+				'statutCompte' => $statut,
+				'loginCompte' => $login,
+				'mdpCompte' => $motdp,
+				'idCompte' => $id
+		));
+		
+		echo '<h4 class="goood">Les données à propos du compte '.$nom.' '.$prenom.' ont bien été mises à jour</h4>'; //Informe l'utilisateur que la modification c'est bien déroulé.
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$modification->closeCursor();
 	}
 	catch (Exception $erreur)
 	{
@@ -723,7 +766,7 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 		{
 			$reponseHoraires = $bdd->query('SELECT * FROM horaires WHERE boutique_id = '.$donnees['id'].''); // Envoi de la requête
 			$donneesHoraires = $reponseHoraires->fetch();
-			echo '<table>'; // Déclaration d'un tableau et de sa ligne d'en-tête
+			echo '<table class="gestion">'; // Déclaration d'un tableau et de sa ligne d'en-tête
 			echo '<tr><th class="noBorder"></th><th>NUMERO</th><th>RUE</th><th>CODE POSTAL</th><th>VILLE</th><th>FICHIER D\'IMAGE</th><th>TELEPHONE</th></tr>';
 			echo '<tr>';
 			echo '<td class="noBorder"></td>';
@@ -733,6 +776,19 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 			echo '<td class="c1">'.$donnees['ville'].'</td>';
 			echo '<td class="c1">'.$donnees['image'].'</td>';
 			echo '<td class="c1">'.$donnees['telephone'].'</td>';
+			//Si l'utilisateur est administrateur, le possibilité de modifier ou de supprimer un compte lui est offerte.
+			//if($_SESSION['statPeople'] == "A"){
+			//Modification
+			echo '<td rowspan="2" class="c1">
+				<input type="image" id="editBoutique" name="editBoutique" src="img/edit.png"
+				onclick="location.href=\'gestionBoutiques.php?editBoutique='
+					.$donnees['id'].'\'"/></td>';
+				
+			//Suppresion
+			echo '<td rowspan="2" class="c1">
+					<input type="image" id="suppBoutique" name="suppBoutique" src="img/icon_suppr.gif"
+					onclick="attentionBoutique('.$donnees['id'].', \''.$donnees['ville'].'\');"/></td>';
+			
 			echo '</tr>';
 				
 			echo '<th>HORAIRES';
@@ -781,7 +837,8 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['samedi_apres_fin'].'</p></th>
 					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['dimanche_apres_debut'].'</p>
 														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['dimanche_apres_fin'].'</p></th>
-				</tr>
+												
+			</tr>
 			</table>
 			</th>
 			';
@@ -878,6 +935,56 @@ function insertTableauBoutique($base, $hote, $utilisateur, $mdp, $rue, $cp, $vil
 	catch (Exception $erreur)
 	{
 		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function suppTableauBoutique($suppBoutique, $base, $hote, $utilisateur, $mdp) {
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		//On prépare la requète:
+		$modification = $bdd->prepare('DELETE FROM compte WHERE id=:idBoutique');
+		//On envoie la requète avec les valeurs nécessaires:
+		$modification->execute(array(
+				'idBoutique' => $suppBoutique
+		));
+
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$modification->closeCursor();
+		// On modifie l'auto-incremente pour que l'id de la prochaine boutiques ajouter suives les autres :
+		autoInc($base, $hote, $utilisateur, $mdp, "boutique");
+		echo '<h4 class="goood">La boutique <i>numéro '.$suppBoutique.'</i> a été supprimé.</h4>'; //Informe l'utilisateur que la suppresion c'est bien déroulé.
+	}
+	catch (Exception $e)
+	{
+		die('Erreur : ' . $e->getMessage());
+	}
+}
+
+//Permet de demander à l'utilisateur de confirmer la suppression de la personne de la base de données.
+echo '<script type=\'text/javascript\'>
+function attentionBoutique(idEffacer, ville) {
+	if( confirm(\'Etes-vous certain de vouloir effacer la ville de \'+ville+\' ? \') )
+	{
+		location.href=\'gestionBoutiques.php?suppBoutique=\'+idEffacer;
+	}
+}
+</script>';
+
+function autoInc ($base, $hote, $utilisateur, $mdp, $table){
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$reponse = $bdd->query('SELECT max(id)+1 AS maxID FROM '.$table.'');
+		$donnees = $reponse->fetch();
+		$autoInc = $bdd->query('ALTER TABLE '.$table.' AUTO_INCREMENT = '.$donnees['maxID'].'') ;
+		$autoInc->closeCursor();
+	}
+	catch (Exception $e)
+	{
+		die('Erreur : ' . $e->getMessage());
 	}
 }
 
