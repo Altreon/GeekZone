@@ -718,13 +718,14 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 		$bdd->exec('SET NAMES utf16');
 		$reponseBoutique = $bdd->query('SELECT * FROM boutique ORDER BY '.$tri.''); // Envoi de la requête
 		$nb = $reponseBoutique->rowCount(); // Compte du nombre de lignes retournées
-		echo '<table>'; // Déclaration d'un tableau et de sa ligne d'en-tête
-		echo '<tr><th class="noBorder"></th><th>NUMERO</th><th>RUE</th><th>CODE POSTAL</th><th>VILLE</th><th>FICHIER D\'IMAGE</th><th>TELEPHONE</th></tr>';
 		$reponseHoraire;
 		while ( $donnees = $reponseBoutique->fetch() ) // Découpage ligne à ligne de $reponse
 		{
-			$reponseHoraire = $bdd->query('SELECT * FROM horaire WHERE boutique_id = '.$donnees['id'].''); // Envoi de la requête
-			echo '<tr>'; // Une ligne appelle les données de $donnees['']
+			$reponseHoraires = $bdd->query('SELECT * FROM horaires WHERE boutique_id = '.$donnees['id'].''); // Envoi de la requête
+			$donneesHoraires = $reponseHoraires->fetch();
+			echo '<table>'; // Déclaration d'un tableau et de sa ligne d'en-tête
+			echo '<tr><th class="noBorder"></th><th>NUMERO</th><th>RUE</th><th>CODE POSTAL</th><th>VILLE</th><th>FICHIER D\'IMAGE</th><th>TELEPHONE</th></tr>';
+			echo '<tr>';
 			echo '<td class="noBorder"></td>';
 			echo '<td class="c1">'.$donnees['id'].'</td>';
 			echo '<td class="c1">'.$donnees['rue'].'</td>';
@@ -749,41 +750,44 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 				</tr>
 				<tr>
 					<th class="boutinfos" rowspan = "1">Matin</th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="lundi_matin_debut" name = "lundi_matin_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="lundi_matin_fin" name = "lundi_matin_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mardi_matin_debut" name = "mardi_matin_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="mardi_matin_fin" name = "mardi_matin_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mercredi_matin_debut" name = "mercredi_matin_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="mercredi_matin_fin" name = "mercredi_matin_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="jeudi_matin_debut" name = "jeudi_matin_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="jeudi_matin_fin" name = "jeudi_matin_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="vendredi_matin_debut" name = "vendredi_matin_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="vendredi_matin_fin" name = "vendredi_matin_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="samedi_matin_debut" name = "samedi_matin_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="samedi_matin_fin" name = "samedi_matin_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="dimanche_matin_debut" name = "dimanche_matin_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="dimanche_matin_fin" name = "dimanche_matin_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['lundi_matin_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['lundi_matin_fin'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['mardi_apres_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['mardi_apres_fin'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['mercredi_matin_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['mercredi_matin_debut'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['jeudi_matin_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['jeudi_matin_debut'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['vendredi_matin_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['vendredi_matin_debut'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['samedi_matin_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['samedi_matin_debut'].'</p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p class = "horaire">'.$donneesHoraires['dimanche_matin_debut'].'</p>
+														<label class="horaire">Fin:</label><p class = "horaire">'.$donneesHoraires['dimanche_matin_debut'].'</p></th>
 				</tr>
 				<tr>
 					<th class="boutinfos" rowspan = "1">Après-midi</th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="lundi_apres_debut" name = "lundi_apres_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="lundi_apres_fin" name = "lundi_apres_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mardi_apres_debut" name = "mardi_apres_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="mardi_apres_fin" name = "mardi_apres_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mercredi_apres_debut" name = "mercredi_apres_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="mercredi_apres_fin" name = "mercredi_apres_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="jeudi_apres_debut" name = "jeudi_apres_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="jeudi_apres_fin" name = "jeudi_apres_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="vendredi_apres_debut" name = "vendredi_apres_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="vendredi_apres_fin" name = "vendredi_apres_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="samedi_apres_debut" name = "samedi_apres_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="samedi_apres_fin" name = "samedi_apres_fin" /></th>
-					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="dimanche_apres_debut" name = "dimanche_apres_debut" /><br/><br/>
-														<label class="horaire">Fin:</label><input class="horaire" type="text" id="dimanche_apres_fin" name = "dimanche_apres_fin" /></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
+														<label class="horaire">Fin:</label><p><p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
+														<label class="horaire">Fin:</label><p><p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
+														<label class="horaire">Fin:</label><p><p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
+														<label class="horaire">Fin:</label><p><p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
+														<label class="horaire">Fin:</label><p><p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
+														<label class="horaire">Fin:</label><p><p></th>
+					<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><p><p><br/><br/>
+														<label class="horaire">Fin:</label><p><p></th>
 				</tr>
 			</table>
 			</th>
 			';
+			echo '</table>'; // Fin du tableau
+			echo '<br><br><br>';
+			$reponseHoraires->closeCursor();
 
 			//Si l'utilisateur est administrateur, le possibilité de modifier ou de supprimer une boutique lui est offerte.
 			//if($_SESSION['statPeople'] == "A"){
@@ -803,11 +807,9 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 			//}
 			*/
 		}
-		echo '</table>'; // Fin du tableau
 		echo '<p>Il y a '.$nb.' boutiques.</p>'; // Affichade du compte des lignes
 		// On libère la connexion du serveur pour d'autres requêtes :
 		$reponseBoutique->closeCursor();
-		//$reponseHoraire->closeCursor();
 	}
 	catch (Exception $erreur)
 	{

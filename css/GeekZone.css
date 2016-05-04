@@ -513,6 +513,7 @@ th {
 }
 
 th.boutinfos {
+	min-width: 130px;
 	background-color:#d6ebda;
 }
 
