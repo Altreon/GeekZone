@@ -159,6 +159,12 @@ img.detproduit {
 	margin: 5% auto auto auto;
 }
 
+img.imgmin {
+	width: 90px;
+	margin: 5% auto auto auto;
+	display: initial;
+}
+
 img.detproduit:hover {
 	width:320px;
 }

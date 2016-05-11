@@ -64,7 +64,7 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 				<hr class="produit">
 				
 				'; $cheminsImage=array('img/produits/'.pathinfo('img/produits/'.$donnees['image'], PATHINFO_FILENAME));
-				echo '<h4>';echo json_encode($cheminsImage);echo'</h4>';
+				//echo '<h4>';echo json_encode($cheminsImage);echo'</h4>';
 
 					if (file_exists($cheminsImage[0].'-1'.'.jpg')) {
 						array_push($cheminsImage, $cheminsImage[0].'-1');
@@ -76,21 +76,24 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 					$Image=$cheminsImage[$nbImage].'.jpg';
 					
 				echo '<div class = "produitimg">
-					<img class="detproduit" onClick="changeImage(\''.$cheminsImage[0].'\')" src="'.$Image.'"></img>
+					<img id="imgp" class="detproduit" src="'.$Image.'"></img>
 				</div>	
 					<br>
 				<div class = "produitminimg">
-					'; for ($i=0; $i<count($cheminsImage); $i++) {
-					if ($cheminsImage[$i].'.jpg'!=$Image) {
-						echo '<img class="imgmin" src="';
-					}
-				}
+					';
 				echo '</div>
 					<br><br>
-				<div class="produitdet">			
-					<p class="detailproduitPrix">
-					Disponible!<br>	
-					'.$donnees['prix'].'€	
+						
+				<div class="produitdet">';	
+				if (count($cheminsImage)!=1){									
+					for ($i=0; $i<count($cheminsImage); $i++) {	
+						echo '<img id="imgmin" class="imgmin" onClick="changeImage(\''.$cheminsImage[$i].'\')" src="'.$cheminsImage[$i].'.jpg">             ';
+					}
+				}	
+				
+				echo '<p class="detailproduitPrix">
+				Disponible!<br>
+				'.$donnees['prix'].'€	
 				</div>
 							
 				<div class="details">
