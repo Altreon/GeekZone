@@ -1,5 +1,3 @@
-
-
 <?php
 function produitList($filter, $tri, $decroissant, $recherche, $base, $hote, $utilisateur, $mdp) {
 	try{
@@ -201,6 +199,36 @@ function boutique($name, $base, $hote, $utilisateur, $mdp) {
 	}
 }
 
+function listBoutique($base, $hote, $utilisateur, $mdp, $boutiqueGeree){
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf8');
+		echo '<label>Gère la boutique de</label>';
+		echo '<select id="boutiqueGeree" name="boutiqueGeree">';
+
+		$reponse = $bdd->prepare('SELECT * FROM boutique');
+		$reponse->execute( array() );
+		while ( $donnees = $reponse->fetch() )
+		{
+			if($boutiqueGeree != null && $boutiqueGeree == $donnees['id']){
+				echo '<option value="'.$donnees['id'].'" selected="selected">'
+						.$donnees['ville'].'</option>';
+			}else{
+				echo '<option value="'.$donnees['id'].'" >'
+						.$donnees['ville'].'</option>';
+			}
+		}
+		$reponse->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+	echo '</select><br/><br/>';
+}
+
 function boutiquelist($base, $hote, $utilisateur, $mdp) {
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
@@ -229,6 +257,29 @@ function boutiquelist($base, $hote, $utilisateur, $mdp) {
 	}
 }
 
+function verifLogin ($login, $motdp, $base, $hote, $utilisateur, $mdp){
+	$valide = false;
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf8');
+		$reponse = $bdd->query('SELECT * FROM boutique'); // Envoi de la requête
+		while ( !$valide && $donnees = $reponse->fetch()) // Découpage ligne à ligne de $reponse
+		{
+			if($donnees['loginPeople'] == $login && $donnees['mdpPeople'] == $motdp){
+				$valide = true;
+				session_start();
+				$_SESSION['logPeople'] = $donnees['loginPeople'];
+				$_SESSION['statPeople'] = $donnees['statutPeople'];
+			}
+		}
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+	return $valide;
+}
 
 function ModifProduitValues($base, $hote, $utilisateur, $mdp) {
 
@@ -373,6 +424,8 @@ function imageRandomBoutique($base, $hote, $utilisateur, $mdp) {
 		}
 	} echo '<br></div>';
 }
+
+//====================================================================================================================================================
 
 //Permet d'afficher le tableau des comptes de la base de données.
 function creaTableau($tri, $base, $hote, $utilisateur, $mdp) {

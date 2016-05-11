@@ -73,9 +73,13 @@ include 'inc/fonction.php';
 	      <area shape="rect" coords="0,0,270,122" href="gestionBoutiques.php"/>
 			<area shape="rect" coords="910,0,1184,122" href="gestionProduits.php"/>
 	</map>
+	<map name="mapus" id="mapus">
+		<area shape="rect" coords="0,0,270,122" href="gestionUtilisateur.php">
+	</map>
+	
 	<img src="imgcedric/bouton/gz.png" usemap="mapacc" alt="image"/>
 	
-	<a href="gestionUtilisateur.php"><img class="userBout" src="imgcedric/bouton/utilisateurs.png"/></a><br/>
+	<img class="userBout" src="imgcedric/bouton/utilisateurs.png" usemap="mapus" alt="image"/><br/>
 </div>
 
 <br>
