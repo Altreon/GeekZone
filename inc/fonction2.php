@@ -1005,7 +1005,7 @@ function creaTableauProduit ($tri, $base, $hote, $utilisateur, $mdp) {
 			//Suppresion
 			echo '<td class="c1">
 					<input type="image" id="suppProduit" name="suppProduit" src="img/icon_suppr.gif"
-					onclick="attentionUser('.$donnees['produit_id'].', \''.$donnees['nom'].'\');"/></td>';
+					onclick="attentionProduit('.$donnees['produit_id'].', \''.$donnees['nom'].'\');"/></td>';
 			echo '</tr>';
 			//}
 		}
@@ -1073,23 +1073,24 @@ function insertTableauproduit($base, $hote, $utilisateur, $mdp, $nom, $descripti
 	}
 }
 
-function suppTableauProduit($suppCompte, $base, $hote, $utilisateur, $mdp) {
+function suppTableauProduit($suppProduit, $base, $hote, $utilisateur, $mdp) {
+	echo'<h4>'.$suppProduit.'</h4>';
 	try
 	{
 		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		//On prépare la requète:
-		$modification = $bdd->prepare('DELETE FROM compte WHERE id=:idCompte');
+		$modification = $bdd->prepare('DELETE FROM produit WHERE produit_id=:idProduit');
 		//On envoie la requète avec les valeurs nécessaires:
 		$modification->execute(array(
-				'idCompte' => $suppCompte
+				'idProduit' => $suppProduit
 		));
 
 		// On libère la connexion du serveur pour d'autres requêtes :
 		$modification->closeCursor();
 		// On modifie l'auto-incremente pour que l'id de la prochaine personne ajouter suives les autres :
-		autoInc($base, $hote, $utilisateur, $mdp, "compte");
-		echo '<h4 class="goood">Le compte <i>numéro '.$suppCompte.'</i> a été supprimé.</h4>'; //Informe l'utilisateur que la suppresion c'est bien déroulé.
+		autoInc($base, $hote, $utilisateur, $mdp, "produit");
+		echo '<h4 class="goood">Le produit <i>numéro '.$suppProduit.'</i> a été supprimé.</h4>'; //Informe l'utilisateur que la suppresion c'est bien déroulé.
 	}
 	catch (Exception $e)
 	{
@@ -1099,20 +1100,24 @@ function suppTableauProduit($suppCompte, $base, $hote, $utilisateur, $mdp) {
 
 //Permet de demander à l'utilisateur de confirmer la suppression de la personne de la base de données.
 echo '<script type=\'text/javascript\'>
-function attentionProduit(idEffacer, prenom, nom) {
-	if( confirm(\'Etes-vous certain de vouloir effacer le compte de \'+prenom+\' \'+nom+\' ? \') )
+function attentionProduit(idEffacer, nom) {
+	if( confirm(\'Etes-vous certain de vouloir effacer le produit "\'+nom+\'" ? \') )
 	{
-		location.href=\'gestionUtilisateur.php?suppCompte=\'+idEffacer;
+		location.href=\'gestionProduits.php?suppProduit=\'+idEffacer;
 	}
 }
 </script>';
 
 function autoInc ($base, $hote, $utilisateur, $mdp, $table){
+	$idName = "id";
+	if($table == "produit"){
+		$idName = "produit_id";
+	}
 	try
 	{
 		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
-		$reponse = $bdd->query('SELECT max(id)+1 AS maxID FROM '.$table.'');
+		$reponse = $bdd->query('SELECT max('.$idName.')+1 AS maxID FROM '.$table.'');
 		$donnees = $reponse->fetch();
 		$autoInc = $bdd->query('ALTER TABLE '.$table.' AUTO_INCREMENT = '.$donnees['maxID'].'') ;
 		$autoInc->closeCursor();

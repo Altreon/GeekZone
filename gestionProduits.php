@@ -39,7 +39,7 @@ if(isset($_POST['envoyerModif']) && !empty($_POST['envoyerModif']) && isset($_PO
 	updateTableauProduit($base, $hote, $utilisateur, $mdp, $_POST['nom'], $_POST['description'], $_POST['detail'], $_POST['prix'], $_POST['image'], $_POST['categorie'], $_POST['hdIdProduit']);
 }
 
-if(isset($_GET['suppCompte']) && !empty($_GET['suppCompte'])){
+if(isset($_GET['suppProduit']) && !empty($_GET['suppProduit'])){
 	suppTableauProduit($_GET['suppProduit'], $base, $hote, $utilisateur, $mdp);
 }
 
