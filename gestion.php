@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" media="screen" href="css/GeekZone.css"/>
 
 <?php
-$page="accueil";
+$page="gestion";
 $base='geekzone';
 $hote='localhost';
 $utilisateur='root';
