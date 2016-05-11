@@ -962,12 +962,147 @@ function suppTableauBoutique($suppBoutique, $base, $hote, $utilisateur, $mdp) {
 	}
 }
 
-//Permet de demander à l'utilisateur de confirmer la suppression de la personne de la base de données.
+//Permet de demander à l'utilisateur de confirmer la suppression de la ville de la base de données.
 echo '<script type=\'text/javascript\'>
 function attentionBoutique(idEffacer, ville) {
 	if( confirm(\'Etes-vous certain de vouloir effacer la ville de \'+ville+\' ? \') )
 	{
 		location.href=\'gestionBoutiques.php?suppBoutique=\'+idEffacer;
+	}
+}
+</script>';
+
+//Permet d'afficher le tableau des produits de la base de données.
+function creaTableauProduit ($tri, $base, $hote, $utilisateur, $mdp) {
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		$reponse = $bdd->query('SELECT * FROM produit ORDER BY '.$tri.''); // Envoi de la requête
+		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
+		echo '<table class="gestion">'; // Déclaration d'un tableau et de sa ligne d'en-tête
+		echo '<tr><th>NUMERO</th><th>NOM</th><th>DESCRIPTION</th><th>DETAIL</th><th>PRIX</th>
+		<th>FICHIER D\'IMAGE</th><th>CATEGORIE</th></tr>';
+		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
+		{
+			echo '<tr>'; // Une ligne appelle les données de $donnees['']
+			echo '<td class="c1">'.$donnees['produit_id'].'</td>';
+			echo '<td class="c1">'.$donnees['nom'].'</td>';
+			echo '<td class="c1">'.$donnees['description'].'</td>';
+			echo '<td class="c1">'.$donnees['detail'].'</td>';
+			echo '<td class="c1">'.$donnees['prix'].'</td>';
+			echo '<td class="c1">'.$donnees['image'].'</td>';
+			echo '<td class="c1">'.$donnees['categorie'].'</td>';
+
+			//Si l'utilisateur est administrateur, le possibilité de modifier ou de supprimer un compte lui est offerte.
+			//if($_SESSION['statPeople'] == "A"){
+			//Modification
+			echo '<td class="c1">
+				<input type="image" id="editProduit" name="editProduit" src="img/edit.png"
+				onclick="location.href=\'gestionProduits.php?editProduit='
+					.$donnees['produit_id'].'\'"/></td>';
+
+			//Suppresion
+			echo '<td class="c1">
+					<input type="image" id="suppProduit" name="suppProduit" src="img/icon_suppr.gif"
+					onclick="attentionUser('.$donnees['produit_id'].', \''.$donnees['nom'].'\');"/></td>';
+			echo '</tr>';
+			//}
+		}
+		echo '</table>'; // Fin du tableau
+		echo '<p>Il y a '.$nb.' produits.</p>'; // Affichade du compte des lignes
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+//Permet d'ajouter un produit dans la base de données.
+function insertTableauproduit($base, $hote, $utilisateur, $mdp, $nom, $description, $detail, $prix, $image, $categorie) {
+	
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$reponse = $bdd->query('SELECT categorie_id FROM categorie WHERE libelle = "'.$categorie.'"');
+		$donnees = $reponse->fetch();
+		$categorie = $donnees['categorie_id'];
+		$reponse->closeCursor();
+	}
+	catch (Exception $e)
+	{
+		die('Erreur : ' . $e->getMessage());
+	}
+	
+	echo'
+		<h4>'.$nom.'</h4>
+		<h4>'.$description.'</h4>
+		<h4>'.$detail.'</h4>
+		<h4>'.$prix.'</h4>
+		<h4>'.$categorie.'</h4>
+	';
+	
+	
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$insertion = $bdd->prepare('INSERT INTO produit (produit_id, nom, description, detail, prix, image, categorie) VALUES (\'\', :nom, :description, :detail, :prix, :image, :categorie)');
+		//On envoie la requète avec les valeurs nécessaires:
+		$insertion->execute(array(
+				'nom' => $nom,
+				'description' => $description,
+				'detail' => $detail,
+				'prix' => $prix,
+				'image' => $image,
+				'categorie' => $categorie
+		));
+		$dernierId = $bdd->lastInsertId();
+		echo '<h4 class="goood">Le nouveau produit '.$nom.' a bien été
+		enregistré avec l\'identifiant '.$dernierId.'</h4>'; //Informe l'utilisateur que l'insertion c'est bien déroulé.
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$insertion->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function suppTableauProduit($suppCompte, $base, $hote, $utilisateur, $mdp) {
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		//On prépare la requète:
+		$modification = $bdd->prepare('DELETE FROM compte WHERE id=:idCompte');
+		//On envoie la requète avec les valeurs nécessaires:
+		$modification->execute(array(
+				'idCompte' => $suppCompte
+		));
+
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$modification->closeCursor();
+		// On modifie l'auto-incremente pour que l'id de la prochaine personne ajouter suives les autres :
+		autoInc($base, $hote, $utilisateur, $mdp, "compte");
+		echo '<h4 class="goood">Le compte <i>numéro '.$suppCompte.'</i> a été supprimé.</h4>'; //Informe l'utilisateur que la suppresion c'est bien déroulé.
+	}
+	catch (Exception $e)
+	{
+		die('Erreur : ' . $e->getMessage());
+	}
+}
+
+//Permet de demander à l'utilisateur de confirmer la suppression de la personne de la base de données.
+echo '<script type=\'text/javascript\'>
+function attentionProduit(idEffacer, prenom, nom) {
+	if( confirm(\'Etes-vous certain de vouloir effacer le compte de \'+prenom+\' \'+nom+\' ? \') )
+	{
+		location.href=\'gestionUtilisateur.php?suppCompte=\'+idEffacer;
 	}
 }
 </script>';
@@ -988,5 +1123,25 @@ function autoInc ($base, $hote, $utilisateur, $mdp, $table){
 	}
 }
 
-
-
+function listCategorie ($base, $hote, $utilisateur, $mdp){
+try{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		$reponse = $bdd->query('SELECT * FROM categorie'); // Envoi de la requête
+		echo'<SELECT class="produitFilter" name="categorie" size="">';
+		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
+		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
+		{
+				echo'
+				<OPTION>';echo''.$donnees['libelle'].'';
+		}
+		echo'</SELECT>';
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}

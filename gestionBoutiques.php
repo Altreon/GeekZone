@@ -66,6 +66,11 @@ echo '
 			<label>Ville :</label><input class="formGestion" type="text" id="ville" name = "ville" /><br/><br/>
 			<label>Nom du fichier image :</label><input class="formGestion" type="text" id="image" name = "image" /><br/><br/>
 			<label>Téléphone :</label><input class="formGestion" type="text" id="telephone" name = "telephone" /><br/><br/>
+		
+			<label>Coordonnées sur la carte :</label><br/><br/>
+		
+			';include 'inc/franceEdit.inc.php';echo'
+		
 			<label>Horaires :</label><br/><br/>
 			
 			<table class="horaire">
