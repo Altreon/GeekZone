@@ -6,10 +6,17 @@
       // Global variables
       var canvas;
       var ctx;
+      var mousePos;
+      var point;
 
       function click() {
-			document.write('<h1>test</h1>');
-    	}
+			document.getElementById('coordX').setAttribute('value', Math.round(mousePos.x));
+			document.getElementById('coordY').setAttribute('value', Math.round(mousePos.y));
+			var point = document.images['point'].style;
+			point.position = "relative";
+			//point.margin-top = "200px";
+			//point.margin-left = "200px";
+     	}
 	  
 
 	  function writeMessage(canvas, message) {
@@ -35,7 +42,7 @@
 
 		// add event listener
 		canvas.addEventListener('mousemove', function (evt) {
-			var mousePos = getMousePos(canvas, evt);
+			mousePos = getMousePos(canvas, evt);
 			var message = 'Coordonnées: ' + Math.round(mousePos.x) + ',' + Math.round(mousePos.y);
 			writeMessage(canvas, message);
 		}, false);
@@ -7580,18 +7587,16 @@ ctx.closePath();
 
     </script>
   </head>
-  
-  <div>
-  <img src="img/edit.png" onLoad="click()">
-  </div>
-  
+  <img src="imgcedric/point.png" id="point" name="point"/>
   <body onload="init()">
-    <canvas id="myCanvas" width="500" height="700">
+  <a href="javascript:click()">
+    <canvas class="carte" id="myCanvas" width="500" height="700">
     </canvas>
+  </a>
   </body>
   
-  <div>
-  <img src="img/edit.png" onClick="click()">
-  </div>
+  <br>
+	<label>Coordonnée X :</label><input class="formGestion" type="text" id="coordX" name = "coordX" /><br/><br/>
+	<label>Coordonnée Y :</label><input class="formGestion" type="text" id="coordY" name = "coordY" /><br/><br/>
 
 </html>

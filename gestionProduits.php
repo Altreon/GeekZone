@@ -45,8 +45,8 @@ if(isset($_GET['suppProduit']) && !empty($_GET['suppProduit'])){
 
 creaTableauProduit("produit_id", $base, $hote, $utilisateur, $mdp);
 
-if ( isset($_GET['editCompte']) && !empty($_GET['editCompte']) ) {
-	editTableauUser($_GET['editProduit'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'une personne
+if ( isset($_GET['editProduit']) && !empty($_GET['editProduit']) ) {
+	editTableauUser($_GET['editProduit'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'un produit
 }else{
 
 //Affiche le formulaire d'ajout de produit
