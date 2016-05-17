@@ -21,7 +21,7 @@ echo'
 	</div>
 ';
 
-boutique($_GET['boutique'], $base, $hote, $utilisateur, $mdp);
+boutique($_GET['boutique'], $base, $hote, $utilisateur, $mdp);  //Affiche les caractéristiques de la boutique sélectionnée.
 
 include 'inc/basPage.php';
 

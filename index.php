@@ -27,7 +27,7 @@ include 'inc/fonction.php';
 			</h1>
 			
 <?php
-imageRandomProduit($base, $hote, $utilisateur, $mdp);	?>	
+imageRandomProduit($base, $hote, $utilisateur, $mdp);	// Affiche une image de produit au hasard?>	
 		
 	<br></div>
 	

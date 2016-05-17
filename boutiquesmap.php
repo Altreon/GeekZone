@@ -4,6 +4,8 @@ echo '
 ';
 
 $villes = array("ALBERTVILLE","ANNECY","CHAMBERY","CLERMONT FERRAND","GRENOBLE","LYON","VALENCE");
+
+// Tableau de coordonnées des points sur la carte de chaque ville
 $coordx = array(442+50,426+50,420+50,311+50,406+50,370+50,383+50);
 $coordy = array(307+168+30,295+168+30,311+168+30,307+168+30,329+168+30,305+168+30,362+168+30);
 
@@ -18,9 +20,9 @@ echo '
 	<div class = "content">
 ';
 
-include 'inc/france.inc.php';
+include 'inc/france.inc.php';  // Carte de la France
 
-for($i=0; $i<count($villes); $i++) {
+for($i=0; $i<count($villes); $i++) {  // Affichage de chaque point
  	echo '<DIV STYLE="
  	 position:absolute;
  	 top:'.$coordy[$i].';
@@ -38,7 +40,7 @@ $base='geekzone';
 $hote='localhost';
 $utilisateur='root';
 $mdp='';
-boutiquelist($base, $hote, $utilisateur, $mdp);
+boutiquelist($base, $hote, $utilisateur, $mdp);  // Affiche la liste des boutiques
 				
 echo '	</div>
 	</div>

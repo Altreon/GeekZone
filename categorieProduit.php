@@ -8,10 +8,10 @@ $mdp='';
 $filter = "Tous";
 $tri = "nom A>Z";
 
-if(isset($_GET['categorie'])){
+if(isset($_GET['categorie'])){  // Choix d'une catégorie de produit à afficher
 	$filter = $_GET['categorie'];
 }
-if(isset($_GET['tri'])){
+if(isset($_GET['tri'])){  // Choix d'une méthode de tri à appliquer
 	$tri = $_GET['tri'];
 }
 
@@ -66,7 +66,7 @@ echo'
 	<div class="produitList">
 ';
 
-	if(isset($_GET['recherche'])){
+	if(isset($_GET['recherche'])){  // Affichage des produits
 		produitList("Tous", "nom", null, $_GET['recherche'], $base, $hote, $utilisateur, $mdp);
 	}else{
 		if($tri == "nom A>Z"){

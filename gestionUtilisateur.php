@@ -31,7 +31,7 @@ echo '
 	<div class = "content">
 ';
 
-if ($_SESSION['statCompte'] != "A") {
+if (!isset($_SESSION['logCompte']) || $_SESSION['statCompte'] != "G") {  // Vérification des droits pour gérer les utilisateurs
 	echo'<p class="blocAcces">Vous ne possédez pas les autorisations nécessaires pour visionner le contenu de cette page!</p>';
 } else {
 

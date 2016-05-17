@@ -13,9 +13,10 @@ include 'inc/border.php';
 echo '
 	<div class = "content">
 		
-		<br>
-		
-		<div class="form"><form class="contact" action="contact.php" method="POST" enctype="multipart/form-data">
+		<br>';
+
+// Formulaire d'envoi d'un message
+echo '	<div class="form"><form class="contact" action="contact.php" method="POST" enctype="multipart/form-data">
 			<div class="row">
 				<label class="tcenter">Votre nom:</label><br/>
 				<input id="name" class="input form" name="name" type="text" value="" size="30" /><br />

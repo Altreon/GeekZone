@@ -25,7 +25,7 @@ echo '
 		
 ';
 
-	if(isset($_GET['idProduit'])){
+	if(isset($_GET['idProduit'])){  // Affiche les détails sur le produit sélectionné
 		detailProduit($_GET['idProduit'], $base, $hote, $utilisateur, $mdp);
 	}
 		

@@ -15,7 +15,7 @@ include 'inc/fonction.php';
 	
 <?php include 'inc/border.php'; ?>
 <div class = "content">
-<?php if (!isset($_SESSION['logCompte'])) { ?>
+<?php if (!isset($_SESSION['logCompte'])) {   // Si l'utilisateur n'est pas connecté, affiche le formulaire de connexion?>
 	
 		<div class="gestionForm">
 			<form class="connexion" action="gestion.php" method="post">
@@ -60,7 +60,7 @@ include 'inc/fonction.php';
 	 
 	 </div>
 	
-<?php } else { ?>
+<?php } else {  // Si l'utilisateur est connecté, affiche la page de gestion ?>
 <div class="gestionZone">
 	<div class="gestionContent">
 		<p class="produit">Bienvenue sur la page d'administration du site.<br><br>Accès aux pages de gestion ci-dessous :</p>
