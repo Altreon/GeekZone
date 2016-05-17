@@ -61,7 +61,7 @@ echo '
 			<label>Nom du fichier image :</label><input class="formGestion" type="text" id="image" name = "image" /><br/><br/>
 			<label>Catégorie :</label>
 			';
-			listCategorie($base, $hote, $utilisateur, $mdp);
+			listCategorie($base, $hote, $utilisateur, $mdp, null);
 			echo'
 			<input name="effacerAjout" type="reset" value="Effacer" />
 			<input name="envoyerAjout" type="submit" value="Envoyer" />

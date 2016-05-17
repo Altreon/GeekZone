@@ -1108,6 +1108,92 @@ function attentionProduit(idEffacer, nom) {
 }
 </script>';
 
+function editTableauProduit($editProduit, $base, $hote, $utilisateur, $mdp) {
+	// Ici on édite la fiche d'un produit
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$reponse = $bdd->prepare('SELECT * FROM produit WHERE produit_id= ? ');
+		//On envoie la requète avec les valeurs nécessaires:
+		$reponse->execute( array($editProduit) );
+
+		$donnees = $reponse->fetch(); // Découpage ligne à ligne de $reponse (une seul ligne ici)
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+
+		//Formulaire d'édition d'une personne.
+		?>
+		<h2>Modification d'un compte</h2>
+		<form class="gestion" method="post" action="gestionUtilisateur.php">
+		<fieldset>
+		<legend>Modification du produit numéro <b><?php echo $donnees['produit_id']; ?></b></legend>
+			<label>Nom :</label><input class="formGestion" type="text" id="nom" name = "nom" value="<?php echo $donnees['nom']; ?>"/><br/><br/>
+			<label>Description :</label><textarea id="description"  name="description" value="<?php echo $donnees['description']; ?>"></textarea><br/><br/>
+			<label>Détail :</label><textarea id="detail" name="detail" value="<?php echo $donnees['detail']; ?>"></textarea><br/><br/>
+			<label>Prix :</label><input class="formGestion" type="text" id="prix" name = "prix" value="<?php echo $donnees['prix']; ?>"/>  €<br/><br/>
+			<label>Nom du fichier image :</label><input class="formGestion" type="text" id="image" name = "image" value="<?php echo $donnees['image']; ?>"/><br/><br/>
+			<label>Catégorie :</label>
+			';
+			listCategorie($base, $hote, $utilisateur, $mdp, <?php echo $donnees['categorie']; ?>);
+			echo'
+			<input type="hidden" name="hdIdproduit" id="hdIdproduit" 
+			value=" <?php echo $donnees['produit_id']; ?>" /> <!-- cette input "caché" permetra de récupérer plus tard dans $_POST l'id du produit -->
+			<input name="effacerModif" type="reset" value="Effacer" />
+			<input name="envoyerModif" type="submit" value="Envoyer" />
+		</fieldset>
+		</form>
+		<?php
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function updateTableauUser($base, $hote, $utilisateur, $mdp, $nom, $description, $detail, $prix, $image, $categorie, $ville, $id) {
+	//Sécurise en empéchant les commandes JavaScript
+	$nom = htmlspecialchars($nom);
+	$description = htmlspecialchars($description);
+	$detail = $htmlspecialchars(detail);
+	$prix = htmlspecialchars($prix);
+	$image = htmlspecialchars($image);
+	$categorie = htmlspecialchars($categorie);
+	$id = htmlspecialchars($id);
+
+	// Ici on modifie un produit
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$modification = $bdd->prepare('UPDATE produit SET nom = :nomproduit,
+		description = :descriptionProduit, detail = :detailProduit, prix = :prixProduit,
+		image = :imageProduit, categorie = :categorieProduit WHERE id = :idProduit');
+		//On envoie la requète avec les valeurs nécessaires:
+		$modification->execute(array(
+				'nomProduit' => $nom,
+				'descriptionProduit' => $description,
+				'detailProduit' => $detail,
+				'prixProduit' => $prix,
+				'imageProduit' => $image,
+				'categorieProduit' => $categorie,
+				'idProduit' => $id
+		));
+		
+		echo '<h4 class="goood">Les données à propos du produit '.$nom.' ont bien été mises à jour</h4>'; //Informe l'utilisateur que la modification c'est bien déroulé.
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$modification->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
 function autoInc ($base, $hote, $utilisateur, $mdp, $table){
 	$idName = "id";
 	if($table == "produit"){
@@ -1128,7 +1214,7 @@ function autoInc ($base, $hote, $utilisateur, $mdp, $table){
 	}
 }
 
-function listCategorie ($base, $hote, $utilisateur, $mdp){
+function listCategorie ($base, $hote, $utilisateur, $mdp, $categorie){
 try{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
@@ -1138,8 +1224,12 @@ try{
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
 		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
 		{
-				echo'
-				<OPTION>';echo''.$donnees['libelle'].'';
+			//A vérifier
+			if($categorie != null && $categorie == $donnees['id']) {
+				echo'<OPTION checked="checked">';echo''.$donnees['libelle'].'';
+			}else{
+				echo'<OPTION>';echo''.$donnees['libelle'].'';
+			}
 		}
 		echo'</SELECT>';
 		// On libère la connexion du serveur pour d'autres requêtes :
