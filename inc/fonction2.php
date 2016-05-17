@@ -1225,7 +1225,7 @@ try{
 		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
 		{
 			//A vérifier
-			if($categorie != null && $categorie == $donnees['id']) {
+			if($categorie != null && $categorie == $donnees['categorie_id']) {
 				echo'<OPTION checked="checked">';echo''.$donnees['libelle'].'';
 			}else{
 				echo'<OPTION>';echo''.$donnees['libelle'].'';
