@@ -50,7 +50,7 @@ if (!isset($_SESSION['logCompte']) || $_SESSION['statCompte'] != "G") {  // Véri
 	creaTableauProduit("produit_id", $base, $hote, $utilisateur, $mdp);
 	
 	if ( isset($_GET['editProduit']) && !empty($_GET['editProduit']) ) {
-		editTableauUser($_GET['editProduit'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'un produit
+		editTableauProduit($_GET['editProduit'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'un produit
 	}else{
 	
 	//Affiche le formulaire d'ajout de produit

@@ -352,7 +352,7 @@ function boutiquelist($base, $hote, $utilisateur, $mdp) {
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf16');
-		$reponse = $bdd->query('SELECT * FROM boutique'); // Envoi de la requête
+		$reponse = $bdd->query('SELECT ville FROM boutique'); // Envoi de la requête
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
 		
 		echo '<br><hr><br><div class="boutList"><table>';
@@ -367,6 +367,37 @@ function boutiquelist($base, $hote, $utilisateur, $mdp) {
 		}
 		echo'</table></div>';
 		
+	
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function boutiqueListMap($base, $hote, $utilisateur, $mdp) {
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		$reponse = $bdd->query('SELECT * FROM boutique'); // Envoi de la requête
+		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
+	
+		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
+		{
+			$x = $donnees['coordX']+50;
+			$y = $donnees['coordY']+168+30;
+			echo '<DIV STYLE="
+ 				position:absolute;
+ 		 		top:'.$y.';
+ 		 		left:'.$x.';
+  			">
+ 		<a href="boutique.php?boutique='.$donnees['ville'].'"><img src="imgcedric/point.png" /></a>
+			
+ 	</div>';
+			
+		}
+	
 	
 	}
 	catch (Exception $erreur)
@@ -1022,30 +1053,6 @@ function creaTableauProduit ($tri, $base, $hote, $utilisateur, $mdp) {
 
 //Permet d'ajouter un produit dans la base de données.
 function insertTableauproduit($base, $hote, $utilisateur, $mdp, $nom, $description, $detail, $prix, $image, $categorie) {
-	
-	try
-	{
-		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
-		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
-		$reponse = $bdd->query('SELECT categorie_id FROM categorie WHERE libelle = "'.$categorie.'"');
-		$donnees = $reponse->fetch();
-		$categorie = $donnees['categorie_id'];
-		$reponse->closeCursor();
-	}
-	catch (Exception $e)
-	{
-		die('Erreur : ' . $e->getMessage());
-	}
-	
-	echo'
-		<h4>'.$nom.'</h4>
-		<h4>'.$description.'</h4>
-		<h4>'.$detail.'</h4>
-		<h4>'.$prix.'</h4>
-		<h4>'.$categorie.'</h4>
-	';
-	
-	
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
@@ -1074,7 +1081,6 @@ function insertTableauproduit($base, $hote, $utilisateur, $mdp, $nom, $descripti
 }
 
 function suppTableauProduit($suppProduit, $base, $hote, $utilisateur, $mdp) {
-	echo'<h4>'.$suppProduit.'</h4>';
 	try
 	{
 		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
@@ -1127,19 +1133,19 @@ function editTableauProduit($editProduit, $base, $hote, $utilisateur, $mdp) {
 		//Formulaire d'édition d'une personne.
 		?>
 		<h2>Modification d'un compte</h2>
-		<form class="gestion" method="post" action="gestionUtilisateur.php">
+		<form class="gestion" method="post" action="gestionProduits.php">
 		<fieldset>
 		<legend>Modification du produit numéro <b><?php echo $donnees['produit_id']; ?></b></legend>
 			<label>Nom :</label><input class="formGestion" type="text" id="nom" name = "nom" value="<?php echo $donnees['nom']; ?>"/><br/><br/>
-			<label>Description :</label><textarea id="description"  name="description" value="<?php echo $donnees['description']; ?>"></textarea><br/><br/>
-			<label>Détail :</label><textarea id="detail" name="detail" value="<?php echo $donnees['detail']; ?>"></textarea><br/><br/>
+			<label>Description :</label><textarea id="description"  name="description"><?php echo $donnees['description']; ?></textarea><br/><br/>
+			<label>Détail :</label><textarea id="detail" name="detail"><?php echo $donnees['detail']; ?></textarea><br/><br/>
 			<label>Prix :</label><input class="formGestion" type="text" id="prix" name = "prix" value="<?php echo $donnees['prix']; ?>"/>  €<br/><br/>
 			<label>Nom du fichier image :</label><input class="formGestion" type="text" id="image" name = "image" value="<?php echo $donnees['image']; ?>"/><br/><br/>
 			<label>Catégorie :</label>
-			';
-			listCategorie($base, $hote, $utilisateur, $mdp, <?php echo $donnees['categorie']; ?>);
-			echo'
-			<input type="hidden" name="hdIdproduit" id="hdIdproduit" 
+			<?php
+			listCategorie($base, $hote, $utilisateur, $mdp, $donnees['categorie']);
+			?>
+			<input type="hidden" name="hdIdProduit" id="hdIdProduit" 
 			value=" <?php echo $donnees['produit_id']; ?>" /> <!-- cette input "caché" permetra de récupérer plus tard dans $_POST l'id du produit -->
 			<input name="effacerModif" type="reset" value="Effacer" />
 			<input name="envoyerModif" type="submit" value="Envoyer" />
@@ -1153,15 +1159,15 @@ function editTableauProduit($editProduit, $base, $hote, $utilisateur, $mdp) {
 	}
 }
 
-function updateTableauUser($base, $hote, $utilisateur, $mdp, $nom, $description, $detail, $prix, $image, $categorie, $ville, $id) {
+function updateTableauProduit($base, $hote, $utilisateur, $mdp, $nom, $description, $detail, $prix, $image, $categorie, $id) {
 	//Sécurise en empéchant les commandes JavaScript
 	$nom = htmlspecialchars($nom);
 	$description = htmlspecialchars($description);
-	$detail = $htmlspecialchars(detail);
-	$prix = htmlspecialchars($prix);
+	$detail = htmlspecialchars($detail);
+	$prix = $prix;
 	$image = htmlspecialchars($image);
-	$categorie = htmlspecialchars($categorie);
-	$id = htmlspecialchars($id);
+	$categorie = $categorie;
+	$id = $id;
 
 	// Ici on modifie un produit
 	try
@@ -1170,9 +1176,9 @@ function updateTableauUser($base, $hote, $utilisateur, $mdp, $nom, $description,
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf16');
 		//On prépare la requète:
-		$modification = $bdd->prepare('UPDATE produit SET nom = :nomproduit,
+		$modification = $bdd->prepare('UPDATE produit SET nom = :nomProduit,
 		description = :descriptionProduit, detail = :detailProduit, prix = :prixProduit,
-		image = :imageProduit, categorie = :categorieProduit WHERE id = :idProduit');
+		image = :imageProduit, categorie = :categorieProduit WHERE produit_id = :idProduit');
 		//On envoie la requète avec les valeurs nécessaires:
 		$modification->execute(array(
 				'nomProduit' => $nom,
@@ -1226,9 +1232,9 @@ try{
 		{
 			//A vérifier
 			if($categorie != null && $categorie == $donnees['categorie_id']) {
-				echo'<OPTION checked="checked">';echo''.$donnees['libelle'].'';
+				echo'<OPTION value="';echo''.$donnees['categorie_id'].'" checked="checked">';echo''.$donnees['libelle'].'';
 			}else{
-				echo'<OPTION>';echo''.$donnees['libelle'].'';
+				echo'<OPTION value="';echo''.$donnees['categorie_id'].'">';echo''.$donnees['libelle'].'';
 			}
 		}
 		echo'</SELECT>';

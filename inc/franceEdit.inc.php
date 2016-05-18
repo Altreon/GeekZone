@@ -12,8 +12,8 @@
       function click() {
 			document.getElementById('coordX').setAttribute('value', Math.round(mousePos.x));
 			document.getElementById('coordY').setAttribute('value', Math.round(mousePos.y));
-			var point = document.images['point'].style;
-			point.position = "relative";
+			//var point = document.images['point'].style;
+			//point.position = "relative";
 			//point.margin-top = "200px";
 			//point.margin-left = "200px";
      	}
@@ -7587,7 +7587,7 @@ ctx.closePath();
 
     </script>
   </head>
-  <img src="imgcedric/point.png" id="point" name="point"/>
+  <!-- <img src="imgcedric/point.png" id="point" name="point"/> -->
   <body onload="init()">
   <a href="javascript:click()">
     <canvas class="carte" id="myCanvas" width="500" height="700">
