@@ -1448,7 +1448,7 @@ function suppTableauCategorie($suppCategorie, $base, $hote, $utilisateur, $mdp) 
 		$modification->closeCursor();
 		// On modifie l'auto-incremente pour que l'id de la prochaine personne ajouter suives les autres :
 		autoInc($base, $hote, $utilisateur, $mdp, "categorie");
-		echo '<h4 class="goood">Le produit <i>numéro '.$suppProduit.'</i> a été supprimé.</h4>'; //Informe l'utilisateur que la suppresion c'est bien déroulé.
+		echo '<h4 class="goood">La catégorie <i>numéro '.$suppCategorie.'</i> a été supprimé.</h4>'; //Informe l'utilisateur que la suppresion c'est bien déroulé.
 	}
 	catch (Exception $e)
 	{
@@ -1458,10 +1458,10 @@ function suppTableauCategorie($suppCategorie, $base, $hote, $utilisateur, $mdp) 
 
 //Permet de demander à l'utilisateur de confirmer la suppression de la personne de la base de données.
 echo '<script type=\'text/javascript\'>
-function attentionProduit(idEffacer, nom) {
-	if( confirm(\'Etes-vous certain de vouloir effacer le produit "\'+nom+\'" ? \') )
+function attentionProduit(idEffacer, libelle) {
+	if( confirm(\'Etes-vous certain de vouloir effacer la categorie "\'+libelle+\'" ? \') )
 	{
-		location.href=\'gestionProduits.php?suppProduit=\'+idEffacer;
+		location.href=\'gestionProduits.php?suppCategorie=\'+idEffacer;
 	}
 }
 </script>';
