@@ -733,17 +733,17 @@ function editTableauUser($editCompte, $base, $hote, $utilisateur, $mdp) {
 
 function updateTableauUser($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mail, $telephone, $adresse, $cp, $ville, $boutiqueGeree, $statut, $login, $motdp, $id) {
 	//Sécurise en empéchant les commandes JavaScript
-	$nom = htmlspecialchars($nom);
-	$prenom = htmlspecialchars($prenom);
-	$mail = $mail;
+	$nom = htmlspecialchars($nom, ENT_COMPAT,'ISO-8859-1', true);
+	$prenom = htmlspecialchars($prenom, ENT_COMPAT,'ISO-8859-1', true);
+	$mail = htmlspecialchars($mail, ENT_COMPAT,'ISO-8859-1', true);
 	$telephone = htmlspecialchars($telephone);
-	$adresse = $adresse;
-	$cp = $cp;
-	$ville = htmlspecialchars($ville);
+	$adresse = htmlspecialchars($adresse, ENT_COMPAT,'ISO-8859-1', true);
+	$cp = htmlspecialchars($cp);
+	$ville = htmlspecialchars($ville, ENT_COMPAT,'ISO-8859-1', true);
 	$boutiqueGeree = htmlspecialchars($boutiqueGeree);
-	$statut = $statut;
-	$login = htmlspecialchars($login);
-	$motdp = htmlspecialchars($motdp);
+	$statut = htmlspecialchars($statut);
+	$login = htmlspecialchars($login, ENT_COMPAT,'ISO-8859-1', true);
+	$motdp = htmlspecialchars($motdp, ENT_COMPAT,'ISO-8859-1', true);
 	$id = htmlspecialchars($id);
 
 	// Ici on modifie un people
@@ -798,7 +798,7 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 			$reponseHoraires = $bdd->query('SELECT * FROM horaires WHERE boutique_id = '.$donnees['id'].''); // Envoi de la requête
 			$donneesHoraires = $reponseHoraires->fetch();
 			echo '<table class="gestion">'; // Déclaration d'un tableau et de sa ligne d'en-tête
-			echo '<tr><th class="noBorder"></th><th>NUMERO</th><th>RUE</th><th>CODE POSTAL</th><th>VILLE</th><th>FICHIER D\'IMAGE</th><th>TELEPHONE</th></tr>';
+			echo '<tr><th class="noBorder"></th><th>NUMERO</th><th>RUE</th><th>CODE POSTAL</th><th>VILLE</th><th>FICHIER D\'IMAGE</th><th>TELEPHONE</th><th>COORDX</th><th>COORDY</th></tr>';
 			echo '<tr>';
 			echo '<td class="noBorder"></td>';
 			echo '<td class="c1">'.$donnees['id'].'</td>';
@@ -807,6 +807,8 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 			echo '<td class="c1">'.$donnees['ville'].'</td>';
 			echo '<td class="c1">'.$donnees['image'].'</td>';
 			echo '<td class="c1">'.$donnees['telephone'].'</td>';
+			echo '<td class="c1">'.$donnees['coordX'].'</td>';
+			echo '<td class="c1">'.$donnees['coordY'].'</td>';
 			//Si l'utilisateur est administrateur, le possibilité de modifier ou de supprimer un compte lui est offerte.
 			//if($_SESSION['statPeople'] == "A"){
 			//Modification
@@ -823,7 +825,7 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 			echo '</tr>';
 				
 			echo '<th>HORAIRES';
-			echo'<td class="c1" colspan=6>
+			echo'<td class="c1" colspan=8>
 			<table class="horaire">
 				<tr>
 					<th class="boutinfos" rowspan = "1"></th>
@@ -905,7 +907,7 @@ function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
 	}
 }
 
-function insertTableauBoutique($base, $hote, $utilisateur, $mdp, $rue, $cp, $ville, $image, $telephone,
+function insertTableauBoutique($base, $hote, $utilisateur, $mdp, $rue, $cp, $ville, $image, $telephone, $coordX, $coordY,
 		$lundi_matin_debut, $lundi_matin_fin, $lundi_apres_debut, $lundi_apres_fin,
 		$mardi_matin_debut, $mardi_matin_fin, $mardi_apres_debut, $mardi_apres_fin,
 		$mercredi_matin_debut, $mercredi_matin_fin, $mercredi_apres_debut, $mercredi_apres_fin,
@@ -918,14 +920,16 @@ function insertTableauBoutique($base, $hote, $utilisateur, $mdp, $rue, $cp, $vil
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf16');
 		//On prépare la requète:
-		$insertion = $bdd->prepare('INSERT INTO boutique (id, rue, cp, ville, image, telephone) VALUES (\'\', :rue, :cp, :ville, :image, :telephone)');
+		$insertion = $bdd->prepare('INSERT INTO boutique (id, rue, cp, ville, image, telephone, coordX, coordY) VALUES (\'\', :rue, :cp, :ville, :image, :telephone, :coordX, :coordY)');
 		//On envoie la requète avec les valeurs nécessaires:
 		$insertion->execute(array(
 				'rue' => $rue,
 				'cp' => $cp,
 				'ville' => $ville,
 				'image' => $image,
-				'telephone' => $telephone
+				'telephone' => $telephone,
+				'coordX' => $coordX,
+				'coordY' => $coordY
 		));
 		$dernierId = $bdd->lastInsertId();
 		// On libère la connexion du serveur pour d'autres requêtes :
@@ -975,7 +979,7 @@ function suppTableauBoutique($suppBoutique, $base, $hote, $utilisateur, $mdp) {
 		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		//On prépare la requète:
-		$modification = $bdd->prepare('DELETE FROM compte WHERE id=:idBoutique');
+		$modification = $bdd->prepare('DELETE FROM boutique WHERE id=:idBoutique');
 		//On envoie la requète avec les valeurs nécessaires:
 		$modification->execute(array(
 				'idBoutique' => $suppBoutique
@@ -1002,6 +1006,162 @@ function attentionBoutique(idEffacer, ville) {
 	}
 }
 </script>';
+
+function editTableauBoutique($editBoutique, $base, $hote, $utilisateur, $mdp){
+	
+	// Ici on édite la fiche d'une boutique
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$reponse = $bdd->prepare('SELECT * FROM boutique WHERE id= ? ');
+		//On envoie la requète avec les valeurs nécessaires:
+		$reponse->execute( array($editBoutique) );
+
+		$donnees = $reponse->fetch(); // Découpage ligne à ligne de $reponse (une seul ligne ici)
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+		
+		$reponse = $bdd->prepare('SELECT * FROM horaires WHERE boutique_id= ? ');
+		//On envoie la requète avec les valeurs nécessaires:
+		$reponse->execute( array($editBoutique) );
+		
+		$donneesHoraires = $reponse->fetch(); // Découpage ligne à ligne de $reponse (une seul ligne ici)
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+
+		//Formulaire d'édition d'une personne.
+		?>
+		<h2>Modification d'un boutique</h2>
+		<form class="gestion boutique" method="post" action="gestionBoutiques.php">
+		<fieldset>
+		<legend>Modification du produit numéro <b><?php echo $donnees['id']; ?></b></legend>
+				<label>Rue :</label><input class="formGestion" type="text" id="rue" name = "rue" value="<?php echo $donnees['rue']; ?>"/><br/><br/>
+				<label>CP :</label><input class="formGestion" type="text" id="cp" name = "cp" value="<?php echo $donnees['cp']; ?>"/><br/><br/>
+				<label>Ville :</label><input class="formGestion" type="text" id="ville" name = "ville" value="<?php echo $donnees['ville']; ?>"/><br/><br/>
+				<label>Nom du fichier image :</label><input class="formGestion" type="text" id="image" name = "image" value="<?php echo $donnees['image']; ?>"/><br/><br/>
+				<label>Téléphone :</label><input class="formGestion" type="text" id="telephone" name = "telephone" value="<?php echo $donnees['telephone']; ?>"/><br/><br/>
+				<label>Coordonnées sur la carte :</label><br/><br/>
+			
+				<div><?php
+					include 'inc/franceEdit.inc.php';
+					createCoord($donnees['coordX'], $donnees['coordY']);
+				?></div>
+			
+				<label class="noFloat">Horaires :</label><br/><br/>
+				
+				<table class="horaire">
+					<tr>
+						<th class="boutinfos" rowspan = "1"></th>
+						<th class="boutinfos" rowspan = "1">Lundi</th>
+						<th class="boutinfos" rowspan = "1">Mardi</th>
+						<th class="boutinfos" rowspan = "1">Mercredi</th>
+						<th class="boutinfos" rowspan = "1">Jeudi</th>
+						<th class="boutinfos" rowspan = "1">Vendredi</th>
+						<th class="boutinfos" rowspan = "1">Samedi</th>
+						<th class="boutinfos" rowspan = "1">Dimanche</th>
+					</tr>
+					<tr>
+						<th class="boutinfos" rowspan = "1">Matin</th>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="lundi_matin_debut" name = "lundi_matin_debut" value="<?php echo $donneesHoraires['lundi_matin_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="lundi_matin_fin" name = "lundi_matin_fin" value="<?php echo $donneesHoraires['lundi_matin_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mardi_matin_debut" name = "mardi_matin_debut" value="<?php echo $donneesHoraires['mardi_matin_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="mardi_matin_fin" name = "mardi_matin_fin" value="<?php echo $donneesHoraires['mardi_matin_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mercredi_matin_debut" name = "mercredi_matin_debut" value="<?php echo $donneesHoraires['mercredi_matin_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="mercredi_matin_fin" name = "mercredi_matin_fin" value="<?php echo $donneesHoraires['mercredi_matin_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="jeudi_matin_debut" name = "jeudi_matin_debut" value="<?php echo $donneesHoraires['jeudi_matin_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="jeudi_matin_fin" name = "jeudi_matin_fin" value="<?php echo $donneesHoraires['jeudi_matin_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="vendredi_matin_debut" name = "vendredi_matin_debut" value="<?php echo $donneesHoraires['vendredi_matin_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="vendredi_matin_fin" name = "vendredi_matin_fin" value="<?php echo $donneesHoraires['vendredi_matin_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="samedi_matin_debut" name = "samedi_matin_debut" value="<?php echo $donneesHoraires['samedi_matin_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="samedi_matin_fin" name = "samedi_matin_fin" value="<?php echo $donneesHoraires['samedi_matin_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="dimanche_matin_debut" name = "dimanche_matin_debut" value="<?php echo $donneesHoraires['dimanche_matin_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="dimanche_matin_fin" name = "dimanche_matin_fin" value="<?php echo $donneesHoraires['dimanche_matin_fin']; ?>"/></td>
+					</tr>
+					<tr>
+						<th class="boutinfos" rowspan = "1">Après-midi</th>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="lundi_apres_debut" name = "lundi_apres_debut" value="<?php echo $donneesHoraires['lundi_apres_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="lundi_apres_fin" name = "lundi_apres_fin" value="<?php echo $donneesHoraires['lundi_apres_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mardi_apres_debut" name = "mardi_apres_debut" value="<?php echo $donneesHoraires['mardi_apres_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="mardi_apres_fin" name = "mardi_apres_fin" value="<?php echo $donneesHoraires['mardi_apres_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="mercredi_apres_debut" name = "mercredi_apres_debut" value="<?php echo $donneesHoraires['mercredi_apres_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="mercredi_apres_fin" name = "mercredi_apres_fin" value="<?php echo $donneesHoraires['mercredi_apres_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="jeudi_apres_debut" name = "jeudi_apres_debut" value="<?php echo $donneesHoraires['jeudi_apres_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="jeudi_apres_fin" name = "jeudi_apres_fin" value="<?php echo $donneesHoraires['jeudi_apres_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="vendredi_apres_debut" name = "vendredi_apres_debut" value="<?php echo $donneesHoraires['vendredi_apres_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="vendredi_apres_fin" name = "vendredi_apres_fin" value="<?php echo $donneesHoraires['vendredi_apres_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="samedi_apres_debut" name = "samedi_apres_debut" value="<?php echo $donneesHoraires['samedi_apres_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="samedi_apres_fin" name = "samedi_apres_fin" value="<?php echo $donneesHoraires['samedi_apres_fin']; ?>"/></td>
+						<td class="boutinfos" rowspan = "1"><label class="horaire">Début:</label><input class="horaire" type="text" id="dimanche_apres_debut" name = "dimanche_apres_debut" value="<?php echo $donneesHoraires['dimanche_apres_debut']; ?>"/><br/><br/>
+															<label class="horaire">Fin:</label><input class="horaire" type="text" id="dimanche_apres_fin" name = "dimanche_apres_fin" value="<?php echo $donneesHoraires['dimanche_apres_fin']; ?>"/></td>
+					</tr>
+				</table>
+			<input type="hidden" name="hdIdBoutique" id="hdIdBoutique" 
+			value=" <?php echo $donnees['id']; ?>" /> <!-- cette input "caché" permetra de récupérer plus tard dans $_POST l'id du produit -->
+			<input name="effacerModif" type="reset" value="Effacer" />
+			<input name="envoyerModif" type="submit" value="Envoyer" />
+		</fieldset>
+		</form>
+		<?php
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function updateTableauBoutique($base, $hote, $utilisateur, $mdp, $rue, $cp, $ville, $image, $telephone, $coordX, $coordY, $id,
+		$lundi_matin_debut, $lundi_matin_fin, $lundi_apres_debut, $lundi_apres_fin,
+		$mardi_matin_debut, $mardi_matin_fin, $mardi_apres_debut, $mardi_apres_fin,
+		$mercredi_matin_debut, $mercredi_matin_fin, $mercredi_apres_debut, $mercredi_apres_fin,
+		$jeudi_matin_debut, $jeudi_matin_fin, $jeudi_apres_debut, $jeudi_apres_fin,
+		$vendredi_matin_debut, $vendredi_matin_fin, $vendredi_apres_debut, $vendredi_apres_fin,
+		$samedi_matin_debut, $samedi_matin_fin, $samedi_apres_debut, $samedi_apres_fin,
+		$dimanche_matin_debut, $dimanche_matin_fin, $dimanche_apres_debut, $dimanche_apres_fin){
+		
+	//Sécurise en empéchant les commandes JavaScript
+	$rue = htmlspecialchars($rue, ENT_COMPAT,'ISO-8859-1', true);
+	$cp = htmlspecialchars($cp);
+	$ville = htmlspecialchars($ville , ENT_COMPAT,'ISO-8859-1', true);
+	$image = htmlspecialchars($image);
+	$telephone = htmlspecialchars($telephone);
+	$coordX = htmlspecialchars($coordX);
+	$coordY = htmlspecialchars($coordY);
+	$id = $id;
+
+	// Ici on modifie un produit
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$modification = $bdd->prepare('UPDATE boutique SET rue = :rueBoutique,
+		cp = :cpBoutique, ville = :villeBoutique, image = :imageBoutique, telephone = :telephoneBoutique, 
+		coordX = :coordXBoutique, coordY = :coordYBoutique WHERE id = :idBoutique');
+		//On envoie la requète avec les valeurs nécessaires:
+		$modification->execute(array(
+				'rueBoutique' => $rue,
+				'cpBoutique' => $cp,
+				'villeBoutique' => $ville,
+				'imageBoutique' => $image,
+				'telephoneBoutique' => $telephone,
+				'coordXBoutique' => $coordX,
+				'coordYBoutique' => $coordY,
+				'idBoutique' => $id
+		));
+		
+		echo '<h4 class="goood">Les données à propos de la boutique de '.$ville.' ont bien été mises à jour</h4>'; //Informe l'utilisateur que la modification c'est bien déroulé.
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$modification->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
 
 //Permet d'afficher le tableau des produits de la base de données.
 function creaTableauProduit ($tri, $base, $hote, $utilisateur, $mdp) {
@@ -1161,9 +1321,201 @@ function editTableauProduit($editProduit, $base, $hote, $utilisateur, $mdp) {
 
 function updateTableauProduit($base, $hote, $utilisateur, $mdp, $nom, $description, $detail, $prix, $image, $categorie, $id) {
 	//Sécurise en empéchant les commandes JavaScript
-	$nom = htmlspecialchars($nom);
-	$description = htmlspecialchars($description);
-	$detail = htmlspecialchars($detail);
+	$nom = htmlspecialchars($nom, ENT_COMPAT,'ISO-8859-1', true);
+	$vdescription = htmlspecialchars($description, ENT_COMPAT,'ISO-8859-1', true);
+	$detail = htmlspecialchars($detail, ENT_COMPAT,'ISO-8859-1', true);
+	$prix = $prix;
+	$image = htmlspecialchars($image);
+	$categorie = $categorie;
+	$id = $id;
+
+	// Ici on modifie un produit
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$modification = $bdd->prepare('UPDATE produit SET nom = :nomProduit,
+		description = :descriptionProduit, detail = :detailProduit, prix = :prixProduit,
+		image = :imageProduit, categorie = :categorieProduit WHERE produit_id = :idProduit');
+		//On envoie la requète avec les valeurs nécessaires:
+		$modification->execute(array(
+				'nomProduit' => $nom,
+				'descriptionProduit' => $description,
+				'detailProduit' => $detail,
+				'prixProduit' => $prix,
+				'imageProduit' => $image,
+				'categorieProduit' => $categorie,
+				'idProduit' => $id
+		));
+		
+		echo '<h4 class="goood">Les données à propos du produit '.$nom.' ont bien été mises à jour</h4>'; //Informe l'utilisateur que la modification c'est bien déroulé.
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$modification->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+//Permet d'afficher le tableau des produits de la base de données.
+function creaTableauCategorie ($tri, $base, $hote, $utilisateur, $mdp) {
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		$reponse = $bdd->query('SELECT * FROM produit ORDER BY '.$tri.''); // Envoi de la requête
+		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
+		echo '<table class="gestion">'; // Déclaration d'un tableau et de sa ligne d'en-tête
+		echo '<tr><th>NUMERO</th><th>NOM</th><th>DESCRIPTION</th><th>DETAIL</th><th>PRIX</th>
+		<th>FICHIER D\'IMAGE</th><th>CATEGORIE</th></tr>';
+		while ( $donnees = $reponse->fetch() ) // Découpage ligne à ligne de $reponse
+		{
+			echo '<tr>'; // Une ligne appelle les données de $donnees['']
+			echo '<td class="c1">'.$donnees['produit_id'].'</td>';
+			echo '<td class="c1">'.$donnees['nom'].'</td>';
+			echo '<td class="c1">'.$donnees['description'].'</td>';
+			echo '<td class="c1">'.$donnees['detail'].'</td>';
+			echo '<td class="c1">'.$donnees['prix'].'</td>';
+			echo '<td class="c1">'.$donnees['image'].'</td>';
+			echo '<td class="c1">'.$donnees['categorie'].'</td>';
+
+			//Si l'utilisateur est administrateur, le possibilité de modifier ou de supprimer un compte lui est offerte.
+			//if($_SESSION['statPeople'] == "A"){
+			//Modification
+			echo '<td class="c1">
+				<input type="image" id="editProduit" name="editProduit" src="img/edit.png"
+				onclick="location.href=\'gestionProduits.php?editProduit='
+					.$donnees['produit_id'].'\'"/></td>';
+
+			//Suppresion
+			echo '<td class="c1">
+					<input type="image" id="suppProduit" name="suppProduit" src="img/icon_suppr.gif"
+					onclick="attentionProduit('.$donnees['produit_id'].', \''.$donnees['nom'].'\');"/></td>';
+			echo '</tr>';
+			//}
+		}
+		echo '</table>'; // Fin du tableau
+		echo '<p>Il y a '.$nb.' produits.</p>'; // Affichade du compte des lignes
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+//Permet d'ajouter un produit dans la base de données.
+function insertTableauCategorie($base, $hote, $utilisateur, $mdp, $libelle) {
+	try{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$insertion = $bdd->prepare('INSERT INTO categorie (categorie_id, libelle) VALUES (\'\', :libelle)');
+		//On envoie la requète avec les valeurs nécessaires:
+		$insertion->execute(array(
+				'libelle' => $libelle,
+		));
+		$dernierId = $bdd->lastInsertId();
+		echo '<h4 class="goood">La nouvelle catégorie de produit "'.$libelle.'" a bien été
+		enregistré avec l\'identifiant '.$dernierId.'</h4>'; //Informe l'utilisateur que l'insertion c'est bien déroulé.
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$insertion->closeCursor();
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function suppTableauCategorie($suppCategorie, $base, $hote, $utilisateur, $mdp) {
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		//On prépare la requète:
+		$modification = $bdd->prepare('DELETE FROM categorie WHERE categorie_id=:idCategorie');
+		//On envoie la requète avec les valeurs nécessaires:
+		$modification->execute(array(
+				'idCategorie' => $suppCategorie
+		));
+
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$modification->closeCursor();
+		// On modifie l'auto-incremente pour que l'id de la prochaine personne ajouter suives les autres :
+		autoInc($base, $hote, $utilisateur, $mdp, "categorie");
+		echo '<h4 class="goood">Le produit <i>numéro '.$suppProduit.'</i> a été supprimé.</h4>'; //Informe l'utilisateur que la suppresion c'est bien déroulé.
+	}
+	catch (Exception $e)
+	{
+		die('Erreur : ' . $e->getMessage());
+	}
+}
+
+//Permet de demander à l'utilisateur de confirmer la suppression de la personne de la base de données.
+echo '<script type=\'text/javascript\'>
+function attentionProduit(idEffacer, nom) {
+	if( confirm(\'Etes-vous certain de vouloir effacer le produit "\'+nom+\'" ? \') )
+	{
+		location.href=\'gestionProduits.php?suppProduit=\'+idEffacer;
+	}
+}
+</script>';
+
+function editTableauProduit($editProduit, $base, $hote, $utilisateur, $mdp) {
+	// Ici on édite la fiche d'un produit
+	try
+	{
+		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
+		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
+		$bdd->exec('SET NAMES utf16');
+		//On prépare la requète:
+		$reponse = $bdd->prepare('SELECT * FROM produit WHERE produit_id= ? ');
+		//On envoie la requète avec les valeurs nécessaires:
+		$reponse->execute( array($editProduit) );
+
+		$donnees = $reponse->fetch(); // Découpage ligne à ligne de $reponse (une seul ligne ici)
+		// On libère la connexion du serveur pour d'autres requêtes :
+		$reponse->closeCursor();
+
+		//Formulaire d'édition d'une personne.
+		?>
+		<h2>Modification d'un compte</h2>
+		<form class="gestion" method="post" action="gestionProduits.php">
+		<fieldset>
+		<legend>Modification du produit numéro <b><?php echo $donnees['produit_id']; ?></b></legend>
+			<label>Nom :</label><input class="formGestion" type="text" id="nom" name = "nom" value="<?php echo $donnees['nom']; ?>"/><br/><br/>
+			<label>Description :</label><textarea id="description"  name="description"><?php echo $donnees['description']; ?></textarea><br/><br/>
+			<label>Détail :</label><textarea id="detail" name="detail"><?php echo $donnees['detail']; ?></textarea><br/><br/>
+			<label>Prix :</label><input class="formGestion" type="text" id="prix" name = "prix" value="<?php echo $donnees['prix']; ?>"/>  €<br/><br/>
+			<label>Nom du fichier image :</label><input class="formGestion" type="text" id="image" name = "image" value="<?php echo $donnees['image']; ?>"/><br/><br/>
+			<label>Catégorie :</label>
+			<?php
+			listCategorie($base, $hote, $utilisateur, $mdp, $donnees['categorie']);
+			?>
+			<input type="hidden" name="hdIdProduit" id="hdIdProduit" 
+			value=" <?php echo $donnees['produit_id']; ?>" /> <!-- cette input "caché" permetra de récupérer plus tard dans $_POST l'id du produit -->
+			<input name="effacerModif" type="reset" value="Effacer" />
+			<input name="envoyerModif" type="submit" value="Envoyer" />
+		</fieldset>
+		</form>
+		<?php
+	}
+	catch (Exception $erreur)
+	{
+		die('Erreur : ' . $erreur->getMessage());
+	}
+}
+
+function updateTableauProduit($base, $hote, $utilisateur, $mdp, $nom, $description, $detail, $prix, $image, $categorie, $id) {
+	//Sécurise en empéchant les commandes JavaScript
+	$nom = htmlspecialchars($nom, ENT_COMPAT,'ISO-8859-1', true);
+	$vdescription = htmlspecialchars($description, ENT_COMPAT,'ISO-8859-1', true);
+	$detail = htmlspecialchars($detail, ENT_COMPAT,'ISO-8859-1', true);
 	$prix = $prix;
 	$image = htmlspecialchars($image);
 	$categorie = $categorie;

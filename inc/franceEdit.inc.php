@@ -7586,6 +7586,16 @@ ctx.closePath();
 		
 
     </script>
+  
+  <?php
+  function createCoord($x, $y){
+ 	echo'
+    	<label>Coordonnée X :</label><input class="formGestion" type="text" id="coordX" name = "coordX" value="'.$x.'"/><br/><br/>
+		<label>Coordonnée Y :</label><input class="formGestion" type="text" id="coordY" name = "coordY" value="'.$y.'"/><br/><br/>
+    ';
+  }
+  ?>
+    
   </head>
   <!-- <img src="imgcedric/point.png" id="point" name="point"/> -->
   <body onload="init()">
@@ -7596,7 +7606,5 @@ ctx.closePath();
   </body>
   
   <br>
-	<label>Coordonnée X :</label><input class="formGestion" type="text" id="coordX" name = "coordX" /><br/><br/>
-	<label>Coordonnée Y :</label><input class="formGestion" type="text" id="coordY" name = "coordY" /><br/><br/>
 
 </html>

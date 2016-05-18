@@ -35,8 +35,8 @@ if (!isset($_SESSION['logCompte'])) {  // Vérifie si l'utilisateur est connecté 
 } else {
 
 
-	if(isset($_POST['envoyerAjout']) && isset($_POST['rue']) && !empty($_POST['rue']) && isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) &&isset($_POST['image']) && !empty($_POST['image']) && isset($_POST['telephone']) && !empty($_POST['telephone'])){
-		insertTableauBoutique($base, $hote, $utilisateur, $mdp, $_POST['rue'], $_POST['cp'], $_POST['ville'], $_POST['image'], $_POST['telephone'],
+	if(isset($_POST['envoyerAjout']) && isset($_POST['rue']) && !empty($_POST['rue']) && isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) &&isset($_POST['image']) && !empty($_POST['image']) && isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['coordX']) && !empty($_POST['coordX']) && isset($_POST['coordY']) && !empty($_POST['coordY'])){
+		insertTableauBoutique($base, $hote, $utilisateur, $mdp, $_POST['rue'], $_POST['cp'], $_POST['ville'], $_POST['image'], $_POST['telephone'], $_POST['coordX'], $_POST['coordY'],
 								$_POST['lundi_matin_debut'], $_POST['lundi_matin_fin'], $_POST['lundi_apres_debut'], $_POST['lundi_apres_fin'],
 								$_POST['mardi_matin_debut'],$_POST['mardi_matin_fin'], $_POST['mardi_apres_debut'], $_POST['mardi_apres_fin'],
 								$_POST['mercredi_matin_debut'],$_POST['mercredi_matin_fin'], $_POST['mercredi_apres_debut'], $_POST['mercredi_apres_fin'],
@@ -47,20 +47,27 @@ if (!isset($_SESSION['logCompte'])) {  // Vérifie si l'utilisateur est connecté 
 	}
 	
 	if ($_SESSION['statCompte'] == "G" || $_POST['boutiqueGeree'] == $_SESSION['boutiqueGeree']) {  // Vérification des droits
-		if(isset($_POST['envoyerModifBoutique']) && !empty($_POST['envoyerModif']) && isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['prenom']) && !empty($_POST['prenom']) &&isset($_POST['mail']) && !empty($_POST['mail']) &&isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['adresse']) && !empty($_POST['adresse']) &&isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) && isset($_POST['boutiqueGeree']) && !empty($_POST['boutiqueGeree']) && isset($_POST['statut']) && !empty($_POST['statut']) && isset($_POST['login']) && !empty($_POST['login']) && isset($_POST['mdp']) && !empty($_POST['mdp']) && isset($_POST['hdIdCompte']) && !empty($_POST['hdIdCompte'])){
-			updateTableauBoutique($base, $hote, $utilisateur, $mdp, $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['telephone'], $_POST['adresse'], $_POST['cp'], $_POST['ville'], $_POST['boutiqueGeree'], $_POST['statut'], $_POST['login'], $_POST['mdp'], $_POST['hdIdCompte']);
+		if(isset($_POST['envoyerModif']) && !empty($_POST['envoyerModif']) && isset($_POST['rue']) && !empty($_POST['rue']) && isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) &&isset($_POST['image']) && !empty($_POST['image']) && isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['coordX']) && !empty($_POST['coordX']) && isset($_POST['coordY']) && !empty($_POST['coordY']) && isset($_POST['hdIdBoutique']) && !empty($_POST['hdIdBoutique'])){
+			updateTableauBoutique($base, $hote, $utilisateur, $mdp, $_POST['rue'], $_POST['cp'], $_POST['ville'], $_POST['image'], $_POST['telephone'], $_POST['coordX'], $_POST['coordY'], $_POST['hdIdBoutique'],
+								$_POST['lundi_matin_debut'], $_POST['lundi_matin_fin'], $_POST['lundi_apres_debut'], $_POST['lundi_apres_fin'],
+								$_POST['mardi_matin_debut'],$_POST['mardi_matin_fin'], $_POST['mardi_apres_debut'], $_POST['mardi_apres_fin'],
+								$_POST['mercredi_matin_debut'],$_POST['mercredi_matin_fin'], $_POST['mercredi_apres_debut'], $_POST['mercredi_apres_fin'],
+								$_POST['jeudi_matin_debut'],$_POST['jeudi_matin_fin'], $_POST['jeudi_apres_debut'], $_POST['jeudi_apres_fin'],
+								$_POST['vendredi_matin_debut'],$_POST['vendredi_matin_fin'], $_POST['vendredi_apres_debut'], $_POST['vendredi_apres_fin'],
+								$_POST['samedi_matin_debut'],$_POST['samedi_matin_fin'], $_POST['samedi_apres_debut'], $_POST['samedi_apres_fin'],
+								$_POST['dimanche_matin_debut'],$_POST['dimanche_matin_fin'], $_POST['dimanche_apres_debut'], $_POST['dimanche_apres_fin']);
 		}
 	}
 	
 	if ($_SESSION['statCompte'] == "G") { // Vérification des droits
-		if(isset($_GET['suppCompteBoutique']) && !empty($_GET['suppCompte'])){
+		if(isset($_GET['suppBoutique']) && !empty($_GET['suppBoutique'])){
 			suppTableauBoutique($_GET['suppBoutique'], $base, $hote, $utilisateur, $mdp);
 		}
 	}
 	
 	creaTableauBoutique("id", $base, $hote, $utilisateur, $mdp);
 	
-	if ( isset($_GET['editCompteBoutique']) && !empty($_GET['editCompte']) ) {
+	if ( isset($_GET['editBoutique']) && !empty($_GET['editBoutique']) ) {
 		editTableauBoutique($_GET['editBoutique'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'une personne
 	}else{
 	
@@ -77,7 +84,9 @@ if (!isset($_SESSION['logCompte'])) {  // Vérifie si l'utilisateur est connecté 
 				<label>Coordonnées sur la carte :</label><br/><br/>
 			
 				<div>
-					';include 'inc/franceEdit.inc.php';echo'
+					';include 'inc/franceEdit.inc.php';
+					  createCoord(0, 0);
+					echo'
 				</div>
 			
 				<label clas="noFloat">Horaires :</label><br/><br/>
