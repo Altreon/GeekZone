@@ -40,7 +40,7 @@ echo '
 		// add event listener
 		canvas.addEventListener(\'mousemove\', function (evt) {
 			var mousePos = getMousePos(canvas, evt);
-			writeMessage(canvas, message);
+			//writeMessage(canvas, message);
 		}, false);
 		
         // Draw on the context.
