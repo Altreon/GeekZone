@@ -5,21 +5,21 @@ function produitList($filter, $tri, $decroissant, $recherche, $base, $hote, $uti
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf16');
 		$reponse;
-		if($recherche == null){
+		if($recherche == null){  // Si l'utilisateur n'a pas fait de recherche, affiche tout les produits
 			if($filter == "Tous"){
 				if(!$decroissant){
 					$reponse = $bdd->query('SELECT * FROM produit ORDER BY '.$tri.'');
-				}else{
+				} else {
 					$reponse = $bdd->query('SELECT * FROM produit ORDER BY '.$tri.' DESC');
 				}
-			}else{
-				if(!$decroissant){
+			} else {
+				if(!$decroissant) {
 					$reponse = $bdd->query('SELECT * FROM produit, categorie WHERE produit.categorie = categorie.categorie_id AND categorie.libelle = "'.$filter.'" ORDER BY '.$tri.'');
-				}else{
+				} else {
 					$reponse = $bdd->query('SELECT * FROM produit, categorie WHERE produit.categorie = categorie.categorie_id AND categorie.libelle = "'.$filter.'" ORDER BY '.$tri.' DESC');
 				}
 			}
-		}else{
+		} else {
 			$reponse = $bdd->query('SELECT * FROM produit WHERE nom LIKE \'%'.$recherche.'%\' OR description LIKE \'%'.$recherche.'%\' OR detail LIKE \'%'.$recherche.'%\' ORDER BY nom');
 		}
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
@@ -64,7 +64,7 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 				'; $cheminsImage=array('img/produits/'.pathinfo('img/produits/'.$donnees['image'], PATHINFO_FILENAME));
 				//echo '<h4>';echo json_encode($cheminsImage);echo'</h4>';
 
-					if (file_exists($cheminsImage[0].'-1'.'.jpg')) {
+					if (file_exists($cheminsImage[0].'-1'.'.jpg')) {  // Vérification de l'existence de différentes images pour un produit
 						array_push($cheminsImage, $cheminsImage[0].'-1');
 						if (file_exists($cheminsImage[0].'-2'.'.jpg')) {
 							array_push($cheminsImage, $cheminsImage[0].'-2');
@@ -84,7 +84,7 @@ function detailProduit($id, $base, $hote, $utilisateur, $mdp) {
 						
 				<div class="produitdet">';	
 				if (count($cheminsImage)!=1){									
-					for ($i=0; $i<count($cheminsImage); $i++) {	
+					for ($i=0; $i<count($cheminsImage); $i++) {	 // Implémente toutes les images existentes pour un produit en dessous de l'image principale
 						echo '<img id="imgmin" class="imgmin" onClick="changeImage(\''.$cheminsImage[$i].'\')" src="'.$cheminsImage[$i].'.jpg">             ';
 					}
 				}	
@@ -199,7 +199,7 @@ function boutique($name, $base, $hote, $utilisateur, $mdp) {
 	}
 }
 
-function listBoutique($base, $hote, $utilisateur, $mdp, $boutiqueGeree){
+/*function listBoutique($base, $hote, $utilisateur, $mdp, $boutiqueGeree){
 	try
 	{
 		$pdo_options[PDO::ATTR_ERRMODE ] = PDO::ERRMODE_EXCEPTION ;
@@ -227,7 +227,7 @@ function listBoutique($base, $hote, $utilisateur, $mdp, $boutiqueGeree){
 		die('Erreur : ' . $erreur->getMessage());
 	}
 	echo '</select><br/><br/>';
-}
+}*/
 
 function boutiquelist($base, $hote, $utilisateur, $mdp) {
 	try{
