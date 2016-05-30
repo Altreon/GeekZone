@@ -11,6 +11,11 @@ html {
 	height:100%;
 }
 
+a:link 
+{ 
+ text-decoration:none; 
+} 
+
 body {
 	background-color : #F1F1F1;
 	min-height:100%;

@@ -1466,7 +1466,7 @@ function attentionProduit(idEffacer, libelle) {
 }
 </script>';
 
-function editTableauProduit($editProduit, $base, $hote, $utilisateur, $mdp) {
+function editTableauCategorie($editProduit, $base, $hote, $utilisateur, $mdp) {
 	// Ici on édite la fiche d'un produit
 	try
 	{
@@ -1511,7 +1511,7 @@ function editTableauProduit($editProduit, $base, $hote, $utilisateur, $mdp) {
 	}
 }
 
-function updateTableauProduit($base, $hote, $utilisateur, $mdp, $nom, $description, $detail, $prix, $image, $categorie, $id) {
+function updateTableauCategorie($base, $hote, $utilisateur, $mdp, $nom, $description, $detail, $prix, $image, $categorie, $id) {
 	//Sécurise en empéchant les commandes JavaScript
 	$nom = htmlspecialchars($nom, ENT_COMPAT,'ISO-8859-1', true);
 	$vdescription = htmlspecialchars($description, ENT_COMPAT,'ISO-8859-1', true);

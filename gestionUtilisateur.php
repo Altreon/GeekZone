@@ -18,22 +18,22 @@ echo '
 	';
 include 'inc/border.php';
 
-if(!isset($_SESSION['login'])){
+/*if(!isset($_SESSION['login'])){
 
 if(isset($_POST['identifiant']) && !empty($_POST['identifiant']) && isset($_POST['mdp']) && !empty($_POST['mdp'])){
 	if(verifLogin($_POST['identifiant'], $_POST['mdp'], $base, $hote, $utilisateur, $mdp)){
 		echo'<meta http-equiv="refresh" content="0; URL=gestionUtilisateur.php">';
 		exit;
 	}
-}
+}*/
  
 echo '
 	<div class = "content">
 ';
 
-if (!isset($_SESSION['logCompte']) || $_SESSION['statCompte'] != "G") {  // Vérification des droits pour gérer les utilisateurs
-	echo'<p class="blocAcces">Vous ne possédez pas les autorisations nécessaires pour visionner le contenu de cette page!</p>';
-} else {
+//if (!isset($_SESSION['logCompte']) || $_SESSION['statCompte'] != "G") {  // Vérification des droits pour gérer les utilisateurs
+	//echo'<p class="blocAcces">Vous ne possédez pas les autorisations nécessaires pour visionner le contenu de cette page!</p>';
+//} else {
 
 	if(isset($_POST['envoyerAjout']) && !empty($_POST['envoyerAjout']) && isset($_POST['nom']) && !empty($_POST['nom']) && isset($_POST['prenom']) && !empty($_POST['prenom']) &&isset($_POST['mail']) && !empty($_POST['mail']) &&isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['adresse']) && !empty($_POST['adresse']) &&isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) && isset($_POST['boutiqueGeree']) && !empty($_POST['boutiqueGeree']) && isset($_POST['login']) && !empty($_POST['login']) &&isset($_POST['mdp']) && !empty($_POST['mdp'])){
 		insertTableauUser($base, $hote, $utilisateur, $mdp, $_POST['nom'], $_POST['prenom'], $_POST['mail'], $_POST['telephone'], $_POST['adresse'], $_POST['cp'], $_POST['ville'], $_POST['boutiqueGeree'], $_POST['statut'], $_POST['login'], $_POST['mdp']);
@@ -70,7 +70,7 @@ if (!isset($_SESSION['logCompte']) || $_SESSION['statCompte'] != "G") {  // Véri
 				echo'
 				<label>Statut :</label>
 					<input type="radio" id="statut" name="statut" value="B" checked="checked"/>Administrateur de boutique
-					<label> </label><input type="radio" id="statut" name="statut" value="G"/>Administrateur général
+					<label></p></label><input type="radio" id="statut" name="statut" value="G"/>Administrateur général
 				<br>
 				<br>
 				<label>Identifiant :</label><input class="formGestion" type="text" id="login" name = "login" /><br/><br/>
@@ -82,8 +82,8 @@ if (!isset($_SESSION['logCompte']) || $_SESSION['statCompte'] != "G") {  // Véri
 	';
 	
 	}
-	}
-}
+	//}
+//}
 echo'
 	</div>
 ';
