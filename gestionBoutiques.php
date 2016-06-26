@@ -27,13 +27,42 @@ if(isset($_POST['identifiant']) && !empty($_POST['identifiant']) && isset($_POST
 	}
 }
 
+
 echo '
 	<div class = "content">
+		
+	<form class="produitFT"; action="gestionBoutiques.php" method="get">
+	
+		<div class="produitTri">
+			Trier les boutiques : <SELECT class="produitFilter" name="tri" size="">
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "numero"){echo("selected");}echo'>numero
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "ville"){echo("selected");}echo'>ville
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "code postal"){echo("selected");}echo'>code postal
+			</SELECT>
+		</div>
+		<br>
+		<div class="produitTri">
+			Ordre de tri : <SELECT class="produitFilter" name="ordre" size="">
+				<OPTION ';if(isset($_GET['ordre']) && $_GET['ordre'] == "croissant"){echo("selected");}echo'>croissant
+				<OPTION ';if(isset($_GET['ordre']) && $_GET['ordre'] == "decroissant"){echo("selected");}echo'>decroissant
+			</SELECT>
+		</div>		
+				
+		<input class="produitFilter form" type="submit" name="send"></input>
+		
+	</form>	
 ';
+
+echo'
+	<div class="strip">
+	</div>
+	<br>
+	<div class="produitList">
+';
+
 if (!isset($_SESSION['logCompte'])) {  // Vérifie si l'utilisateur est connecté pour le laisser gérer les boutiques
 	echo'<p class="blocAcces">Vous ne possédez pas les autorisations nécessaires pour visionner le contenu de cette page!</p>';
 } else {
-
 
 	if(isset($_POST['envoyerAjout']) && isset($_POST['rue']) && !empty($_POST['rue']) && isset($_POST['cp']) && !empty($_POST['cp']) &&isset($_POST['ville']) && !empty($_POST['ville']) &&isset($_POST['image']) && !empty($_POST['image']) && isset($_POST['telephone']) && !empty($_POST['telephone']) && isset($_POST['coordX']) && !empty($_POST['coordX']) && isset($_POST['coordY']) && !empty($_POST['coordY'])){
 		insertTableauBoutique($base, $hote, $utilisateur, $mdp, $_POST['rue'], $_POST['cp'], $_POST['ville'], $_POST['image'], $_POST['telephone'], $_POST['coordX'], $_POST['coordY'],
@@ -59,13 +88,20 @@ if (!isset($_SESSION['logCompte'])) {  // Vérifie si l'utilisateur est connecté 
 		}
 	}
 	
+	
 	if ($_SESSION['statCompte'] == "G") { // Vérification des droits
 		if(isset($_GET['suppBoutique']) && !empty($_GET['suppBoutique'])){
 			suppTableauBoutique($_GET['suppBoutique'], $base, $hote, $utilisateur, $mdp);
 		}
 	}
 	
-	creaTableauBoutique("id", $base, $hote, $utilisateur, $mdp);
+	if (isset($_GET['tri'])) $tri = $_GET['tri'];
+	if (isset($_GET['ordre'])) $ordre = $_GET['ordre'];
+	if (!isset($_GET['tri'])) $tri = "id";
+	if (!isset($_GET['ordre'])) $ordre = "asc";
+	
+	creaTableauBoutique($tri, $ordre, $base, $hote, $utilisateur, $mdp);
+	
 	
 	if ( isset($_GET['editBoutique']) && !empty($_GET['editBoutique']) ) {
 		editTableauBoutique($_GET['editBoutique'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'une personne

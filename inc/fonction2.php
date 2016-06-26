@@ -551,12 +551,19 @@ function imageRandomBoutique($base, $hote, $utilisateur, $mdp) {
 }
 
 //Permet d'afficher le tableau des comptes de la base de données.
-function creaTableauUser ($tri, $base, $hote, $utilisateur, $mdp) {
+function creaTableauUser ($tri, $ordre, $base, $hote, $utilisateur, $mdp) {
+	if ($tri == "numero") $tri="id";
+	if ($tri == "code postal") $tri="cp";
+	if ($tri == "boutique geree") $tri="boutiqueGeree";
+	
+	if ($ordre == "croissant") $ordre="asc";
+	if ($ordre == "decroissant") $ordre="desc";
+	
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf16');
-		$reponse = $bdd->query('SELECT * FROM compte ORDER BY '.$tri.''); // Envoi de la requête
+		$reponse = $bdd->query('SELECT * FROM compte ORDER BY '.$tri.' '.$ordre.''); // Envoi de la requête
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
 		echo '<table class="gestion">'; // Déclaration d'un tableau et de sa ligne d'en-tête
 		echo '<tr><th>NUMERO</th><th>NOM</th><th>PRENOM</th><th>MAIL</th><th>TELEPHONE</th>
@@ -785,12 +792,18 @@ function updateTableauUser($base, $hote, $utilisateur, $mdp, $nom, $prenom, $mai
 }
 
 //Permet d'afficher le tableau des boutiques de la base de données.
-function creaTableauBoutique ($tri, $base, $hote, $utilisateur, $mdp) {
+function creaTableauBoutique ($tri, $ordre, $base, $hote, $utilisateur, $mdp) {
+	if ($tri == "numero") $tri="id";
+	if ($tri == "code postal") $tri="cp";
+		
+	if ($ordre == "croissant") $ordre="asc";
+	if ($ordre == "decroissant") $ordre="desc";
+	
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf16');
-		$reponseBoutique = $bdd->query('SELECT * FROM boutique ORDER BY '.$tri.''); // Envoi de la requête
+		$reponseBoutique = $bdd->query('SELECT * FROM boutique ORDER BY '.$tri.' '.$ordre.''); // Envoi de la requête
 		$nb = $reponseBoutique->rowCount(); // Compte du nombre de lignes retournées
 		$reponseHoraire;
 		while ( $donnees = $reponseBoutique->fetch() ) // Découpage ligne à ligne de $reponse
@@ -1164,12 +1177,17 @@ function updateTableauBoutique($base, $hote, $utilisateur, $mdp, $rue, $cp, $vil
 }
 
 //Permet d'afficher le tableau des produits de la base de données.
-function creaTableauProduit ($tri, $base, $hote, $utilisateur, $mdp) {
+function creaTableauProduit ($tri, $ordre, $base, $hote, $utilisateur, $mdp) {
+	if ($tri == "numero") $tri="produit_id";
+	
+	if ($ordre == "croissant") $ordre="asc";
+	if ($ordre == "decroissant") $ordre="desc";
+	
 	try{
 		$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		$bdd = new PDO('mysql:host='.$hote.';dbname='.$base, $utilisateur, $mdp);
 		$bdd->exec('SET NAMES utf16');
-		$reponse = $bdd->query('SELECT * FROM produit ORDER BY '.$tri.''); // Envoi de la requête
+		$reponse = $bdd->query('SELECT * FROM produit ORDER BY '.$tri.' '.$ordre.''); // Envoi de la requête
 		$nb = $reponse->rowCount(); // Compte du nombre de lignes retournées
 		echo '<table class="gestion">'; // Déclaration d'un tableau et de sa ligne d'en-tête
 		echo '<tr><th>NUMERO</th><th>NOM</th><th>DESCRIPTION</th><th>DETAIL</th><th>PRIX</th>

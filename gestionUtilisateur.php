@@ -29,6 +29,41 @@ if(isset($_POST['identifiant']) && !empty($_POST['identifiant']) && isset($_POST
  
 echo '
 	<div class = "content">
+	<form class="produitFT"; action="gestionUtilisateur.php" method="get">
+	
+		<div class="produitTri">
+			Trier les utilisateurs : <SELECT class="produitFilter" name="tri" size="">
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "numero"){echo("selected");}echo'>numero
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "nom"){echo("selected");}echo'>nom
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "prenom"){echo("selected");}echo'>prenom
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "mail"){echo("selected");}echo'>mail
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "telephone"){echo("selected");}echo'>telephone
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "code postal"){echo("selected");}echo'>code postal
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "ville"){echo("selected");}echo'>ville
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "boutique geree"){echo("selected");}echo'>boutique geree
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "statut"){echo("selected");}echo'>statut
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "login"){echo("selected");}echo'>login
+				<OPTION ';if(isset($_GET['tri']) && $_GET['tri'] == "mdp"){echo("selected");}echo'>mdp
+			</SELECT>
+		</div>
+		<br>
+		<div class="produitTri">
+			Ordre de tri : <SELECT class="produitFilter" name="ordre" size="">
+				<OPTION ';if(isset($_GET['ordre']) && $_GET['ordre'] == "croissant"){echo("selected");}echo'>croissant
+				<OPTION ';if(isset($_GET['ordre']) && $_GET['ordre'] == "decroissant"){echo("selected");}echo'>decroissant
+			</SELECT>
+		</div>		
+				
+		<input class="produitFilter form" type="submit" name="send"></input>
+		
+	</form>	
+';
+
+echo'
+	<div class="strip">
+	</div>
+	<br>
+	<div class="produitList">
 ';
 
 //if (!isset($_SESSION['logCompte']) || $_SESSION['statCompte'] != "G") {  // Vérification des droits pour gérer les utilisateurs
@@ -47,7 +82,12 @@ echo '
 		suppTableauUser($_GET['suppCompte'], $base, $hote, $utilisateur, $mdp);
 	}
 	
-	creaTableauUser("id", $base, $hote, $utilisateur, $mdp);
+	if (isset($_GET['tri'])) $tri = $_GET['tri'];
+	if (isset($_GET['ordre'])) $ordre = $_GET['ordre'];
+	if (!isset($_GET['tri'])) $tri = "id";
+	if (!isset($_GET['ordre'])) $ordre = "asc";
+	
+	creaTableauUser($tri, $ordre, $base, $hote, $utilisateur, $mdp);
 	
 	if ( isset($_GET['editCompte']) && !empty($_GET['editCompte']) ) {
 		editTableauUser($_GET['editCompte'], $base, $hote, $utilisateur, $mdp); //Affiche le formulaire d'édition d'une personne
